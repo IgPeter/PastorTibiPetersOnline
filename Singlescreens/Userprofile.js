@@ -9,24 +9,18 @@ import {
 } from "react-native";
 import React from "react";
 import user from "./user.json";
+import { BackButton } from "../components/Backbutton";
+import { MenuButton } from "../components/Menubutton";
 
 export const Userprofile = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <TouchableHighlight>
-          <View style={styles.btn}>
-            <Image source={require("../assets/backarrow.png")} />
-          </View>
-        </TouchableHighlight>
-        <Text style={{ fontSize: 26, fontWeight: "bold", left: -36 }}>
+        <BackButton onPress={() => console.log("Button pressed")} />
+        <Text style={{ fontSize: 26, fontWeight: "bold", left: -36, alignSelf: "center" }}>
           Profile
         </Text>
-        <TouchableHighlight>
-          <View style={styles.btn}>
-            <Image source={require("../assets/menu.png")} />
-          </View>
-        </TouchableHighlight>
+        <MenuButton onPress={() => console.log("Button pressed")} />
       </View>
       <View style={styles.profile}>
         <View style={styles.avatar}>
@@ -44,17 +38,25 @@ export const Userprofile = () => {
           </Text>
         </View>
       </View>
-      <View style={{ marginBottom: 452, display: "flex", flexDirection: "row", justifyContent: "center"}}>
-          <Image
-            style={{marginRight: 12}}
-            source={require("../assets/onestar.png")} />
+      <View
+        style={{
+          marginBottom: 452,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <Image
+          style={{ marginRight: 12 }}
+          source={require("../assets/onestar.png")}
+        />
         <Text
           style={{
             textAlign: "center",
             fontSize: 12,
             alignSelf: "center",
             justifyContent: "center",
-            color: "#235EF5"
+            color: "#235EF5",
           }}
         >
           10 days remaining before renewal
