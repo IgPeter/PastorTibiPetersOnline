@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { Togglebutton } from "../components/Togglebutton";
 
@@ -23,30 +23,30 @@ export const Menu = () => {
           </View>
         </View>
         <View style={styles.menuItems}>
-            <View style={styles.item}>
+            <TouchableOpacity style={styles.item}>
                 <Image source={require('../assets/notification.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 23}}>Notification</Text>
-            </View>
-            <View style={styles.item}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item}>
                 <Image source={require('../assets/saved.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 25}}>Saved Files</Text>
-            </View>
-            <View style={styles.item}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item}>
                 <Image source={require('../assets/subscription.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 18}}>Subscription</Text>
-            </View>
-            <View style={styles.item}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item}>
                 <Image source={require('../assets/help.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 22}}>Help & FAQ</Text>
-            </View>
-            <View style={styles.item}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item}>
                 <Image source={require('../assets/settings.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 23}}>Settings</Text>
-            </View>
-            <View style={styles.item}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item}>
                 <Image source={require('../assets/logout.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 23}}>Log Out</Text>
-            </View>
+            </TouchableOpacity>
         </View>
         <View>
           <Togglebutton />
