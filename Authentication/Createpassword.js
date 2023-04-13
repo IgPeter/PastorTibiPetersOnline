@@ -1,5 +1,6 @@
 import { StyleSheet, TouchableHighlight, Text, TextInput, View, ScrollView, Image } from 'react-native'
 import React from 'react'
+import { Button } from '../components/Button'
 
 export const Createpassword = () => {
   return (
@@ -14,13 +15,8 @@ export const Createpassword = () => {
         <TextInput style={styles.inputField} placeholder="Confirm New Password" />
         <Text style={styles.inputText}>Email/Username is wrong</Text>
       </View>
-      <View>
-        <TouchableHighlight>
-          <View style={styles.btn}>
-            <Text style={{ color: '#fff', fontWeight: 'bold' }}>ENTER</Text>
-          </View>
-        </TouchableHighlight>
-      </View>
+      <Button title="ENTER" btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 83,
+ }} txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "bold", textAlign: "center" }} />
     </ScrollView>
   )
 }
