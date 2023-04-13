@@ -4,20 +4,42 @@ import { Userprofile } from './Singlescreens/Userprofile';
 import { Singlebook } from './Singlescreens/Singlebook';
 import { Singleaudio } from './Singlescreens/Singleaudio';
 import { Singlevideo } from './Singlescreens/Singlevideo';
+import { Singlevideoplay } from './Singlescreens/Singlevideoplay';
+import { Subscription } from './Singlescreens/Subscription';
+import { Settingspage } from './Singlescreens/Settingspage';
+import { Singlemessage } from './Singlescreens/Singlemessage';
+import Constants from 'expo-constants';
 import { Menu } from './Singlescreens/Menu';
-// import { Singlemessage } from './Singlescreens/Singlemessage';
+import { Getotp } from './Authentication/Getotp';
+import { Createpassword } from './Authentication/Createpassword';
+import { Login } from './Authentication/Login';
+import { Onboarding } from './Authentication/Onboarding';
+import { Passwordsuccess } from './Authentication/Passwordsuccess';
+import { Signup } from './Authentication/Signup';
+import { Useotp } from './Authentication/Useotp';
 
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
+      {/* <Getotp /> */}
+      {/* <Createpassword /> */}
+      {/* <Login /> */}
+      {/* <Onboarding /> */}
+      {/* <Passwordsuccess /> */}
+      {/* <Signup /> */}
+      {/* <Useotp /> */}
       {/* <Userprofile /> */}
-      <Menu />
+      {/* <Menu /> */}
       {/* <Singlebook /> */}
       {/* <Singleaudio /> */}
       {/* <Singlevideo /> */}
-      {/* <Singlemessage /> */}
+      {/* <Subscription /> */}
+      {/* <Settingspage /> */}
+      <Singlemessage />
+      {/* <Singlevideoplay /> */}
+      {/* <HomeScreen /> */}
     </View>
   );
 }
