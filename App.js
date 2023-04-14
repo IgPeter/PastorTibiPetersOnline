@@ -17,6 +17,7 @@ import { Onboarding } from './Authentication/Onboarding';
 import { Passwordsuccess } from './Authentication/Passwordsuccess';
 import { Signup } from './Authentication/Signup';
 import { Useotp } from './Authentication/Useotp';
+import { Bookreader } from './Singlescreens/Bookreader';
 
 
 export default function App() {
@@ -37,9 +38,10 @@ export default function App() {
       {/* <Singlevideo /> */}
       {/* <Subscription /> */}
       {/* <Settingspage /> */}
-      <Singlemessage />
+      {/* <Singlemessage /> */}
       {/* <Singlevideoplay /> */}
       {/* <HomeScreen /> */}
+      <Bookreader />
     </View>
   );
 }
