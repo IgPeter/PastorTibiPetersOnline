@@ -72,6 +72,20 @@ export const Singleaudio = () => {
             <Button
               onPress={() => console.log("Button pressed")}
               title="Play"
+              btnstyle={{
+                borderRadius: 8,
+                height: 54,
+                justifyContent: "center",
+                padding: 10,
+                backgroundColor: "#141414",
+                marginBottom: 83,
+              }}
+              txtstyle={{
+                color: "#FFFFFF",
+                fontSize: 14,
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
             />
           </View>
         </View>

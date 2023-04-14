@@ -10,8 +10,12 @@ import React from "react";
 import { Button } from "../components/Button";
 import { BackButton } from "../components/Backbutton";
 import { MenuButton } from "../components/Menubutton";
+import { Bookreader } from "./Bookreader";
 
-export const Singlebook = () => {
+export const Singlebook = ({ navigation }) => {
+  const handleClick = () => {
+    navigation.navigate({Bookreader});
+  };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -26,7 +30,12 @@ export const Singlebook = () => {
         </TouchableOpacity>
         <View>
           <Text
-            style={{ textAlign: "center", fontSize: 24, fontWeight: "600", paddingHorizontal: 53 }}
+            style={{
+              textAlign: "center",
+              fontSize: 24,
+              fontWeight: "600",
+              paddingHorizontal: 53,
+            }}
           >
             30 Days in the Book of Revelation
           </Text>
@@ -77,8 +86,22 @@ export const Singlebook = () => {
               of the new testament book, Revelation.
             </Text>
             <Button
-              onPress={() => console.log("Button pressed")}
+              onPress={handleClick}
               title="Read"
+              btnstyle={{
+                borderRadius: 8,
+                height: 54,
+                justifyContent: "center",
+                padding: 10,
+                backgroundColor: "#141414",
+                marginBottom: 83,
+              }}
+              txtstyle={{
+                color: "#FFFFFF",
+                fontSize: 14,
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
             />
           </View>
         </View>
