@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native'
 import React from 'react'
+import { Button } from '../components/Button'
 
 export const Passwordsuccess = () => {
     return (
@@ -11,9 +12,7 @@ export const Passwordsuccess = () => {
                     <Image source={require('../assets/Success.png')} />
                 </View>
                 <TouchableHighlight>
-                    <View style={styles.btn}>
-                        <Text style={{ color: '#fff', fontWeight: 'bold' }}>Next</Text>
-                    </View>
+                    <Button title="Next"  btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} />
                 </TouchableHighlight>
             </View>
         </View>

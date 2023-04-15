@@ -1,6 +1,7 @@
 import { StyleSheet, TouchableHighlight, Text, TextInput, View, ScrollView } from 'react-native'
 import React from 'react'
 import { A } from '@expo/html-elements'
+import { Button } from '../components/Button'
 
 export const Useotp = () => {
   return (
@@ -16,11 +17,7 @@ export const Useotp = () => {
         <TextInput style={styles.inputField} placeholder="0" keyboardType='number-pad' maxLength='1' />
       </View>
       <View>
-        <TouchableHighlight>
-          <View style={styles.btn}>
-            <Text style={{ color: '#fff', fontWeight: 'bold' }}>Submit</Text>
-          </View>
-        </TouchableHighlight>
+        <Button title="Submit"  btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} />
         <Text style={{ textAlign: 'center', marginBottom: 70 }}>
           <Text>Didn't receive OTP? </Text>
           <A>Resend OTP</A>

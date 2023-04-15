@@ -1,6 +1,7 @@
 import { StyleSheet, TouchableHighlight, Text, TextInput, View, ScrollView, Image } from 'react-native'
 import React from 'react'
 import { A } from '@expo/html-elements';
+import { Button } from '../components/Button';
 
 
 export const Signup = () => {
@@ -23,14 +24,10 @@ export const Signup = () => {
         <Text style={styles.inputText}>Password is wrong</Text>
       </View>
       <View>
-        <TouchableHighlight>
-          <View style={styles.btn}>
-            <Text style={{ color: '#fff', fontWeight: 'bold' }}>Sign Up</Text>
-          </View>
-        </TouchableHighlight>
+        <Button  title="Sign Up"  btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} />
         <Text style={{ textAlign: 'center', marginBottom: 52 }}>
-          <Text>Don't have an Account? </Text>
-          <A style={{ fontWeight: 'bold' }}>Sign Up</A>
+          <Text>Already have an Account? </Text>
+          <A style={{ fontWeight: '600' }}>Log in</A>
         </Text>
       </View>
     </ScrollView>
