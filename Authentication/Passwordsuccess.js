@@ -9,10 +9,12 @@ export const Passwordsuccess = () => {
                 <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 10 }}>Congratulations</Text>
                 <Text style={{marginBottom: 22}}>Password successfully changed</Text>
                 <View style={{marginBottom: 31, alignItems: 'center'}}>
-                    <Image source={require('../assets/Success.png')} />
+                    <Image source={require('../assets/icons/Success.png')} />
                 </View>
                 <TouchableHighlight>
-                    <Button title="Next"  btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} />
+                    <Button title="Next"  btnstyle={{ backgroundColor: "#141414", 
+                    borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} 
+                    txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} />
                 </TouchableHighlight>
             </View>
         </View>

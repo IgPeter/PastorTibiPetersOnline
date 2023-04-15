@@ -17,7 +17,9 @@ export const Useotp = () => {
         <TextInput style={styles.inputField} placeholder="0" keyboardType='number-pad' maxLength='1' />
       </View>
       <View>
-        <Button title="Submit"  btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} />
+        <Button title="Submit"  btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, 
+        justifyContent: "center", padding: 10, marginBottom: 15, }} 
+        txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} />
         <Text style={{ textAlign: 'center', marginBottom: 70 }}>
           <Text>Didn't receive OTP? </Text>
           <A>Resend OTP</A>

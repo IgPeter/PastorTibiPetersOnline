@@ -20,7 +20,7 @@ export const Onboarding = () => {
           <View style={{ paddingLeft: 8, }}>
             <Image
               style={styles.skipIcon}
-              source={require("../assets/nextbutton.png")}
+              source={require("../assets/icons/nextbutton.png")}
             />
           </View>
         </Text>

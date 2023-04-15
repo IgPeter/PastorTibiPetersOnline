@@ -23,7 +23,7 @@ export const VideoCard = ({ title, imageSource, videoSource }) => {
           <View style={styles.card}>
             <Image style={styles.image} source={imageSource} />
             <TouchableOpacity style={styles.playButton}>
-              <Image source={require('../assets/play.png')} />
+              <Image source={require('../assets/icons/play.png')} />
             </TouchableOpacity>
           </View>
         </TouchableOpacity>

@@ -24,7 +24,9 @@ export const Signup = () => {
         <Text style={styles.inputText}>Password is wrong</Text>
       </View>
       <View>
-        <Button  title="Sign Up"  btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} />
+        <Button  title="Sign Up"  btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, 
+        justifyContent: "center", padding: 10, marginBottom: 15, }} 
+        txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} />
         <Text style={{ textAlign: 'center', marginBottom: 52 }}>
           <Text>Already have an Account? </Text>
           <A style={{ fontWeight: '600' }}>Log in</A>

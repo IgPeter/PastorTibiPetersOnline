@@ -56,7 +56,7 @@ export const Bookreader = ({ totalPages = 20 }) => {
     };
 
     return (
-      <TouchableOpacity onPress={changeColors} style={{ borderRadius: "100%", height: 20, width: 20, justifyContent: "center", backgroundColor: "#A3A3A3",}}>
+      <TouchableOpacity onPress={changeColors} style={{ /*borderRadius: "100%",*/ height: 20, width: 20, justifyContent: "center", backgroundColor: "#A3A3A3",}}>
         <Text style={{  color: "#FFFFFF", fontSize: 14, fontWeight: "bold", textAlign: "center"}}>A</Text>
       </TouchableOpacity>
     );
@@ -118,14 +118,14 @@ export const Bookreader = ({ totalPages = 20 }) => {
           {`${currentPage + 1}`}
           </Text>
           </View>
-          <View style={{ width: `${currentPage + 1}`, backgroundColor: "#fff", }}></View>
+          {<View style={{ backgroundColor: "#fff"}}></View>}
         </View>
         <View style={styles.formatting}>
           <Button
             onPress={increaseFontSize}
             title="+"
             btnstyle={{
-              borderRadius: "100%",
+              //borderRadius: "100%",
               height: 20,
               width: 20,
               justifyContent: "center",
@@ -143,7 +143,7 @@ export const Bookreader = ({ totalPages = 20 }) => {
             onPress={decreaseFontSize}
             title="-"
             btnstyle={{
-              borderRadius: "100%",
+              //borderRadius: "100%",
               height: 20,
               width: 20,
               justifyContent: "center",
@@ -159,7 +159,7 @@ export const Bookreader = ({ totalPages = 20 }) => {
           />
           <Colorbutton />
           <TouchableOpacity>
-            <Image source={require('../assets/brightness.png')}/>
+            <Image source={require('../assets/icons/brightness.png')}/>
           </TouchableOpacity>
         </View>
       </View>
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     padding: 20,
-    borderBottomColor: "fff",
+    borderBottomColor: "#fff",
     borderBottomWidth: 1,
   },
   content: {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
   footer:{
     height: 80,
-    borderTopColor: "fff",
+    borderTopColor: "#fff",
     borderTopWidth: 1,
     paddingVertical: 26
   },
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: "center",
     alignSelf: "center",
-    alignItems: "center",
+    alignItems: "center"
     // marginVertical: 26
-  },
+  }
 });

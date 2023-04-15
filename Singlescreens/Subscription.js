@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 import React from "react";
-import user from "./user.json";
+import user from "../assets/data/user.json";
 import { Button } from "../components/Button";
 import { BackButton } from "../components/Backbutton";
 import { MenuButton } from "../components/Menubutton";
@@ -25,7 +25,7 @@ export const Subscription = () => {
       </View>
       <View style={styles.main}>
         <View style={styles.star}>
-          <Image source={require("../assets/star.png")} />
+          <Image source={require("../assets/icons/star.png")} />
         </View>
         <View>
           <Text
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     //   backgroundColor: "#D9D9D9",
     height: 120,
     width: 120,
-    borderRadius: "100%",
+    //borderRadius: "100%",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 8,

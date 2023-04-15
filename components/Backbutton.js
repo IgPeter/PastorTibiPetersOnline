@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 
 export const BackButton = ({ onPress }) => (
   <TouchableOpacity onPress={onPress} style={styles.button}>
-    <Image source={require('../assets/backarrow.png')} />
+    <Image source={require('../assets/icons/backarrow.png')} />
   </TouchableOpacity>
 );
 

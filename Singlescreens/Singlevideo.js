@@ -10,7 +10,7 @@ import { Button } from "../components/Button";
 import { BackButton } from "../components/Backbutton";
 import { MenuButton } from "../components/Menubutton";
 import { VideoCard } from "../components/Videocard";
-import messages from "./messages.json"
+import messages from "../assets/data/messages.json"
 
 export const Singlevideo = () => {
   return (
@@ -35,11 +35,11 @@ export const Singlevideo = () => {
               justifyContent: "center",
             }}
           >
-            <Image source={require("../assets/ratingb.png")} />
-            <Image source={require("../assets/ratingb.png")} />
-            <Image source={require("../assets/ratingb.png")} />
-            <Image source={require("../assets/ratingb.png")} />
-            <Image source={require("../assets/ratingw.png")} />
+            <Image source={require("../assets/icons/ratingb.png")} />
+            <Image source={require("../assets/icons/ratingb.png")} />
+            <Image source={require("../assets/icons/ratingb.png")} />
+            <Image source={require("../assets/icons/ratingb.png")} />
+            <Image source={require("../assets/icons/ratingw.png")} />
           </View>
           <Text style={styles.infocon}>
             <View style={styles.info}>

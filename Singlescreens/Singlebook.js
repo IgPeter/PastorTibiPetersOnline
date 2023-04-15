@@ -56,11 +56,11 @@ export const Singlebook = ({ navigation }) => {
               justifyContent: "center",
             }}
           >
-            <Image source={require("../assets/ratingb.png")} />
-            <Image source={require("../assets/ratingb.png")} />
-            <Image source={require("../assets/ratingb.png")} />
-            <Image source={require("../assets/ratingb.png")} />
-            <Image source={require("../assets/ratingw.png")} />
+            <Image source={require("../assets/icons/ratingb.png")} />
+            <Image source={require("../assets/icons/ratingb.png")} />
+            <Image source={require("../assets/icons/ratingb.png")} />
+            <Image source={require("../assets/icons/ratingb.png")} />
+            <Image source={require("../assets/icons/ratingw.png")} />
           </View>
           <Text style={styles.infocon}>
             <View style={styles.info}>

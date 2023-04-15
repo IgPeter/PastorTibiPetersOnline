@@ -7,7 +7,7 @@ import {
     Image,
   } from "react-native";
   import React from "react";
-  import user from "./user.json";
+  import user from "../assets/data/user.json";
   import { Button } from "../components/Button";
   import { BackButton } from "../components/Backbutton";
   import { MenuButton } from "../components/Menubutton";
@@ -23,34 +23,34 @@ import {
         </View>
         <View style={styles.menuItems}>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/profile2.png')}/>
+                <Image source={require('../assets/icons/profile2.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 23}}>Account</Text>
-                <Image style={{marginLeft: 175}} source={require('../assets/forwardarrow.png')} />
+                <Image style={{marginLeft: 175}} source={require('../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/notification.png')}/>
+                <Image source={require('../assets/icons/notification.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 25}}>Notifications</Text>
-                <Image style={{marginLeft: 150}} source={require('../assets/forwardarrow.png')} />
+                <Image style={{marginLeft: 150}} source={require('../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/appearance.png')}/>
+                <Image source={require('../assets/icons/appearance.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 18}}>Appearance</Text>
-                <Image style={{marginLeft: 152}} source={require('../assets/forwardarrow.png')} />
+                <Image style={{marginLeft: 152}} source={require('../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/privacy.png')}/>
+                <Image source={require('../assets/icons/privacy.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 22}}>Privacy & Security</Text>
-                <Image style={{marginLeft: 110}} source={require('../assets/forwardarrow.png')} />
+                <Image style={{marginLeft: 110}} source={require('../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/help.png')}/>
+                <Image source={require('../assets/icons/help.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 23}}>Help & FAQ</Text>
-                <Image style={{marginLeft: 150}} source={require('../assets/forwardarrow.png')} />
+                <Image style={{marginLeft: 150}} source={require('../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/info.png')}/>
+                <Image source={require('../assets/icons/info.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 23}}>About</Text>
-                <Image style={{marginLeft: 180}} source={require('../assets/forwardarrow.png')} />
+                <Image style={{marginLeft: 180}} source={require('../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
         </View>
       </ScrollView>
@@ -65,7 +65,7 @@ import {
       marginTop: 20,
     },
     header: {
-      justifyContent: "around",
+      justifyContent: "center",
       display: "flex",
       flexDirection: "row",
       padding: 20,

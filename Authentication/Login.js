@@ -35,11 +35,11 @@ export const Login = () => {
       <View style={styles.loginAlt}>
         <A>
           <Image source={require
-            ('../assets/google.png')} />
+            ('../assets/icons/google.png')} />
         </A>
         <A>
           <Image source={require
-            ('../assets/facebook.png')} />
+            ('../assets/icons/facebook.png')} />
         </A>
       </View>
       <View>

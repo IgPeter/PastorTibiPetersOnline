@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 import React from "react";
-import user from "./user.json";
+import user from "../assets/data/user.json";
 import { BackButton } from "../components/Backbutton";
 import { MenuButton } from "../components/Menubutton";
 
@@ -48,7 +48,7 @@ export const Userprofile = () => {
       >
         <Image
           style={{ marginRight: 12 }}
-          source={require("../assets/onestar.png")}
+          source={require("../assets/icons/onestar.png")}
         />
         <Text
           style={{
@@ -62,7 +62,7 @@ export const Userprofile = () => {
           10 days remaining before renewal
         </Text>
       </View>
-      <View style={styles.footer}>
+      {/*<View style={styles.footer}>
         <View>
           <TouchableHighlight>
             <View style={styles.btn}>
@@ -70,6 +70,7 @@ export const Userprofile = () => {
             </View>
           </TouchableHighlight>
         </View>
+        
         <View>
           <TouchableHighlight>
             <View style={styles.btn}>
@@ -92,6 +93,7 @@ export const Userprofile = () => {
           </TouchableHighlight>
         </View>
       </View>
+        */}
     </ScrollView>
   );
 };
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#D9D9D9",
     height: 120,
     width: 120,
-    borderRadius: "100%",
+    //borderRadius: "100%",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 8,

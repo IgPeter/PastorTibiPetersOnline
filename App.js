@@ -31,17 +31,17 @@ export default function App() {
       {/* <Passwordsuccess /> */}
       {/* <Signup /> */}
       {/* <Useotp /> */}
-      {/* <Userprofile /> */}
+      { /*<Userprofile />*/ }
       {/* <Menu /> */}
-      {/* <Singlebook /> */}
+      {/*<Singlebook />*/}
       {/* <Singleaudio /> */}
       {/* <Singlevideo /> */}
-      {/* <Subscription /> */}
-      {/* <Settingspage /> */}
-      {/* <Singlemessage /> */}
-      {/* <Singlevideoplay /> */}
+      {/*<Subscription />*/}
+      {/*<Settingspage />*/}
+      {/*<Singlemessage />*/}
+      { /*<Singlevideoplay />*/ }
       {/* <HomeScreen /> */}
-      <Bookreader />
+      {/*<Bookreader />*/}
     </View>
   );
 }
