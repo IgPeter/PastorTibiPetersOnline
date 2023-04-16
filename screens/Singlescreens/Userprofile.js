@@ -8,9 +8,9 @@ import {
   Image,
 } from "react-native";
 import React from "react";
-import user from "../assets/data/user.json";
-import { BackButton } from "../components/Backbutton";
-import { MenuButton } from "../components/Menubutton";
+import user from "../../assets/data/user.json";
+import { BackButton } from "../../components/Backbutton";
+import { MenuButton } from "../../components/Menubutton";
 
 export const Userprofile = () => {
   return (
@@ -48,7 +48,7 @@ export const Userprofile = () => {
       >
         <Image
           style={{ marginRight: 12 }}
-          source={require("../assets/icons/onestar.png")}
+          source={require("../../assets/icons/onestar.png")}
         />
         <Text
           style={{

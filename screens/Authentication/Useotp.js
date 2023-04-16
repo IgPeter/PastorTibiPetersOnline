@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableHighlight, Text, TextInput, View, ScrollView } from 'react-native'
 import React from 'react'
 import { A } from '@expo/html-elements'
-import { Button } from '../components/Button'
+import { Button } from '../../components/Button'
 
 export const Useotp = () => {
   return (

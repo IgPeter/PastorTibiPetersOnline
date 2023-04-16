@@ -4,51 +4,30 @@ import {
   ScrollView,
   StyleSheet,
   Image,
-  TouchableOpacity,
 } from "react-native";
 import React from "react";
-import { Button } from "../components/Button";
-import { BackButton } from "../components/Backbutton";
-import { MenuButton } from "../components/Menubutton";
-import { Bookreader } from "./Bookreader";
+import { Button } from "../../components/Button";
+import { BackButton } from "../../components/Backbutton";
+import { MenuButton } from "../../components/Menubutton";
+import { VideoCard } from "../../components/Videocard";
+import messages from "../../assets/data/messages.json"
 
-export const Singlebook = ({ navigation }) => {
-  const handleClick = () => {
-    navigation.navigate({Bookreader});
-  };
+export const Singlevideo = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <BackButton onPress={() => console.log("Button pressed")} />
-        <MenuButton onPress={() => console.log("Button pressed")} />
+        <BackButton  onPress={() => console.log('Button pressed')} />
+        <MenuButton  onPress={() => console.log('Button pressed')} />
       </View>
-      <View style={styles.bookInfo}>
-        <TouchableOpacity onPress={() => console.log("Button pressed")}>
-          <View style={styles.thumbnail}>
-            <Image />
-          </View>
-        </TouchableOpacity>
+      <View style={styles.audioInfo}>
+        <View style={styles.thumbnail}>
+          <VideoCard />
+        </View>
         <View>
-          <Text
-            style={{
-              textAlign: "center",
-              fontSize: 24,
-              fontWeight: "600",
-              paddingHorizontal: 53,
-            }}
-          >
-            30 Days in the Book of Revelation
+          <Text style={{ textAlign: "center", fontSize: 24, fontWeight: "600", paddingHorizontal: 53 }}>
+            {messages[0].title}
           </Text>
-          <Text
-            style={{
-              textAlign: "center",
-              fontSize: 16,
-              fontWeight: "500",
-              marginBottom: 7,
-            }}
-          >
-            Pastor Tibi Peters
-          </Text>
+          <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "500", marginBottom: 7 }}>Pastor Tibi Peters</Text>
           <View
             style={{
               display: "flex",
@@ -56,20 +35,20 @@ export const Singlebook = ({ navigation }) => {
               justifyContent: "center",
             }}
           >
-            <Image source={require("../assets/icons/ratingb.png")} />
-            <Image source={require("../assets/icons/ratingb.png")} />
-            <Image source={require("../assets/icons/ratingb.png")} />
-            <Image source={require("../assets/icons/ratingb.png")} />
-            <Image source={require("../assets/icons/ratingw.png")} />
+            <Image source={require("../../assets/icons/ratingb.png")} />
+            <Image source={require("../../assets/icons/ratingb.png")} />
+            <Image source={require("../../assets/icons/ratingb.png")} />
+            <Image source={require("../../assets/icons/ratingb.png")} />
+            <Image source={require("../../assets/icons/ratingw.png")} />
           </View>
           <Text style={styles.infocon}>
             <View style={styles.info}>
-              <Text style={styles.infotext}>Pages</Text>
-              <Text style={styles.infosubtext}>100</Text>
+              <Text style={styles.infotext}>Duration</Text>
+              <Text style={styles.infosubtext}>54 mins</Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.infotext}>Language</Text>
-              <Text style={styles.infosubtext}>English</Text>
+              <Text style={styles.infotext}>Type</Text>
+              <Text style={styles.infosubtext}>Video</Text>
             </View>
             <View style={{ paddingHorizontal: 10 }}>
               <Text style={styles.infotext}>Release</Text>
@@ -77,7 +56,7 @@ export const Singlebook = ({ navigation }) => {
             </View>
           </Text>
           <View style={styles.description}>
-            <Text style={{ marginBottom: 40, textAlign: "justify" }}>
+            <Text style={{marginBottom: 40, textAlign: "justify"}}>
               30 Days in the Book of Revelation is a daily devotional coi ned
               from the chapters of the new testament book, Revel ation. 30 Days
               in the Book of Revelation is a daily devotio nal coined from the
@@ -85,10 +64,7 @@ export const Singlebook = ({ navigation }) => {
               Book of Revelation is a daily de votional coined from the chapters
               of the new testament book, Revelation.
             </Text>
-            <Button
-              onPress={handleClick}
-              title="Read"
-              btnstyle={{
+            <Button onPress={() => console.log('Button pressed')} title= "Play" btnstyle={{
                 borderRadius: 8,
                 height: 54,
                 justifyContent: "center",
@@ -101,8 +77,7 @@ export const Singlebook = ({ navigation }) => {
                 fontSize: 14,
                 fontWeight: "bold",
                 textAlign: "center",
-              }}
-            />
+              }} />
           </View>
         </View>
       </View>
@@ -124,7 +99,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 20,
   },
-  bookInfo: {
+  audioInfo: {
     justifyContent: "center",
     alignItems: "center",
   },
@@ -133,13 +108,14 @@ const styles = StyleSheet.create({
     width: 195,
     height: 280,
     alignSelf: "center",
-    marginBottom: 20,
+    marginBottom: 20
   },
   infocon: {
     width: "100%",
     marginTop: 21,
     alignSelf: "center",
-    marginBottom: 30,
+    marginBottom: 30
+    ,
   },
   info: {
     borderColor: "#A3A3A3",
@@ -155,6 +131,6 @@ const styles = StyleSheet.create({
   },
   description: {
     paddingHorizontal: 17,
-    marginBottom: 83,
-  },
+    marginBottom: 83
+  }
 });

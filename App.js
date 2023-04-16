@@ -1,23 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Userprofile } from './Singlescreens/Userprofile';
-import { Singlebook } from './Singlescreens/Singlebook';
-import { Singleaudio } from './Singlescreens/Singleaudio';
-import { Singlevideo } from './Singlescreens/Singlevideo';
-import { Singlevideoplay } from './Singlescreens/Singlevideoplay';
-import { Subscription } from './Singlescreens/Subscription';
-import { Settingspage } from './Singlescreens/Settingspage';
-import { Singlemessage } from './Singlescreens/Singlemessage';
+import { Userprofile } from './screens/Singlescreens/Userprofile';
+import { Singlebook } from './screens/Singlescreens/Singlebook';
+import { Singleaudio } from './screens/Singlescreens/Singleaudio';
+import { Singlevideo } from './screens/Singlescreens/Singlevideo';
+import { Singlevideoplay } from './screens/Singlescreens/Singlevideoplay';
+import { Subscription } from './screens/Singlescreens/Subscription';
+import { Settingspage } from './screens/Singlescreens/Settingspage';
+import { Singlemessage } from './screens/Singlescreens/Singlemessage';
 import Constants from 'expo-constants';
-import { Menu } from './Singlescreens/Menu';
-import { Getotp } from './Authentication/Getotp';
-import { Createpassword } from './Authentication/Createpassword';
-import { Login } from './Authentication/Login';
-import { Onboarding } from './Authentication/Onboarding';
-import { Passwordsuccess } from './Authentication/Passwordsuccess';
-import { Signup } from './Authentication/Signup';
-import { Useotp } from './Authentication/Useotp';
-import { Bookreader } from './Singlescreens/Bookreader';
+import { Menu } from './screens/Singlescreens/Menu';
+import { Getotp } from './screens/Authentication/Getotp';
+import { Createpassword } from './screens/Authentication/Createpassword';
+import { Login } from './screens/Authentication/Login';
+import { Onboarding } from './screens/Authentication/Onboarding';
+import { Passwordsuccess } from './screens/Authentication/Passwordsuccess';
+import { Signup } from './screens/Authentication/Signup';
+import { Useotp } from './screens/Authentication/Useotp';
+import { Bookreader } from './screens/Singlescreens/Bookreader';
 
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
       { /*<Userprofile />*/ }
       {/* <Menu /> */}
       {/*<Singlebook />*/}
-      {/* <Singleaudio /> */}
+      { <Singleaudio /> }
       {/* <Singlevideo /> */}
       {/*<Subscription />*/}
       {/*<Settingspage />*/}

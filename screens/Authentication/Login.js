@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableHighlight, Text, TextInput, View, ScrollView, Image } from 'react-native'
 import React, { useState } from 'react'
 import { A } from '@expo/html-elements'
-import { Button } from '../components/Button'
+import { Button } from '../../components/Button'
 // import CheckBox from '@react-native-community/checkbox'
 
 export const Login = () => {
@@ -35,11 +35,11 @@ export const Login = () => {
       <View style={styles.loginAlt}>
         <A>
           <Image source={require
-            ('../assets/icons/google.png')} />
+            ('../../assets/icons/google.png')} />
         </A>
         <A>
           <Image source={require
-            ('../assets/icons/facebook.png')} />
+            ('../../assets/icons/facebook.png')} />
         </A>
       </View>
       <View>

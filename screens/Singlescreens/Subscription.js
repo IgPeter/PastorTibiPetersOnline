@@ -8,10 +8,10 @@ import {
   Image,
 } from "react-native";
 import React from "react";
-import user from "../assets/data/user.json";
-import { Button } from "../components/Button";
-import { BackButton } from "../components/Backbutton";
-import { MenuButton } from "../components/Menubutton";
+import user from "../../assets/data/user.json";
+import { Button } from "../../components/Button";
+import { BackButton } from "../../components/Backbutton";
+import { MenuButton } from "../../components/Menubutton";
 
 export const Subscription = () => {
   return (
@@ -25,7 +25,7 @@ export const Subscription = () => {
       </View>
       <View style={styles.main}>
         <View style={styles.star}>
-          <Image source={require("../assets/icons/star.png")} />
+          <Image source={require("../../assets/icons/star.png")} />
         </View>
         <View>
           <Text

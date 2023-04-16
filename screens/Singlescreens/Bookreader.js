@@ -8,9 +8,9 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import { Button } from "../components/Button";
-import { BackButton } from "../components/Backbutton";
-import { MenuButton } from "../components/Menubutton";
+import { Button } from "../../components/Button";
+import { BackButton } from "../../components/Backbutton";
+import { MenuButton } from "../../components/Menubutton";
 
 const PAGE_HEIGHT = Dimensions.get("window").height;
 
@@ -159,7 +159,7 @@ export const Bookreader = ({ totalPages = 20 }) => {
           />
           <Colorbutton />
           <TouchableOpacity>
-            <Image source={require('../assets/icons/brightness.png')}/>
+            <Image source={require('../../assets/icons/brightness.png')}/>
           </TouchableOpacity>
         </View>
       </View>

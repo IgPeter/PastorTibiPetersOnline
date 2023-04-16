@@ -9,7 +9,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { Button } from "../components/Button";
+import { Button } from "../../components/Button";
 
 export const Onboarding = () => {
   return (
@@ -19,8 +19,8 @@ export const Onboarding = () => {
           <Text>Skip</Text>
           <View style={{ paddingLeft: 8, }}>
             <Image
-              style={styles.skipIcon}
-              source={require("../assets/icons/nextbutton.png")}
+              style={styles.skipIcon}s
+              source={require("../../assets/icons/nextbutton.png")}
             />
           </View>
         </Text>

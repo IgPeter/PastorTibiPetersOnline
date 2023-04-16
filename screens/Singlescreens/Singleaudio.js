@@ -1,10 +1,10 @@
 import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
 import React from "react";
-import { Button } from "../components/Button";
-import { BackButton } from "../components/Backbutton";
-import { MenuButton } from "../components/Menubutton";
-import { AudioCard } from "../components/Audiocard";
-import messages from "../assets/data/messages.json";
+import { Button } from "../../components/Button";
+import { BackButton } from "../../components/Backbutton";
+import { MenuButton } from "../../components/Menubutton";
+import { AudioCard } from "../../components/Audiocard";
+import messages from "../../assets/data/messages.json";
 
 export const Singleaudio = () => {
   return (
@@ -40,11 +40,11 @@ export const Singleaudio = () => {
               justifyContent: "center",
             }}
           >
-            <Image source={require("../assets/icons/ratingb.png")} />
-            <Image source={require("../assets/icons/ratingb.png")} />
-            <Image source={require("../assets/icons/ratingb.png")} />
-            <Image source={require("../assets/icons/ratingb.png")} />
-            <Image source={require("../assets/icons/ratingw.png")} />
+            <Image source={require("../../assets/icons/ratingb.png")} />
+            <Image source={require("../../assets/icons/ratingb.png")} />
+            <Image source={require("../../assets/icons/ratingb.png")} />
+            <Image source={require("../../assets/icons/ratingb.png")} />
+            <Image source={require("../../assets/icons/ratingw.png")} />
           </View>
           <Text style={styles.infocon}>
             <View style={styles.info}>

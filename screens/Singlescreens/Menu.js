@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import { Togglebutton } from "../components/Togglebutton";
+import { Togglebutton } from "../../components/Togglebutton";
 
 export const Menu = () => {
   return (
@@ -19,32 +19,32 @@ export const Menu = () => {
             </Text>
           </View>
           <View style={{ alignSelf: 'center' }}>
-            <Image source={require("../assets/icons/edit.png")} />
+            <Image source={require("../../assets/icons/edit.png")} />
           </View>
         </View>
         <View style={styles.menuItems}>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/icons/notification.png')}/>
+                <Image source={require('../../assets/icons/notification.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 23}}>Notification</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/icons/saved.png')}/>
+                <Image source={require('../../assets/icons/saved.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 25}}>Saved Files</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/icons/subscription.png')}/>
+                <Image source={require('../../assets/icons/subscription.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 18}}>Subscription</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/icons/help.png')}/>
+                <Image source={require('../../assets/icons/help.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 22}}>Help & FAQ</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/icons/settings.png')}/>
+                <Image source={require('../../assets/icons/settings.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 23}}>Settings</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../assets/icons/logout.png')}/>
+                <Image source={require('../../assets/icons/logout.png')}/>
                 <Text style={{ fontSize: 16, marginLeft: 23}}>Log Out</Text>
             </TouchableOpacity>
         </View>
