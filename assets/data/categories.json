@@ -1,0 +1,29 @@
+[
+  {
+    "_id": "64356cd1d25e64952086146e",
+    "name": "Latest",
+    "color": "blue",
+    "__v": { "$numberInt": "0" }
+  },
+
+  {
+    "_id": "64356e75fd3b8aa55d9073b5",
+    "name": "Video",
+    "color": "red",
+    "__v": { "$numberInt": "0" }
+  },
+
+  {
+    "_id": "64357d87c406dcaf983f7ce3",
+    "name": "Audio",
+    "color": "yellow",
+    "__v": { "$numberInt": "0" }
+  },
+
+  {
+    "_id":  "64357dacc406dcaf983f7ce6",
+    "name": "Book",
+    "color": "green",
+    "__v": { "$numberInt": "0" }
+  }
+]
