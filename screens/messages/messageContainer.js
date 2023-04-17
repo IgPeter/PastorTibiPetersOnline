@@ -9,7 +9,7 @@ const categoriesData = require('../../assets/data/categories.json');
 var  width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
-const MessageContainer = () => {
+const MessageContainer = (props) => {
 
     const [messages, setMessages] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -50,13 +50,11 @@ const MessageContainer = () => {
 
     return (
             <View style = {styles.container}>                
-                <View>
-                    <View style = {{width: width - 40}}>
-                        <Header />
-                    </View>
+                <View>           
+                    <Header navigation = {props.navigation}/>
                     <View style = {{height: 80, width: width - 40}}>
                         <MessageCategory categories = {categories}
-                                        changeCT = {changeCT} messageCtg = {messageCtg} active = {active} setActive={setActive}
+                    changeCT = {changeCT} messageCtg = {messageCtg} active = {active} setActive={setActive}
                             />
                     </View>
                     <ScrollView>
@@ -64,7 +62,8 @@ const MessageContainer = () => {
                             <View style = {styles.listContainer}>
                                 {messageCtg.map((item)=> {
                                     return (
-                                        <MessageList key={item._id} item={item} />
+                                        <MessageList key={item._id} item={item} 
+                                        navigation = {props.navigation}/>
                                     )
                                 })}
                             </View>

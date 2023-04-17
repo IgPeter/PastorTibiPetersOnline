@@ -7,7 +7,7 @@ const data = require('../assets/data/messages.json');
 
 var width = Dimensions.get('window').width;
 
-const Header = () => {
+const Header = (props) => {
 
     //set the message
     const [messages, setMessages] = useState([]);
@@ -53,7 +53,8 @@ const Header = () => {
                     <TouchableOpacity style = {styles.closeIcon} onPress = {close}>
                         <Image source={require('../assets/icons/icon-close.png')} />
                     </TouchableOpacity> 
-                    <SearchInterface filteredMessage = {filteredMessage}/>  
+                    <SearchInterface filteredMessage = {filteredMessage} 
+                    navigation = {props.navigation}/>  
                 </View>            
            ): (
         <View>   

@@ -5,14 +5,18 @@ import {
   StyleSheet,
   Image,
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/Backbutton";
 import { MenuButton } from "../../components/Menubutton";
 import { VideoCard } from "../../components/Videocard";
 import messages from "../../assets/data/messages.json"
 
-export const Singlevideo = () => {
+export const Singlevideo = (props) => {
+  
+  const [item, setItem] = useState(props.route.params.item);
+  const [availability, setAvailability] = useState('')
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -25,16 +29,10 @@ export const Singlevideo = () => {
         </View>
         <View>
           <Text style={{ textAlign: "center", fontSize: 24, fontWeight: "600", paddingHorizontal: 53 }}>
-            {messages[0].title}
+            {item.title}
           </Text>
           <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "500", marginBottom: 7 }}>Pastor Tibi Peters</Text>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
+          <View style={{ display: "flex", flexDirection: "row", justifyContent: "center"}}>
             <Image source={require("../../assets/icons/ratingb.png")} />
             <Image source={require("../../assets/icons/ratingb.png")} />
             <Image source={require("../../assets/icons/ratingb.png")} />
@@ -57,14 +55,11 @@ export const Singlevideo = () => {
           </Text>
           <View style={styles.description}>
             <Text style={{marginBottom: 40, textAlign: "justify"}}>
-              30 Days in the Book of Revelation is a daily devotional coi ned
-              from the chapters of the new testament book, Revel ation. 30 Days
-              in the Book of Revelation is a daily devotio nal coined from the
-              chapters of the new testament book, Revelation. 30 Days in the
-              Book of Revelation is a daily de votional coined from the chapters
-              of the new testament book, Revelation.
+              {item.description}  
             </Text>
-            <Button onPress={() => console.log('Button pressed')} title= "Play" btnstyle={{
+            <Button onPress={() => {
+              props.navigation.navigate('Video Play', {item: item})
+            }} title= "Play" btnstyle={{
                 borderRadius: 8,
                 height: 54,
                 justifyContent: "center",

@@ -21,7 +21,13 @@ const SearchedMessage = (props) => {
     return(
         <View style={{width: width - 40}}>
             {   filteredMessage.length > 0 ? (
-                    <TouchableOpacity style = {{flexDirection: 'row', width: width - 40}}>
+                    <TouchableOpacity style = {{flexDirection: 'row', width: width - 40}} onPress = {()=>{
+                        filteredMessage[0].contentType.toLowerCase() === 'audio' ?  
+                        props.navigation.navigate('Single Audio', {item: filteredMessage})
+                        : filteredMessage[0].contentType.toLowerCase() === 'video' ? 
+                        props.navigation.navigate('Single Video', {item: filteredMessage})
+                        : props.navigation.navigate('Single Book', {item: filteredMessage})
+                    }}>
                         <View style = {styles.thumbnail}>
                             <Image source = {require("../../assets/messageImages/RoleOfScriptures.jpg")} 
                             style = {styles.searchImage}/>

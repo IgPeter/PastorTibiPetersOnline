@@ -8,7 +8,10 @@ import {
 import { Video, ResizeMode } from "expo-av";
 import VideoPlayer from "expo-video-player";
 
-export const Singlevideoplay = () => {
+export const Singlevideoplay = (props) => {
+
+  const [item, setItem] = useState(props.route.params.item);
+
   const video = useRef(null);
   const [status, setStatus] = useState({});
   const [isMute, setIsMute] = useState(false)
@@ -21,8 +24,8 @@ export const Singlevideoplay = () => {
           resizeMode: ResizeMode.CONTAIN,
           // ❗ source is required https://docs.expo.io/versions/latest/sdk/video/#props
           source: {
-            uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-          },
+            uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+          }
         }}
         onPlaybackStatusUpdate={status => setStatus(() => status)}
         // fullscreen={}

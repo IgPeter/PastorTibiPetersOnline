@@ -10,7 +10,7 @@ const  NavigationIcon = ({route, isFocused}) => {
       switch (route) {
         case "Home":
           return <Image source={require('../assets/icons/VectorHome.png')} /> 
-        case "onboarding":
+        case "Explore":
           return <Image source={require('../assets/icons/Vectoruknown.png')} /> 
         case "Settings":
           return <Image source={require('../assets/icons/Vectordoo.png')}/>

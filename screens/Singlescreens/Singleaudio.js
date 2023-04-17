@@ -1,12 +1,15 @@
 import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/Backbutton";
 import { MenuButton } from "../../components/Menubutton";
 import { AudioCard } from "../../components/Audiocard";
 import messages from "../../assets/data/messages.json";
 
-export const Singleaudio = () => {
+export const Singleaudio = (props) => {
+  const [item, setItem] = useState(props.route.params.item);
+  const [availability, setAvailability] = useState('')
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -21,7 +24,7 @@ export const Singleaudio = () => {
           <Text
             style={{ textAlign: "center", fontSize: 24, fontWeight: "600", paddingHorizontal: 53 }}
           >
-            {messages[1].title}
+            {item.title}
           </Text>
           <Text
             style={{
@@ -62,15 +65,12 @@ export const Singleaudio = () => {
           </Text>
           <View style={styles.description}>
             <Text style={{ marginBottom: 40, textAlign: "justify" }}>
-              30 Days in the Book of Revelation is a daily devotional coi ned
-              from the chapters of the new testament book, Revel ation. 30 Days
-              in the Book of Revelation is a daily devotio nal coined from the
-              chapters of the new testament book, Revelation. 30 Days in the
-              Book of Revelation is a daily de votional coined from the chapters
-              of the new testament book, Revelation.
+              {item.description}
             </Text>
             <Button
-              onPress={() => console.log("Button pressed")}
+              onPress={() => {
+                props.navigation.navigate('Audio Play', {item: item})
+              }}
               title="Play"
               btnstyle={{
                 borderRadius: 8,

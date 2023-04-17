@@ -6,16 +6,21 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/Backbutton";
 import { MenuButton } from "../../components/Menubutton";
 import { Bookreader } from "./Bookreader";
 
-export const Singlebook = ({ navigation }) => {
+export const Singlebook = (props) => {
+
+  const [item, setItem] = useState(props.route.params.item);
+  const [availability, setAvailability] = useState('')
+
   const handleClick = () => {
-    navigation.navigate({Bookreader});
+    props.navigation.navigate("Bookreader");
   };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -116,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
-    marginTop: 20,
+    marginTop: 20
   },
   header: {
     justifyContent: "space-between",
