@@ -1,0 +1,38 @@
+{
+    "androidImplementation": "SimpleExoPlayer",
+    "audioPan": 0,
+    "didJustFinish": false,
+    "durationMillis": 426893,
+    "isBuffering": false,
+    "isLoaded": true,
+    "isLooping": false,
+    "isMuted": false,
+    "isPlaying": false,
+    "playableDurationMillis": 111568,
+    "positionMillis": 1158,
+    "progressUpdateIntervalMillis": 500,
+    "rate": 1,
+    "shouldCorrectPitch": false,
+    "shouldPlay": false,
+    "uri": "/data/user/0/host.exp.exponent/cache/ExperienceData/%40anonymous%2FPastorTibiPetersOnline-45360e4e-af05-4236-b476-6cb8439102df/ExponentAsset-240941303c686779f8b71406499aa52d.mp3",
+    "volume": 1
+}
+
+item.message.contentType.toLowerCase() === 'video' ? (
+                        <View>
+                            <Image source={require("../../assets/icons/VectorvideoIcon.png")}/>
+                            <Image source = {require('../../assets/icons/VectorplayIcon.png')}/>
+                        </View>
+                    ) : item.message.contentType.toLowerCase() === 'audio' ? (
+                        <Image source={require("../../assets/icons/Vectoraudio.png")} />
+                    ) : item.message.contentType.toLowerCase() === 'book' ? (
+                        <Image source={require("../../assets/icons/Vectordevotional.png")} />
+                    ): (
+                        <View>
+                            <Text>No popular messages yet</Text>
+                        </View>
+                    ) }
+                    </View>
+                )
+            })
+            

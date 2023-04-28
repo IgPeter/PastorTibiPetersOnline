@@ -82,9 +82,9 @@ const MessageContainer = (props) => {
 const styles = StyleSheet.create({
     container : {
         height: height,
-        marginTop: 20,
+        marginTop: 55,
         alignItems: 'center',
-        paddingBottom: 160
+        paddingBottom: 120
     },
 
     listContainer: {

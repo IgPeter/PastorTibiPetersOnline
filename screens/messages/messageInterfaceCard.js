@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Dimensions, View, Text, Image } from "react-native";
 import { useFonts } from "expo-font";
 
+
 var { width } = Dimensions.get("window");
 
 const MessageInterfaceCard = (props) => {
@@ -13,16 +14,14 @@ const MessageInterfaceCard = (props) => {
     return null;
   }
 
-  const { title, contentType, category } = props;
+  const { title, contentType } = props;
 
   return (
     <View style={styles.container}>
       <Image
         source={require("../../assets/messageImages/RoleOfScriptures.jpg")}
         style={styles.image}
-      />
-
-    
+      />    
         <View>  
           <Text style={styles.text}>{contentType}</Text>
         {contentType === "video" ? (
@@ -56,7 +55,6 @@ const MessageInterfaceCard = (props) => {
           <Image />
         )}
     </View>
-
       <Text style={styles.title}>
         {title.length > 20 ? title.substring(0, 15 - 3) + "..." : title}
       </Text>

@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 
 export const MenuButton = ({ onPress }) => (
   <TouchableOpacity onPress={onPress} style={styles.button}>
-    <Image source={require('../assets/icons/menu.png')} />
+    <Image source={require('../assets/icons/menu.png')} style={styles.buttonIcon} />
   </TouchableOpacity>
 );
 
@@ -15,10 +15,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
   },
-  buttonText: {
-    color: '#141414',
-    fontSize: 16,
-    fontWeight: 'bold',
+  buttonIcon: {
     marginLeft: 10,
   },
 });

@@ -1,56 +1,62 @@
-import {
-    StyleSheet,
-    TouchableOpacity,
-    Text,
-    View,
-    ScrollView,
-    Image,
-  } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, View, ScrollView, Image} from "react-native";
   import React from "react";
-  import user from "../../assets/data/user.json";
-  import { Button } from "../../components/Button";
   import { BackButton } from "../../components/Backbutton";
-  import { MenuButton } from "../../components/Menubutton";
+  import {useFonts} from 'expo-font';
   
   export const Settingspage = () => {
+
+    const [font] = useFonts({
+      WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf")
+    })
+
+    if(!font){
+      return null
+    }
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.header}>
           <BackButton onPress={() => console.log("Button pressed")} />
-          <Text style={{ fontSize: 26, fontWeight: "bold", left: 26, alignSelf: "center" }}>
+          <Text style={{fontSize: 20, fontFamily: 'WorkSans', fontWeight: "bold", left: 10, alignSelf: "center" }}>
             Settings
           </Text>
         </View>
         <View style={styles.menuItems}>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../../assets/icons/profile2.png')}/>
-                <Text style={{ fontSize: 16, marginLeft: 23}}>Account</Text>
-                <Image style={{marginLeft: 175}} source={require('../../assets/icons/forwardarrow.png')} />
+                <Image source={require('../../assets/icons/profile2.png')} style={styles.icons}/>
+                <Text style={styles.setText}>Account</Text>
+                <Image style={[{marginLeft: 137}, styles.forwardarrow]} 
+                source={require('../../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../../assets/icons/notification.png')}/>
-                <Text style={{ fontSize: 16, marginLeft: 25}}>Notifications</Text>
-                <Image style={{marginLeft: 150}} source={require('../../assets/icons/forwardarrow.png')} />
+                <Image source={require('../../assets/icons/notification.png')} style={styles.icons}/>
+                <Text style={styles.setText}>Notifications</Text>
+                <Image style={[{marginLeft: 110}, styles.forwardarrow]} 
+                source={require('../../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../../assets/icons/appearance.png')}/>
-                <Text style={{ fontSize: 16, marginLeft: 18}}>Appearance</Text>
-                <Image style={{marginLeft: 152}} source={require('../../assets/icons/forwardarrow.png')} />
+                <Image source={require('../../assets/icons/appearance.png')} style={styles.icons}/>
+                <Text style={styles.setText}>Appearance</Text>
+                <Image style={[{marginLeft: 112}, styles.forwardarrow]} 
+                source={require('../../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../../assets/icons/privacy.png')}/>
-                <Text style={{ fontSize: 16, marginLeft: 22}}>Privacy & Security</Text>
-                <Image style={{marginLeft: 110}} source={require('../../assets/icons/forwardarrow.png')} />
+                <Image source={require('../../assets/icons/privacy.png')} style={styles.icons}/>
+                <Text style={styles.setText}>Privacy & Security</Text>
+                <Image style={[{marginLeft: 75}, styles.forwardarrow]} 
+                source={require('../../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../../assets/icons/help.png')}/>
-                <Text style={{ fontSize: 16, marginLeft: 23}}>Help & FAQ</Text>
-                <Image style={{marginLeft: 150}} source={require('../../assets/icons/forwardarrow.png')} />
+                <Image source={require('../../assets/icons/help.png')} style={styles.icons}/>
+                <Text style={styles.setText}>Help & FAQ</Text>
+                <Image style={[{marginLeft: 120}, styles.forwardarrow]} 
+                source={require('../../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-                <Image source={require('../../assets/icons/info.png')}/>
-                <Text style={{ fontSize: 16, marginLeft: 23}}>About</Text>
-                <Image style={{marginLeft: 180}} source={require('../../assets/icons/forwardarrow.png')} />
+                <Image source={require('../../assets/icons/info.png')} style={styles.icons}/>
+                <Text style={styles.setText}>About</Text>
+                <Image style={[{marginLeft: 148}, styles.forwardarrow]} 
+                source={require('../../assets/icons/forwardarrow.png')} />
             </TouchableOpacity>
         </View>
       </ScrollView>
@@ -58,14 +64,14 @@ import {
   };
   const styles = StyleSheet.create({
     container: {
-      // backgroundColor: "brown",
+      backgroundColor: '#f2f2f2',
       flex: 1,
       width: "100%",
       height: "100%",
-      marginTop: 20,
+      marginTop: 60,
     },
     header: {
-      justifyContent: "center",
+      //justifyContent: "center",
       display: "flex",
       flexDirection: "row",
       padding: 20,
@@ -74,12 +80,29 @@ import {
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
-      paddingBottom: 53,
+      paddingBottom: 50,
     },
     menuItems: {
-      marginTop: 70,
-      marginBottom: 365,
-      paddingHorizontal: 19
+      marginTop: 30,
+      marginBottom: 30,
+      paddingHorizontal: 30
+    },
+    forwardarrow: {
+      resizeMode: 'contain',
+      width: 20,
+      height: 15
+    },
+
+    setText: {
+      marginLeft: 23,
+      fontFamily: 'WorkSans',
+      fontSize: 14,
+      fontWeight: 'bold'
+    },
+    icons: {
+      resizeMode: 'contain',
+      width: 14,
+      heigt: 10
     }
   });
   
