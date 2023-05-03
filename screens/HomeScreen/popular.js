@@ -35,7 +35,7 @@ const PopularMessages = (props) => {
                 <View style = {styles.popularContainer}>
                     {popular.map((item, index) => {
                             return (
-                                <View>
+                                <View key={item._id}>
                                     {index <= 5 && (
                                         <MessageList key={item._id} item = {item}
                                         navigation = {props.navigation}/>

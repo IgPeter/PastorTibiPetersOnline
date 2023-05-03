@@ -3,10 +3,37 @@ import React, { useState } from 'react'
 import { A } from '@expo/html-elements'
 import { Button } from '../../components/Button'
 // import CheckBox from '@react-native-community/checkbox'
+import Error from '../../shared/Error'
+import axios from 'axios';
+import baseUrl from '../../assets/common/baseUrl'
 
-export const Login = () => {
+export const Login = (props) => {
   // const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
+    const handleSubmit = () => {
+        if(email === '' || password === ''){
+          setError("Please fill in your credentials")
+      }else {
+        let user = {
+          email: email,
+          password: password
+        }
+        axios.post(`${baseUrl}user/login`, user).then((res)=> {
+          if(res.status = 200){
+              setTimeout(() => {
+                props.navigation.navigate('User Profile');
+                console.log('success!');
+            }, 500)
+          }
+        }).catch((error)=> {
+          console.log(`Login Failed ${error}`)
+        })
+      }
+    }
+    
   return (
     <ScrollView style={styles.container}>
       <View style={styles.title}>
@@ -14,11 +41,15 @@ export const Login = () => {
         <Text>We are glad to have you back.</Text>
       </View>
       <View style={styles.inputView}>
-        <TextInput style={styles.inputField} placeholder="Email" keyboardType='email-address' />
+        <TextInput style={styles.inputField} 
+        placeholder="Email" keyboardType='email-address' onChangeText={(text)=> setEmail(text)}/>
         <Text style={styles.inputText}>Email/Username is wrong</Text>
-        <TextInput style={styles.inputField} placeholder="Password" />
+        <TextInput style={styles.inputField} keyboardType='default' 
+        placeholder="Password" onChangeText={(text)=> setPassword(text)}/>
+        {error ? <Error message={error} /> : null}
         <Text style={styles.inputText}>Password is wrong</Text>
-        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 33, marginBottom: 27 }}>
+        <View style={{ display: 'flex', flexDirection: 'row', 
+        justifyContent: 'space-between', marginTop: 33, marginBottom: 5 }}>
           {/* <CheckBox
             disabled={false}
             value={toggleCheckBox}
@@ -28,25 +59,29 @@ export const Login = () => {
           <Text style={{ marginLeft: 20 }}>Forgot Password?</Text>
         </View>
       </View>
-      <View style={{ marginTop: 27 }}>
+      <View>
         <Text style={{ backgroundColor: '#E3E3E3', height: 1 }}></Text>
-        <Text style={{ textAlign: 'center', marginBottom: 21, backgroundColor: 'white', position: 'absolute', left: '35%', top: -6 }}>Or login using</Text>
+        <Text style={{ textAlign: 'center'}}>Or login using</Text>
       </View>
       <View style={styles.loginAlt}>
-        <A>
+        <A style={{paddingBottom:20}}>
           <Image source={require
             ('../../assets/icons/google.png')} />
         </A>
-        <A>
+        <A style={{paddingBottom:20}}>
           <Image source={require
             ('../../assets/icons/facebook.png')} />
         </A>
       </View>
       <View>
-        <Button title="Log In" btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} />
+        <Button title="Log In" btnstyle={{ backgroundColor: "#141414", 
+        borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} 
+        txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} 
+        onPress={()=>handleSubmit()} />
         <Text style={{ textAlign: 'center', marginBottom: 52 }}>
           <Text>Don't have an Account? </Text>
-          <A style={{ fontWeight: 'bold' }}>Sign Up</A>
+          <A style={{ fontWeight: 'bold' }}
+          onPress={()=> props.navigation.navigate('Register')}>Sign Up</A>
         </Text>
       </View>
     </ScrollView>
@@ -59,7 +94,8 @@ const styles = StyleSheet.create({
     top: 20,
     width: '100%',
     height: '100%',
-    padding: 15,
+    paddingLeft: 20,
+    paddingRight: 10
   },
   title: {
     marginTop: 100,
@@ -69,7 +105,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   inputView: {
-    marginVertical: 40
+    marginVertical: 20
   },
   inputField: {
     height: 54,
@@ -90,7 +126,7 @@ const styles = StyleSheet.create({
   },
   loginAlt: {
     marginTop: 20,
-    marginBottom: 211,
+    marginBottom: 30,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -104,5 +140,5 @@ const styles = StyleSheet.create({
     padding: 15,
     height: 54,
     marginBottom: 15,
-  },
+  }
 })

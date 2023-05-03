@@ -103,15 +103,15 @@
       },
     
       {
-        "_id": "641194c500d9efdd22445445",
-        "title": "Worship Him",
-        "description": "Making the blessing yours",
-        "contentType": "book",
-        "category": "64357dacc406dcaf983f7ce6",
-        "image": "../../assets/messageImages/WorshipHim.jpg",
-        "message": "http://localhost:3000/public/upload/message/audioMessages/Activating-The Blessing - Pastor Tibi Peters.mp3-1678873793963.mp3",
+        "_id": "64357b1acc3b168e63b1b9ac",
+        "title": "In his presence",
+        "description": "This will teach you to dwell",
+        "contentType": "audio",
+        "image": "http://localhost:3000/public/upload/message/images/FaithToFaith.png-1681226522117.png",
+        "message": "http://localhost:3000/public/upload/message/audioMessages/GUC-The-Bill.mp3-1681226522118.mp3",
+        "category": "64356cd1d25e64952086146e",
         "isFeatured": false,
-        "dateCreated": "2023-03-15T09:49:54.302+00:00",
-        "__v": 0
+        "dateCreated": "2023-04-11T15:22:02.228+00:00",
+        "__v": { "$numberInt": "0" }
       }
 ]

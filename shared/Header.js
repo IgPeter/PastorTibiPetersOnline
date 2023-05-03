@@ -1,32 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {SafeAreaView, TextInput, StyleSheet, Image, View, Dimensions, TouchableOpacity, Text} from 'react-native';
+import React, {useState, useCallback} from 'react';
+import {SafeAreaView, TextInput, 
+    StyleSheet, Image, 
+    View, Dimensions, 
+    TouchableOpacity} from 'react-native';
 import SearchInterface from "../screens/messages/searchMessages";
 import {useFonts} from 'expo-font';
-
-const data = require('../assets/data/messages.json');
 
 var width = Dimensions.get('window').width;
 
 const Header = (props) => {
 
     //set the message
-    const [messages, setMessages] = useState([]);
-    const [focus, setFocus] = useState();
+    const [focus, setFocus] = useState(false);
     const [filteredMessage, setFilteredMessage] = useState([]);
-
-    useEffect(() => {
-        setMessages(data);
-        setFocus(false);
-
-        return () => {
-            setMessages([]);
-            setFocus();
-            setFilteredMessage([])
-        }
-    }, [])
-
+        
     const searchMessage = (text) => {
-        setFilteredMessage(messages.filter((i) => i.title.toLowerCase().includes(text.toLowerCase())))
+        setFilteredMessage(props.message.filter((i) => i.title.toLowerCase().includes(text.toLowerCase())))
     }
     
     const [font] = useFonts({
@@ -46,7 +35,7 @@ const Header = (props) => {
     }
 
      return (
-        <SafeAreaView>
+            <SafeAreaView>
             {focus == true ? (
                 <View style = {styles.dropdownInput}>
                     <TextInput style={styles.input} onChangeText={(text) => searchMessage(text)}/>

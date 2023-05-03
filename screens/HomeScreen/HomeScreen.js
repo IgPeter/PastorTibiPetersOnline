@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import PopularMessages from './popular';
 import RecommendedMessages from './recommended';
 import Banner from './banner.js';
+import baseUrl from '../../assets/common/baseUrl';
 
 const HomeScreen = (props) => {
 

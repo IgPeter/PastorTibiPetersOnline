@@ -2,9 +2,9 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MyTabBar from './MyTabBar';
 import { Settingspage } from "../screens/Singlescreens/Settingspage";
-import { Userprofile } from "../screens/Singlescreens/Userprofile";
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import MessageContainer from "../screens/messages/messageContainer";
+import AuthNavigator from "./AuthNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +28,7 @@ const Main = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Explore" component={MessageContainer} />
       <Tab.Screen name="Settings" component={Settingspage} />
-      <Tab.Screen name="User" component={Userprofile} />
+      <Tab.Screen name="User" component={AuthNavigator} />
     </Tab.Navigator>
   );
 };

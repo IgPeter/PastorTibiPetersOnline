@@ -64,6 +64,7 @@ const MessageInterfaceCard = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 5,
     width: width / 3 - 20,
     height: width / 2.1,
   },
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 8,
     fontFamily: "WorkSans",
-    fontWeight: 800,
+    fontWeight: 600,
     marginTop: 5,
     marginLeft: 5,
   },

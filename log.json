@@ -1,38 +1,141 @@
 {
-    "androidImplementation": "SimpleExoPlayer",
-    "audioPan": 0,
-    "didJustFinish": false,
-    "durationMillis": 426893,
-    "isBuffering": false,
-    "isLoaded": true,
-    "isLooping": false,
-    "isMuted": false,
-    "isPlaying": false,
-    "playableDurationMillis": 111568,
-    "positionMillis": 1158,
-    "progressUpdateIntervalMillis": 500,
-    "rate": 1,
-    "shouldCorrectPitch": false,
-    "shouldPlay": false,
-    "uri": "/data/user/0/host.exp.exponent/cache/ExperienceData/%40anonymous%2FPastorTibiPetersOnline-45360e4e-af05-4236-b476-6cb8439102df/ExponentAsset-240941303c686779f8b71406499aa52d.mp3",
-    "volume": 1
+    "config": {
+        "adapter": [
+            "xhr",
+            "http"
+        ],
+        "data": undefined,
+        "env": {
+            "Blob": [Function Blob
+            ],
+            "FormData": [Function FormData
+            ]
+        },
+        "headers": [Object
+        ],
+        "maxBodyLength": -1,
+        "maxContentLength": -1,
+        "method": "get",
+        "timeout": 0,
+        "transformRequest": [
+            [Function transformRequest
+            ]
+        ],
+        "transformResponse": [
+            [Function transformResponse
+            ]
+        ],
+        "transitional": {
+            "clarifyTimeoutError": false,
+            "forcedJSONParsing": true,
+            "silentJSONParsing": true
+        },
+        "url": "http://192.168.140.213:3000/api/v1/message",
+        "validateStatus": [Function validateStatus
+        ],
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN"
+    },
+    "data": {
+        "count": 11,
+        "message": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ]
+    },
+    "headers": {
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-length": "2867",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 03 May 2023 13:55:23 GMT",
+        "etag": "W/\"b33-pzlcvfhhgP7tVDcaXUcf/nr6OVQ\"",
+        "keep-alive": "timeout=5",
+        "x-powered-by": "Express"
+    },
+    "request": {
+        "DONE": 4,
+        "HEADERS_RECEIVED": 2,
+        "LOADING": 3,
+        "OPENED": 1,
+        "UNSENT": 0,
+        "_aborted": false,
+        "_cachedResponse": undefined,
+        "_hasError": false,
+        "_headers": {
+            "accept": "application/json, text/plain, */*"
+        },
+        "_incrementalEvents": false,
+        "_lowerCaseResponseHeaders": {
+            "access-control-allow-origin": "*",
+            "connection": "keep-alive",
+            "content-length": "2867",
+            "content-type": "application/json; charset=utf-8",
+            "date": "Wed, 03 May 2023 13:55:23 GMT",
+            "etag": "W/\"b33-pzlcvfhhgP7tVDcaXUcf/nr6OVQ\"",
+            "keep-alive": "timeout=5",
+            "x-powered-by": "Express"
+        },
+        "_method": "GET",
+        "_perfKey": "network_XMLHttpRequest_http://192.168.140.213:3000/api/v1/message",
+        "_performanceLogger": {
+            "_closed": false,
+            "_extras": [Object
+            ],
+            "_pointExtras": [Object
+            ],
+            "_points": [Object
+            ],
+            "_timespans": [Object
+            ]
+        },
+        "_requestId": null,
+        "_response": "{\"count\":11,\"message\":[{\"_id\":\"6406076f7b4f62a02374803d\",\"title\":\"Glory\",\"description\":\"That God will move again\",\"dateCreated\":\"2023-03-06T15:31:59.068Z\",\"contentType\":\"Video\",\"id\":\"6406076f7b4f62a02374803d\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"6408880c39c1c3fe19475109\",\"title\":\"The will of God\",\"description\":\"knowing the will of God\",\"dateCreated\":\"2023-03-08T13:05:17.000Z\",\"contentType\":\"Audio\",\"id\":\"6408880c39c1c3fe19475109\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"6408885439c1c3fe1947510b\",\"title\":\"Grace  revealed\",\"description\":\"knowing the grace of God\",\"dateCreated\":\"2023-03-08T13:06:28.750Z\",\"contentType\":\"Video\",\"id\":\"6408885439c1c3fe1947510b\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"6408890139c1c3fe1947510d\",\"title\":\"Another test message\",\"description\":\"finding out another test message\",\"dateCreated\":\"2023-03-08T13:09:21.470Z\",\"contentType\":\"audio\",\"id\":\"6408890139c1c3fe1947510d\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"640889635705c5bbbbda70fe\",\"title\":\"Final test message\",\"description\":\"finding out the final test message\",\"dateCreated\":\"2023-03-08T13:10:59.267Z\",\"contentType\":\"video\",\"id\":\"640889635705c5bbbbda70fe\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"64089af3cd0f5ef68646efbe\",\"title\":\"He never fails\",\"description\":\"God never fails\",\"dateCreated\":\"2023-03-08T14:25:55.168Z\",\"contentType\":\"audio\",\"id\":\"64089af3cd0f5ef68646efbe\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"64089b0ecd0f5ef68646efc0\",\"title\":\"Day of trouble\",\"description\":\"psalm 50:15\",\"dateCreated\":\"2023-03-08T14:26:22.483Z\",\"contentType\":\"audio\",\"id\":\"64089b0ecd0f5ef68646efc0\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"641193893feea5757e735c96\",\"title\":\"Zoe\",\"description\":\"The life of God\",\"dateCreated\":\"2023-03-15T09:44:41.691Z\",\"contentType\":\"Audio\",\"id\":\"641193893feea5757e735c96\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"641194c294d9efdd22445445\",\"title\":\"Activating the blessing\",\"description\":\"Making the blessing yours\",\"dateCreated\":\"2023-03-15T09:49:54.302Z\",\"contentType\":\"Audio\",\"id\":\"641194c294d9efdd22445445\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"64357b1acc3b168e63b1b9ac\",\"title\":\"In his presence\",\"description\":\"This will teach you to dwell\",\"dateCreated\":\"2023-04-11T15:22:02.228Z\",\"contentType\":\"audio\",\"id\":\"64357b1acc3b168e63b1b9ac\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"645115c517fd6514966c9d82\",\"title\":\"Grace  revealed\",\"description\":\"knowing the grace of God\",\"dateCreated\":\"2023-03-08T13:06:28.750Z\",\"contentType\":\"Video\",\"id\":\"645115c517fd6514966c9d82\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}}]}",
+        "_responseType": "",
+        "_sent": true,
+        "_subscriptions": [],
+        "_timedOut": false,
+        "_trackingName": "unknown",
+        "_url": "http://192.168.140.213:3000/api/v1/message",
+        "readyState": 4,
+        "responseHeaders": {
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "2867",
+            "Content-Type": "application/json; charset=utf-8",
+            "Date": "Wed, 03 May 2023 13:55:23 GMT",
+            "ETag": "W/\"b33-pzlcvfhhgP7tVDcaXUcf/nr6OVQ\"",
+            "Keep-Alive": "timeout=5",
+            "X-Powered-By": "Express"
+        },
+        "responseURL": "http://192.168.140.213:3000/api/v1/message",
+        "status": 200,
+        "timeout": 0,
+        "upload": {},
+        "withCredentials": true
+    },
+    "status": 200,
+    "statusText": undefined
 }
 
-item.message.contentType.toLowerCase() === 'video' ? (
-                        <View>
-                            <Image source={require("../../assets/icons/VectorvideoIcon.png")}/>
-                            <Image source = {require('../../assets/icons/VectorplayIcon.png')}/>
-                        </View>
-                    ) : item.message.contentType.toLowerCase() === 'audio' ? (
-                        <Image source={require("../../assets/icons/Vectoraudio.png")} />
-                    ) : item.message.contentType.toLowerCase() === 'book' ? (
-                        <Image source={require("../../assets/icons/Vectordevotional.png")} />
-                    ): (
-                        <View>
-                            <Text>No popular messages yet</Text>
-                        </View>
-                    ) }
-                    </View>
-                )
-            })
-            
+        

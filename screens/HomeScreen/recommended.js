@@ -34,7 +34,7 @@ const RecommendedMessages = (props) => {
                 <View style = {styles.recommendedContainer}>
                     {recommended.map((item, index) => {
                             return (
-                                <View>
+                                <View key={item._id}>
                                     {index <= 5 && (
                                         <MessageList key={item._id} item = {item}
                                         navigation = {props.navigation}/>
