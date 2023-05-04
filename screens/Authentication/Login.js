@@ -1,36 +1,37 @@
 import { StyleSheet, TouchableHighlight, Text, TextInput, View, ScrollView, Image } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { A } from '@expo/html-elements'
 import { Button } from '../../components/Button'
 // import CheckBox from '@react-native-community/checkbox'
 import Error from '../../shared/Error'
 import axios from 'axios';
 import baseUrl from '../../assets/common/baseUrl'
+import AuthGlobal from '../../context/store/AuthGlobal'
+import { loginUser } from '../../context/actions/AuthActions'
 
 export const Login = (props) => {
   // const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const context = useContext(AuthGlobal);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    if(context.stateUser.isAuthenticated === true){
+      props.navigation.navigate('User Profile');
+    }
+  }, [context.stateUser.isAuthenticated])
+
     const handleSubmit = () => {
+      const user = {
+        email: email,
+        password: password
+      }
+
         if(email === '' || password === ''){
           setError("Please fill in your credentials")
       }else {
-        let user = {
-          email: email,
-          password: password
-        }
-        axios.post(`${baseUrl}user/login`, user).then((res)=> {
-          if(res.status = 200){
-              setTimeout(() => {
-                props.navigation.navigate('User Profile');
-                console.log('success!');
-            }, 500)
-          }
-        }).catch((error)=> {
-          console.log(`Login Failed ${error}`)
-        })
+          loginUser(user, context.dispatch)
       }
     }
     
@@ -42,12 +43,10 @@ export const Login = (props) => {
       </View>
       <View style={styles.inputView}>
         <TextInput style={styles.inputField} 
-        placeholder="Email" keyboardType='email-address' onChangeText={(text)=> setEmail(text)}/>
-        <Text style={styles.inputText}>Email/Username is wrong</Text>
-        <TextInput style={styles.inputField} keyboardType='default' 
-        placeholder="Password" onChangeText={(text)=> setPassword(text)}/>
+        placeholder="Email" keyboardType='email-address' onChangeText={(text)=> setEmail(text.trim())}/>
+        <TextInput style={styles.inputField} keyboardType='default'
+        placeholder="Password" onChangeText={(text)=> setPassword(text.trim())}/>
         {error ? <Error message={error} /> : null}
-        <Text style={styles.inputText}>Password is wrong</Text>
         <View style={{ display: 'flex', flexDirection: 'row', 
         justifyContent: 'space-between', marginTop: 33, marginBottom: 5 }}>
           {/* <CheckBox

@@ -7,12 +7,42 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import React from "react";
-import user from "../../assets/data/user.json";
+import React, {useState, useContext, useEffect, useCallback} from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BackButton } from "../../components/Backbutton";
 import { MenuButton } from "../../components/Menubutton";
+import axios from "axios";
+import baseUrl from "../../assets/common/baseUrl";
+import AuthGlobal from "../../context/store/AuthGlobal";
+import { logoutUser } from "../../context/actions/AuthActions";
 
-export const Userprofile = () => {
+export const Userprofile = (props) => {
+  const context = useContext(AuthGlobal);
+  const [userProfile, setUserProfile] = useState();
+
+  useEffect(() => {
+    //console.log(context.stateUser);
+    if(context.stateUser.isAuthenticated ===  false || 
+      context.stateUser.isAuthenticated === null){
+        props.navigation.navigate('Login');
+      }
+
+      AsyncStorage.getItem('jwt')
+      .then((res) => {
+        axios.get(`${baseUrl}user/${context.stateUser.user.userId}`, {
+          headers: {Authorization: `Bearer ${res}`}
+        }).then((user) => {
+          console.log(user)
+          setUserProfile(user.data)
+        })
+      }).catch((error) => console.log(error))
+
+      return ()  => {
+        setUserProfile();
+      }
+  }, [context.stateUser.isAuthenticated])
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -25,16 +55,12 @@ export const Userprofile = () => {
       <View style={styles.profile}>
         <View style={styles.avatar}>
           <Text style={{ fontSize: 26 }}>
-            {user[2].name.firstName[0]}
-            {user[2].name.lastName[0]}
+            {userProfile ? userProfile.name : ''}
           </Text>
         </View>
         <View>
-          <Text style={{ textAlign: "center", fontSize: 24 }}>
-            {user[2].name.firstName} {user[2].name.lastName}
-          </Text>
           <Text style={{ textAlign: "center", fontSize: 12 }}>
-            {user[2].email}
+            {userProfile ? userProfile.email : ''}
           </Text>
         </View>
       </View>
