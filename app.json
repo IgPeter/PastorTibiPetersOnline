@@ -25,6 +25,20 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "expo": {
+      "android": {
+        "permissions": [
+          "ACCESS_FINE_LOCATION",
+          "ACCESS_COARSE_LOCATION"
+        ]
+      },
+      "ios": {
+        "infoPlist": {
+          "NSLocationWhenInUseUsageDescription": "This app needs access to your location to function properly.",
+          "NSLocationAlwaysAndWhenInUseUsageDescription": "This app needs access to your location to function properly."
+        }
+      }
     }
   }
 }

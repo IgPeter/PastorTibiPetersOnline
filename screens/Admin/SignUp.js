@@ -12,20 +12,19 @@ import Toast from 'react-native-toast-message';
 var {width} = Dimensions.get('window')
 
 
-export const Signup = (props) => {
+const AdminSignup = (props) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [country, setCountry] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [file, setFile] = useState();
 
 
-  const register = () => {
+  const AdminRegister = () => {
     
-    if(firstName === '' || lastName === '' || email === '' || phone === '' || country === ''
+    if(firstName === '' || lastName === '' || email === '' || phone === ''
     || password === ''){
       setError('Fill in the form completely');
     }
@@ -35,9 +34,8 @@ export const Signup = (props) => {
         lastName: lastName,
         email: email,
         password: password,
-        isAdmin: false,
+        isAdmin: true,
         phone: phone,
-        country: country,
         avatar: file.name
     }
 
@@ -51,7 +49,7 @@ export const Signup = (props) => {
 
         })
             setTimeout(()=> {
-                props.navigation.navigate('Login');
+                props.navigation.navigate('Admin Login');
             }, 300)
       }
     }).catch((error)=> {
@@ -91,13 +89,13 @@ export const Signup = (props) => {
         placeholder="First Name" keyboardType='default' onChangeText={(text) => setFirstName(text.trim())} />
         <TextInput style={styles.inputField} 
         placeholder="Last Name" keyboardType='default' onChangeText={(text) => setLastName(text.trim())} />
+        {/*<Text style={styles.inputText}>Email/Username is wrong</Text>*/}
         <TextInput style={styles.inputField} 
-        placeholder="Email" keyboardType='email-address' 
-        onChangeText={(text)=> setEmail(text.trim().toLowerCase())}/>
+        placeholder="Email" keyboardType='email-address' onChangeText={(text)=> setEmail(text.trim())}/>
+        {/*<Text style={styles.inputText}>Password is wrong</Text>*/}
         <TextInput style={styles.inputField} 
         placeholder="Phone number" keyboardType='numeric' onChangeText={(text)=> setPhone(text.trim())}/>
-         <TextInput style={styles.inputField} 
-        placeholder="Country" keyboardType='default' onChangeText={(text)=> setCountry(text.trim())}/>
+        {/*<Text style={styles.inputText}>Email/Username is wrong</Text>*/}
         <View style={styles.filePicker}>
           <TextInput style={styles.inputField} placeholder="Upload a profile picture" editable={false} 
           value={file ? file.name : ''}/>
@@ -107,21 +105,20 @@ export const Signup = (props) => {
           onPress={pickDocument} />
         </View>
         <TextInput style={styles.inputField} 
-        placeholder="Password" keyboardType='default' 
-        secureTextEntry={true} onChangeText={(text)=> setPassword(text.trim())}/>
-        <TextInput style={styles.inputField} secureTextEntry={true}
+        placeholder="Password" keyboardType='default' onChangeText={(text)=> setPassword(text.trim())}/>
+        {/*<Text style={styles.inputText}>Email/Username is wrong</Text>*/}
+        <TextInput style={styles.inputField} 
         placeholder="Confirm Password" keyboardType='default' onChangeText={(text)=>comparePassword(text.trim())}/>
-         {error ? <Error message={error} />: null}
       </View>
       <View>
         <Button title="Sign Up"  btnstyle={{ backgroundColor: "#141414", borderRadius: 8, height: 54, 
         justifyContent: "center", padding: 10, marginBottom: 15, }} 
         txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} 
-        onPress={()=> register()}/>
+        onPress={()=> AdminRegister()}/>
         {error ? <Error message={error} />: null}
         <Text style={{ textAlign: 'center', marginBottom: 52 }}>
           <Text>Already have an Account? </Text>
-          <A style={{ fontWeight: '600' }} onPress={()=> props.navigation.navigate('Login')}>Log in</A>
+          <A style={{ fontWeight: '600' }} onPress={()=> props.navigation.navigate('Admin Login')}>Log in</A>
         </Text>
       </View>
     </ScrollView>
@@ -170,3 +167,5 @@ const styles = StyleSheet.create({
     color: '#C90101'
   }
 })
+
+export default AdminSignup;

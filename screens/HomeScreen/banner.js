@@ -8,8 +8,8 @@ const Banner = () => {
     const [bannerData, setBannerData] = useState([]);
 
     useEffect(()=> {
-        setBannerData(['../../assets/messageImages/TraditionsOfChrist.jpg', 
-        '../../assets/messageImages/Friends.jpg', '../../assets/messageImages/OneWordOfGod.jpg'])
+        setBannerData([require('../../assets/messageImages/TraditionsOfChrist.jpg'), 
+        require('../../assets/images/bannerImage.jpg'), require('../../assets/messageImages/OneWordOfGod.jpg')])
 
         return ()=>{
             setBannerData([]);
@@ -28,7 +28,7 @@ const Banner = () => {
                     {bannerData.map((item) => {
                         return (
                             <Image key={item} 
-                            source = {require('../../assets/messageImages/TraditionsOfChrist.jpg')} 
+                            source = {item} 
                             resizeMode= 'contain' style = {styles.imageBanner}/>
                         )
                     })}
@@ -43,7 +43,6 @@ export default Banner;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
         backgroundColor: '#f2f2f2'
     },

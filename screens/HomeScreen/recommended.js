@@ -29,7 +29,9 @@ const RecommendedMessages = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text style = {styles.recHeader}>Recommended Messages</Text>
+            <Text style = {styles.recHeader}>JUST A TIP OF THE ICEBERG!</Text>
+            <Text style ={{fontFamily: 'WorkSans', fontWeight: 600, fontSize: 14, color: '#E5B80B', 
+        marginTop: 0, marginBottom: 0, marginLeft: 20}}>Explore these highlights for you</Text>
             {recommended.length > 0 ? (
                 <View style = {styles.recommendedContainer}>
                     {recommended.map((item, index) => {
@@ -54,19 +56,22 @@ const RecommendedMessages = (props) => {
 const styles = StyleSheet.create({
     container : {
         marginTop: 10,
-        paddingBottom: 130
+        paddingTop: 30,
+        paddingBottom: 30
     },
 
     recommendedContainer: {
         alignItems: 'center',
         width: width - 20,
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        marginTop: 0
     },
     recHeader: {
         fontFamily: 'WorkSans',
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 18,
+        marginLeft: 20
     }
 })
 

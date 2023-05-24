@@ -27,7 +27,7 @@ const MessageList = (props) => {
 const styles = StyleSheet.create({
     container: {
         margin: 5,
-        marginTop: 30
+        marginTop: 10
     }
 })
 

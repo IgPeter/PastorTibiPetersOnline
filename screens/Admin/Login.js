@@ -1,25 +1,24 @@
-import { StyleSheet, Text, TextInput, View, ScrollView, Image, ActivityIndicator } from 'react-native'
+import { StyleSheet, TouchableHighlight, Text, TextInput, View, ScrollView, Image } from 'react-native'
 import React, { useState, useContext, useEffect } from 'react'
 import { A } from '@expo/html-elements'
 import { Button } from '../../components/Button'
 // import CheckBox from '@react-native-community/checkbox'
 import Error from '../../shared/Error'
+import axios from 'axios';
+import baseUrl from '../../assets/common/baseUrl'
 import AuthGlobal from '../../context/store/AuthGlobal'
 import { loginUser } from '../../context/actions/AuthActions'
 
-export const Login = (props) => {
+const AdminLogin = (props) => {
   // const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const context = useContext(AuthGlobal);
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState();
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if(context.stateUser.isAuthenticated == true && context.stateUser.user.isSubscriber == false){
-      props.navigation.navigate('Subscription', {item: context.stateUser});
-    }else if (context.stateUser.isAuthenticated == true && context.stateUser.user.isSubscriber == true){
-      props.navigation.navigate('main', {item: context.stateUser})
+    if(context.stateUser.isAuthenticated === true){
+      props.navigation.navigate('Admin Message');
     }
   }, [context.stateUser.isAuthenticated])
 
@@ -32,41 +31,43 @@ export const Login = (props) => {
         if(email === '' || password === ''){
           setError("Please fill in your credentials")
       }else {
-          setLoading(true);
           loginUser(user, context.dispatch)
       }
     }
     
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.title}>
         <Text style={styles.login}>Log in</Text>
-        <Text>We are glad to have you back.</Text>
       </View>
       <View style={styles.inputView}>
         <TextInput style={styles.inputField} 
-        placeholder="Email" keyboardType='email-address' onChangeText={(text)=> setEmail(text.trim())} />
+        placeholder="Email" keyboardType='email-address' onChangeText={(text)=> setEmail(text.trim())}/>
         <TextInput style={styles.inputField} keyboardType='default'
-          placeholder="Password" onChangeText={(text)=> setPassword(text.trim())}/>
+        placeholder="Password" onChangeText={(text)=> setPassword(text.trim())}/>
         {error ? <Error message={error} /> : null}
+        <View style={{ display: 'flex', flexDirection: 'row', 
+        justifyContent: 'space-between', marginTop: 33, marginBottom: 5 }}>
+          {/* <CheckBox
+            disabled={false}
+            value={toggleCheckBox}
+            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+          /> */}
+          <Text style={{ marginLeft: 20 }}>Forgot Password?</Text>
+        </View>
       </View>
       <View>
         <Button title="Log In" btnstyle={{ backgroundColor: "#141414", 
-          borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} 
-          txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} 
-          onPress={()=>handleSubmit()} />
+        borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} 
+        txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} 
+        onPress={()=>handleSubmit()} />
         <Text style={{ textAlign: 'center', marginBottom: 52 }}>
           <Text>Don't have an Account? </Text>
           <A style={{ fontWeight: 'bold' }}
-          onPress={()=> props.navigation.navigate('Register')}>Sign Up</A>
+          onPress={()=> props.navigation.navigate('Admin Register')}>Sign Up</A>
         </Text>
       </View>
-        {loading == true ? (
-          <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <ActivityIndicator color="gold"/>
-          </View>
-        ): null}
-    </ScrollView>
+    </View>
   )
 }
 
@@ -124,3 +125,5 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   }
 })
+
+export  default AdminLogin

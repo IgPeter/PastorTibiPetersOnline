@@ -1,17 +1,13 @@
 import {
   StyleSheet,
-  TouchableHighlight,
   Text,
-  TextInput,
   View,
-  ScrollView,
-  Image,
+  Image
 } from "react-native";
-import React, {useState, useContext, useEffect, useCallback} from "react";
-import { useFocusEffect } from "@react-navigation/native";
+import React, {useState, useContext, useEffect} from "react";
+import { Button } from "../../components/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BackButton } from "../../components/Backbutton";
-import { MenuButton } from "../../components/Menubutton";
 import axios from "axios";
 import baseUrl from "../../assets/common/baseUrl";
 import AuthGlobal from "../../context/store/AuthGlobal";
@@ -33,30 +29,29 @@ export const Userprofile = (props) => {
         axios.get(`${baseUrl}user/${context.stateUser.user.userId}`, {
           headers: {Authorization: `Bearer ${res}`}
         }).then((user) => {
-          console.log(user)
           setUserProfile(user.data)
         })
       }).catch((error) => console.log(error))
-
-      return ()  => {
-        setUserProfile();
-      }
   }, [context.stateUser.isAuthenticated])
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <BackButton onPress={() => console.log("Button pressed")} />
+    <View style={styles.container}>
+          <View style={styles.header}>
+        <BackButton onPress={() => props.navigation.goBack()} />
         <Text style={{ fontSize: 26, fontWeight: "bold", left: -36, alignSelf: "center" }}>
           Profile
         </Text>
-        <MenuButton onPress={() => console.log("Button pressed")} />
       </View>
       <View style={styles.profile}>
         <View style={styles.avatar}>
           <Text style={{ fontSize: 26 }}>
             {userProfile ? userProfile.name : ''}
           </Text>
+          <View>
+            {userProfile ? (
+              <Image source={{uri: userProfile.avatar}}/>
+            ): null}
+          </View>
         </View>
         <View>
           <Text style={{ textAlign: "center", fontSize: 12 }}>
@@ -64,29 +59,54 @@ export const Userprofile = (props) => {
           </Text>
         </View>
       </View>
-      <View
-        style={{
-          marginBottom: 452,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
-      >
-        <Image
+      <View>
+        {userProfile && userProfile.subscription.plan === "Basic" && (
+        <View style={{ marginBottom: 30, flexDirection: "row", justifyContent: "center", alignItems: 'center'}}>
+          <Image
           style={{ marginRight: 12 }}
-          source={require("../../assets/icons/onestar.png")}
-        />
-        <Text
-          style={{
-            textAlign: "center",
-            fontSize: 12,
-            alignSelf: "center",
-            justifyContent: "center",
-            color: "#235EF5",
-          }}
+          source={require("../../assets/icons/Vectorstarbroze.png")}
+          />
+          <Text
+          style={{ textAlign: "center", fontSize: 12, alignSelf: "center", 
+          justifyContent: "center", color: "#235EF5"}}
         >
-          10 days remaining before renewal
+          90 days remaining before renewal
         </Text>
+        </View>
+        )}
+        {userProfile && userProfile.subscription.plan === "Standard" && (
+          <View>
+          <Image
+          style={{ marginRight: 12 }}
+          source={require("../../assets/icons/VectorStarSilver.png")}
+          />
+          <Text
+          style={{ textAlign: "center", fontSize: 12, alignSelf: "center", 
+          justifyContent: "center", color: "#235EF5"}}
+        >
+         180 days before renewal
+        </Text>
+        </View>
+        )}
+        { userProfile && userProfile.subscription.plan === "Premuim" && (
+          <View>
+          <Image
+          style={{ marginRight: 12 }}
+          source={require("../../assets/icons/Vectorstargold.png")}
+          />
+          <Text
+          style={{ textAlign: "center", fontSize: 12, alignSelf: "center", 
+          justifyContent: "center", color: "#235EF5"}}
+        >
+         365 days before renewal
+        </Text>
+        </View>
+        )} 
+        {userProfile && userProfile.subscription.plan === "Free Trial" && (
+         <View>
+            You have only 7 days left on your free trial
+         </View>
+        )}
       </View>
       {/*<View style={styles.footer}>
         <View>
@@ -94,7 +114,7 @@ export const Userprofile = (props) => {
             <View style={styles.btn}>
               <Image source={require("../assets/home.png")} height="19px" />
             </View>
-          </TouchableHighlight>
+          </TouchableHighlight>l,
         </View>
         
         <View>
@@ -120,7 +140,15 @@ export const Userprofile = (props) => {
         </View>
       </View>
         */}
-    </ScrollView>
+        <View>
+          <Button title ='Log Out' btnstyle={{ backgroundColor: "#141414", 
+        borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} 
+        txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} 
+        onPress={()=> {
+          AsyncStorage.removeItem('jwt'), logoutUser(context.dispatch)
+        }}/>
+        </View>
+      </View>
   );
 };
 const styles = StyleSheet.create({

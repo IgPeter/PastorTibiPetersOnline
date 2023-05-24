@@ -14,7 +14,7 @@ import Auth from "./context/store/Auth";
 LogBox.ignoreAllLogs(true);
 
 //Navigation
-import HomeNavigator from "./Navigators/HomeNavigator";
+import AppNavigator from "./Navigators/AppNavigator";
 
 export default function App() {
   return (
@@ -22,7 +22,7 @@ export default function App() {
         <Provider store = {store}>
         <NavigationContainer>
           <StatusBar style="auto" />
-          <HomeNavigator />
+          <AppNavigator/>
           <Toast />
         </NavigationContainer>
         </Provider>

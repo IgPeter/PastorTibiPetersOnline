@@ -1,12 +1,15 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {View, StyleSheet, Dimensions, Image, Text} from 'react-native';
 import {useFonts} from 'expo-font';
 import { TouchableOpacity } from 'react-native';
+import AuthGlobal from '../../context/store/AuthGlobal';
 
 var width = Dimensions.get('window').width;
 
 
 const SearchedMessage = (props) => {
+
+    const context = useContext(AuthGlobal)
 
     const {filteredMessage} = props;
 
@@ -19,7 +22,31 @@ const SearchedMessage = (props) => {
       }
 
     return(
-        <View style={{width: width - 40}}>
+        <View>
+        {context.stateUser.user.isAdmin == true ? (
+           <View>
+            {console.log('Bad in search interface')}
+                {   filteredMessage.length > 0 ? (
+                    <TouchableOpacity>
+                        <View style = {{width: width-20, padding: 5, marginTop: 10}}>
+                            <Text style = {{fontFamily: 'WorkSans', fontSize: 17, fontWeight: '700' }}>
+                                {filteredMessage[0].title} </Text>
+                            <Text style = {{fontFamily: 'WorkSans', fontSize: 12, 
+                            fontWeight: 'regular', paddingTop: 2}}>{filteredMessage[0].description} 
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+            ) : (
+                <View style = {styles.center}>
+                    <Text style = {{alignSelf: 'center', fontFamily: 'WorkSans', fontWeight: 'bold', color: '#CCCCCC'}}>
+                        No message found
+                    </Text>
+                </View>
+            )
+        }   
+           </View>
+        ):(
+            <View style={{width: width - 40}}>
             {   filteredMessage.length > 0 ? (
                     <TouchableOpacity style = {{flexDirection: 'row', width: width - 40}} onPress = {()=>{
                         filteredMessage[0].contentType.toLowerCase() === 'audio' ?  
@@ -48,10 +75,10 @@ const SearchedMessage = (props) => {
                 </View>
             )
         }
-        </View>    
-        
-    )
-
+    </View>    
+    )}
+</View>
+)
 }
 
 const styles = StyleSheet.create({

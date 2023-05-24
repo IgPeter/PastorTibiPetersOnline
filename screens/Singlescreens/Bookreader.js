@@ -10,13 +10,35 @@ import {
 } from "react-native";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/Backbutton";
-import { MenuButton } from "../../components/Menubutton";
+import * as FileSystem from 'expo-file-system';
+//import PDFReader from 'react-native-pdf';
 
 const PAGE_HEIGHT = Dimensions.get("window").height;
 
-export const Bookreader = ({ totalPages = 20 }) => {
+export const Bookreader = (props) => {
+  const [item] = useState(props.route.params.item)
   const [fontSize, setFontSize] = useState(16);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [pdfPath, setPdfPath] = useState(null);
 
+  useEffect(() => {
+    const loadPdfContent = async () => {
+      try {
+        const fileUri = FileSystem.cacheDirectory + `${item.title}`;
+        const downloadedFile = await FileSystem.downloadAsync(
+          `${item.message}`,
+          fileUri
+        );
+
+        setPdfPath(downloadedFile.uri);
+
+      }catch(e){
+        console.log(e);
+      }
+    }
+
+    loadPdfContent();
+  }, [])
   const increaseFontSize = () => {
     setFontSize(fontSize + 2);
   };
@@ -24,8 +46,6 @@ export const Bookreader = ({ totalPages = 20 }) => {
   const decreaseFontSize = () => {
     setFontSize(fontSize - 2);
   };
-
-  const [currentPage, setCurrentPage] = useState(0);
 
   const handleScroll = (event) => {
     const offsetY = event.nativeEvent.contentOffset.y;
@@ -76,39 +96,17 @@ export const Bookreader = ({ totalPages = 20 }) => {
             marginLeft: 30,
           }}
         >
-          30 Days in the Book of Revelation
+          {item.title}
         </Text>
         <MenuButton onPress={() => console.log("Button pressed")} />
       </View>
       <ScrollView onScroll={handleScroll} scrollEventThrottle={16}>
-        <Text
-          style={[
-            styles.content,
-            { fontSize, color: fontColor, backgroundColor: bgColor },
-          ]}
-          selectable={true}
-          selectionColor="blue"
-          suppressHighlighting={false}
-        >
-          lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
-          dolor sit amet lorem ipsum dolor sit amet vlorem ipsum dolor sit amet
-          vlorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
-          dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-          lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
-          dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-          lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
-          dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-          lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
-          dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-          lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
-          dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-          lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
-          dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-          lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
-          dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-          lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
-          dolor sit amet lorem ipsum dolor sit amet
-        </Text>
+          <View>
+              {/*<PDFReader 
+                source={{uri: pdfPath}}
+                style={{flex: 1}}
+              />*/}
+          </View>
       </ScrollView>
 
       <View style={styles.footer}>

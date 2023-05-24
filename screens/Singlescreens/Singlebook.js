@@ -9,23 +9,27 @@ import {
 import React, {useState} from "react";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/Backbutton";
-import { MenuButton } from "../../components/Menubutton";
-import { Bookreader } from "./Bookreader";
+import {useFonts} from "expo-font";
 
 export const Singlebook = (props) => {
 
   const [item, setItem] = useState(props.route.params.item);
-  const [availability, setAvailability] = useState('')
+  const [font] = useFonts({
+    WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf")
+  });
+
+  if(!font){
+    return null
+  }
 
   const handleClick = () => {
-    props.navigation.navigate("Bookreader");
+    props.navigation.navigate("Bookreader", {item: item});
   };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <BackButton onPress={() => console.log("Button pressed")} />
-        <MenuButton onPress={() => console.log("Button pressed")} />
+        <BackButton onPress={() => props.navigation.goBack()} />
       </View>
       <View style={styles.bookInfo}>
         <TouchableOpacity onPress={() => console.log("Button pressed")}>
@@ -36,13 +40,14 @@ export const Singlebook = (props) => {
         <View>
           <Text
             style={{
+              fontFamily: 'WorkSans',
               textAlign: "center",
               fontSize: 24,
               fontWeight: "600",
               paddingHorizontal: 53,
             }}
           >
-            30 Days in the Book of Revelation
+            {item.title}
           </Text>
           <Text
             style={{
@@ -54,24 +59,7 @@ export const Singlebook = (props) => {
           >
             Pastor Tibi Peters
           </Text>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingw.png")} />
-          </View>
           <Text style={styles.infocon}>
-            <View style={styles.info}>
-              <Text style={styles.infotext}>Pages</Text>
-              <Text style={styles.infosubtext}>100</Text>
-            </View>
             <View style={styles.info}>
               <Text style={styles.infotext}>Language</Text>
               <Text style={styles.infosubtext}>English</Text>
@@ -83,12 +71,7 @@ export const Singlebook = (props) => {
           </Text>
           <View style={styles.description}>
             <Text style={{ marginBottom: 40, textAlign: "justify" }}>
-              30 Days in the Book of Revelation is a daily devotional coi ned
-              from the chapters of the new testament book, Revel ation. 30 Days
-              in the Book of Revelation is a daily devotio nal coined from the
-              chapters of the new testament book, Revelation. 30 Days in the
-              Book of Revelation is a daily de votional coined from the chapters
-              of the new testament book, Revelation.
+              {item.description}
             </Text>
             <Button
               onPress={handleClick}

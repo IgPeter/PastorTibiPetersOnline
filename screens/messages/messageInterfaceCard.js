@@ -14,12 +14,12 @@ const MessageInterfaceCard = (props) => {
     return null;
   }
 
-  const { title, contentType } = props;
+  const { title, contentType, image } = props;
 
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../assets/messageImages/RoleOfScriptures.jpg")}
+        source={{uri: image}}
         style={styles.image}
       />    
         <View>  
@@ -64,9 +64,8 @@ const MessageInterfaceCard = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
     width: width / 3 - 20,
-    height: width / 2.1,
+    height: width / 2.2
   },
 
   image: {
@@ -112,11 +111,11 @@ const styles = StyleSheet.create({
 
   overlay: {
     width: width / 3 - 20,
-    height: width / 3 - 19,
+    height: width /3,
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    top: -117,
+    top: -135,
     backgroundColor: 'gainsboro',
     opacity: 0.7
   }

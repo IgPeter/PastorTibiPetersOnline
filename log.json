@@ -1,12 +1,262 @@
-"isAuthenticated": true,
-"user": {
-    "exp": 1683310114,
-    "iat": 1683223714,
-    "isAdmin": false,
-    "isSubscriber": false,
-    "userId": "64527e6ec437224bad3f87b9"
-},
-"userProfile": {
-    "email": "BarryGbenekor@gmail.com",
-    "password": "Daniel"
+{
+    "id": "5CE68274EJ5400129",
+    "intent": "CAPTURE",
+    "status": "COMPLETED",
+    "purchase_units": [
+        {
+            "reference_id": "default",
+            "amount": {
+                "currency_code": "USD",
+                "value": "20.00"
+            },
+            "payee": {
+                "email_address": "sb-2dkmp25975528@business.example.com",
+                "merchant_id": "T33VK9PNDREFQ"
+            },
+            "shipping": {
+                "name": {
+                    "full_name": "John Doe"
+                },
+                "address": {
+                    "address_line_1": "1 Main St",
+                    "admin_area_2": "San Jose",
+                    "admin_area_1": "CA",
+                    "postal_code": "95131",
+                    "country_code": "US"
+                }
+            },
+            "payments": {
+                "captures": [
+                    {
+                        "id": "73R242026E9099635",
+                        "status": "COMPLETED",
+                        "amount": {
+                            "currency_code": "USD",
+                            "value": "20.00"
+                        },
+                        "final_capture": true,
+                        "seller_protection": {
+                            "status": "ELIGIBLE",
+                            "dispute_categories": [
+                                "ITEM_NOT_RECEIVED",
+                                "UNAUTHORIZED_TRANSACTION"
+                            ]
+                        },
+                        "create_time": "2023-05-12T15:03:06Z",
+                        "update_time": "2023-05-12T15:03:06Z"
+                    }
+                ]
+            }
+        }
+    ],
+    "payer": {
+        "name": {
+            "given_name": "John",
+            "surname": "Doe"
+        },
+        "email_address": "sb-hfnfh25975685@personal.example.com",
+        "payer_id": "V2B3T9NPX495Y",
+        "address": {
+            "country_code": "US"
+        }
+    },
+    "create_time": "2023-05-12T15:02:46Z",
+    "update_time": "2023-05-12T15:03:06Z",
+    "links": [
+        {
+            "href": "https://api.sandbox.paypal.com/v2/checkout/orders/5CE68274EJ5400129",
+            "rel": "self",
+            "method": "GET"
+        }
+    ]
+}
+
+<VideoPlayer
+style={styles.main
+}
+videoProps={
+    {
+  shouldPlay: false,
+  resizeMode: ResizeMode.CONTAIN,
+        // ❗ source is required https://docs.expo.io/versions/latest/sdk/video/#props
+  source: {
+    uri: 'https: //d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'
+        },
+    }
+}
+inFullscreen={isFullScreen
+}
+switchToPortrait={() => setIsFullScreen(false)
+}
+height={
+    300
+}
+videoRef={video
+}
+isLooping = {isRepeat
+}
+/>
+
+
+const playVideo = async () => {
+    if(video.current){
+      await video.current.playAsync()
+      setIsPlaying(true);
+    }
+}
+
+  const pauseVideo = async () => {
+    if(video.current){
+      await video.current.pauseAsync()
+      setIsPlaying(false);
+    }
+}
+
+  const handleSkipBackward = async () => {
+    if (video.current) {
+      const status = await video.current.getStatusAsync();
+      const newPosition = status.positionMillis - 10000; // Skip 10 seconds backward
+      video.current.setPositionAsync(newPosition < 0 ? 0 : newPosition);
+    }
+};
+
+  const handleSkipForward = async () => {
+    if (video.current) {
+      const status = await video.current.getStatusAsync();
+      const duration = status.durationMillis;
+      const newPosition = status.positionMillis + 10000; // Skip 10 seconds forward
+      video.current.setPositionAsync(newPosition > duration ? duration : newPosition);
+    }
+}
+//Begining of user profile data
+{
+    "config": {
+        "adapter": [
+            "xhr",
+            "http"
+        ],
+        "data": undefined,
+        "env": {
+            "Blob": [Function Blob
+            ],
+            "FormData": [Function FormData
+            ]
+        },
+        "headers": [Object
+        ],
+        "maxBodyLength": -1,
+        "maxContentLength": -1,
+        "method": "get",
+        "timeout": 0,
+        "transformRequest": [
+            [Function transformRequest
+            ]
+        ],
+        "transformResponse": [
+            [Function transformResponse
+            ]
+        ],
+        "transitional": {
+            "clarifyTimeoutError": false,
+            "forcedJSONParsing": true,
+            "silentJSONParsing": true
+        },
+        "url": "http://192.168.43.66:3000/api/v1/user/646007e6789bbb1e851f8174",
+        "validateStatus": [Function validateStatus
+        ],
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN"
+    },
+    "data": {
+        "avatar": "http://localhost:3000/public/upload/user/imagesundefined",
+        "country": "Nigeria",
+        "email": "igagapeter477@gmail.com",
+        "id": "646007e6789bbb1e851f8174",
+        "isSubscriber": true,
+        "name": "Peter Igaga",
+        "phone": 8163538789,
+        "request": {
+            "type": "GET",
+            "url": "localhost:3000/api/v1/646007e6789bbb1e851f8174"
+        },
+        "subscription": {
+            "desc": "A 90 days subscription plan",
+            "plan": "Basic",
+            "price": 1000
+        }
+    },
+    "headers": {
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-length": "377",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 21 May 2023 16:25:58 GMT",
+        "etag": "W/\"179-P+d6Qd06Qq/wq7DOGnxKzdMJUjw\"",
+        "keep-alive": "timeout=5",
+        "x-powered-by": "Express"
+    },
+    "request": {
+        "DONE": 4,
+        "HEADERS_RECEIVED": 2,
+        "LOADING": 3,
+        "OPENED": 1,
+        "UNSENT": 0,
+        "_aborted": false,
+        "_cachedResponse": undefined,
+        "_hasError": false,
+        "_headers": {
+            "accept": "application/json, text/plain, */*",
+            "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYwMDdlNjc4OWJiYjFlODUxZjgxNzQiLCJpc0FkbWluIjpmYWxzZSwiaXNTdWJzY3JpYmVyIjp0cnVlLCJpYXQiOjE2ODQ2ODYzMzYsImV4cCI6MTY4NDc3MjczNn0.ZvZCtl6A-YKBLqHjntSUEYjejwLHcFTYHCZuWhiq9pw"
+        },
+        "_incrementalEvents": false,
+        "_lowerCaseResponseHeaders": {
+            "access-control-allow-origin": "*",
+            "connection": "keep-alive",
+            "content-length": "377",
+            "content-type": "application/json; charset=utf-8",
+            "date": "Sun, 21 May 2023 16:25:58 GMT",
+            "etag": "W/\"179-P+d6Qd06Qq/wq7DOGnxKzdMJUjw\"",
+            "keep-alive": "timeout=5",
+            "x-powered-by": "Express"
+        },
+        "_method": "GET",
+        "_perfKey": "network_XMLHttpRequest_http://192.168.43.66:3000/api/v1/user/646007e6789bbb1e851f8174",
+        "_performanceLogger": {
+            "_closed": false,
+            "_extras": [Object
+            ],
+            "_pointExtras": [Object
+            ],
+            "_points": [Object
+            ],
+            "_timespans": [Object
+            ]
+        },
+        "_requestId": null,
+        "_response": "{\"name\":\"Peter Igaga\",\"phone\":8163538789,\"email\":\"igagapeter477@gmail.com\",\"avatar\":\"http://localhost:3000/public/upload/user/imagesundefined\",\"id\":\"646007e6789bbb1e851f8174\",\"isSubscriber\":true,\"subscription\":{\"plan\":\"Basic\",\"desc\":\"A 90 days subscription plan\",\"price\":1000},\"country\":\"Nigeria\",\"request\":{\"type\":\"GET\",\"url\":\"localhost:3000/api/v1/646007e6789bbb1e851f8174\"}}",
+        "_responseType": "",
+        "_sent": true,
+        "_subscriptions": [],
+        "_timedOut": false,
+        "_trackingName": "unknown",
+        "_url": "http://192.168.43.66:3000/api/v1/user/646007e6789bbb1e851f8174",
+        "readyState": 4,
+        "responseHeaders": {
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "377",
+            "Content-Type": "application/json; charset=utf-8",
+            "Date": "Sun, 21 May 2023 16:25:58 GMT",
+            "ETag": "W/\"179-P+d6Qd06Qq/wq7DOGnxKzdMJUjw\"",
+            "Keep-Alive": "timeout=5",
+            "X-Powered-By": "Express"
+        },
+        "responseURL": "http://192.168.43.66:3000/api/v1/user/646007e6789bbb1e851f8174",
+        "status": 200,
+        "timeout": 0,
+        "upload": {},
+        "withCredentials": true
+    },
+    "status": 200,
+    "statusText": undefined
 }

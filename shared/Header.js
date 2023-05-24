@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, TextInput, 
     StyleSheet, Image, 
     View, Dimensions, 
@@ -38,6 +38,7 @@ const Header = (props) => {
             <SafeAreaView>
             {focus == true ? (
                 <View style = {styles.dropdownInput}>
+                    {console.log('bad in header')}
                     <TextInput style={styles.input} onChangeText={(text) => searchMessage(text)}/>
                     <TouchableOpacity style = {styles.closeIcon} onPress = {close}>
                         <Image source={require('../assets/icons/icon-close.png')} />
@@ -45,7 +46,7 @@ const Header = (props) => {
                     <SearchInterface filteredMessage = {filteredMessage} 
                     navigation = {props.navigation}/>  
                 </View>            
-           ): (
+           ):(
         <View>   
             <View style = {styles.searchInput}>
                 <TextInput placeholder = "Search for anything" style={styles.input}
@@ -118,6 +119,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 10,
         top: 5
+    },
+
+    dropdownInputAdmin: {
+
+    },
+
+    inputAdmin: {
+
     }
 
 })

@@ -1,8 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "../screens/HomeScreen/HomeScreen";
-import OnBoardingScreen from "../screens/onboarding";
-
+import { Settingspage } from "../screens/Singlescreens/Settingspage";
 
 const Stack = createStackNavigator();
 
@@ -10,7 +8,7 @@ const MyStack = () => {
   return (
       <Stack.Navigator>
           <Stack.Screen
-            name="Home" component={HomeScreen}
+            name="Settings" component={Settingspage}
             options = {{
               headerShown: false
             }}
@@ -19,6 +17,6 @@ const MyStack = () => {
     )
     }
 
-export default function HomeNavigator() {
+export default function SettingNavigator() {
   return <MyStack />;
 }

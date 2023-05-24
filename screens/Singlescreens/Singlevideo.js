@@ -8,20 +8,20 @@ import {
 import React, {useState} from "react";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/Backbutton";
-import { MenuButton } from "../../components/Menubutton";
 import { VideoCard } from "../../components/Videocard";
-import messages from "../../assets/data/messages.json"
+import {useFonts} from "expo-font";
 
 export const Singlevideo = (props) => {
   
   const [item, setItem] = useState(props.route.params.item);
-  const [availability, setAvailability] = useState('')
-
+  const [font] = useFonts({
+    WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf")
+  })
+  
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <BackButton  onPress={() => console.log('Button pressed')} />
-        <MenuButton  onPress={() => console.log('Button pressed')} />
+        <BackButton  onPress={() => props.navigation.goBack()} />
       </View>
       <View style={styles.audioInfo}>
         <View style={styles.thumbnail}>
@@ -32,18 +32,7 @@ export const Singlevideo = (props) => {
             {item.title}
           </Text>
           <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "500", marginBottom: 7 }}>Pastor Tibi Peters</Text>
-          <View style={{ display: "flex", flexDirection: "row", justifyContent: "center"}}>
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingw.png")} />
-          </View>
           <Text style={styles.infocon}>
-            <View style={styles.info}>
-              <Text style={styles.infotext}>Duration</Text>
-              <Text style={styles.infosubtext}>54 mins</Text>
-            </View>
             <View style={styles.info}>
               <Text style={styles.infotext}>Type</Text>
               <Text style={styles.infosubtext}>Video</Text>

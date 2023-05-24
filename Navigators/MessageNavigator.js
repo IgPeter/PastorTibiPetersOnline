@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import {Login} from '../screens/Authentication/Login';
-import {Signup} from '../screens/Authentication/Signup';
-import {Userprofile} from '../screens/Singlescreens/Userprofile';
+//importing message screens
+import MessageContainer from '../screens/messages/messageContainer';
+
 
 const Stack = createStackNavigator();
 
@@ -11,8 +11,8 @@ const MyStack = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name='User Profile' 
-                component={Userprofile}
+                name='Explore Messages' 
+                component={MessageContainer}
                 options={{
                     headerShown: false
                 }}
@@ -21,6 +21,6 @@ const MyStack = () => {
     )
 }
 
-export default function AuthNavigator(){
+export default function MessageNavigator(){
     return <MyStack/>
 }

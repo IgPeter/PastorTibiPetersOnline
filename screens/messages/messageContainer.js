@@ -44,6 +44,7 @@ const MessageContainer = (props) => {
               //getting cached messages and categories
             const getCachedData = async () => {
                 try {
+
                   const messages = await AsyncStorage.getItem('message');
                   const categories = await AsyncStorage.getItem('category');
 
@@ -63,11 +64,11 @@ const MessageContainer = (props) => {
               };
               
             const fetchData = async () => {
-            try{              
-                const {messages, categories} = await getCachedData(); 
+            try{        
+                const {messages, categories} = getCachedData();     
                     //Getting messages data from the database
-                axios
-                .get(`${baseUrl}message`).then((res)=> {
+                axios.get(`${baseUrl}message`)
+                .then(res =>{
                     if(res.status == 304){
                         setMessages(messages);
                         setMessageCtg(messages);
@@ -88,7 +89,7 @@ const MessageContainer = (props) => {
                 })
             
             //Getting categories data
-            axios.get(`${baseUrl}category`).then(res=> {
+            axios.get(`${baseUrl}category`).then(res => {
                 if(res.status == 304){
                     setCategories(categories);
                 }else{
@@ -103,7 +104,6 @@ const MessageContainer = (props) => {
             console.log(e);//end of fetchData
         }
     }
-
 
         fetchData();
                     

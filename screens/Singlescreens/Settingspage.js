@@ -102,7 +102,7 @@ import { StyleSheet, TouchableOpacity, Text, View, ScrollView, Image} from "reac
     icons: {
       resizeMode: 'contain',
       width: 14,
-      heigt: 10
+      height: 10
     }
   });
   

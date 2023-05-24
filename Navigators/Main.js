@@ -1,14 +1,18 @@
-import React from "react";
+import React, {useContext} from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MyTabBar from './MyTabBar';
-import { Settingspage } from "../screens/Singlescreens/Settingspage";
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
-import MessageContainer from "../screens/messages/messageContainer";
+import HomeNavigator from './HomeNavigator'
+import MessageNavigator from './MessageNavigator';
+import SettingNavigator from "./SettingNavigator";
+import AdminNavigator from "./AdminNavigator";
+import AuthGlobal from "../context/store/AuthGlobal";
 import AuthNavigator from "./AuthNavigation";
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
+  const context = useContext(AuthGlobal);
+
   return (
     <Tab.Navigator
       tabBar = {(props) => <MyTabBar {...props} />}
@@ -25,10 +29,14 @@ const Main = () => {
         ]
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Explore" component={MessageContainer} />
-      <Tab.Screen name="Settings" component={Settingspage} />
-      <Tab.Screen name="User" component={AuthNavigator} />
+      <Tab.Screen name="HomeScreen" component={HomeNavigator}/>
+      <Tab.Screen name="Explore" component={MessageNavigator}/>
+      <Tab.Screen name="Setting" component={SettingNavigator} />
+      {context.stateUser.isAdmin == true ? (
+        <Tab.Screen name="User" component={AdminNavigator}/>
+      ):(
+        <Tab.Screen name="User" component={AuthNavigator}/>
+      )}
     </Tab.Navigator>
   );
 };

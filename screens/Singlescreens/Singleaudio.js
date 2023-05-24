@@ -1,20 +1,24 @@
-import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
 import React, {useState} from "react";
+import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/Backbutton";
-import { MenuButton } from "../../components/Menubutton";
 import { AudioCard } from "../../components/Audiocard";
-import messages from "../../assets/data/messages.json";
+import {useFonts} from "expo-font";
 
 export const Singleaudio = (props) => {
   const [item, setItem] = useState(props.route.params.item);
-  const [availability, setAvailability] = useState('')
+  const [font] = useFonts({
+    WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf")
+  })
+
+  if(!font){
+    return null
+  }
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <BackButton onPress={() => console.log("Button pressed")} />
-        <MenuButton onPress={() => console.log("Button pressed")} />
+        <BackButton onPress={() => props.navigation.goBack()} />
       </View>
       <View style={styles.audioInfo}>
         <View style={styles.thumbnail}>
@@ -22,7 +26,8 @@ export const Singleaudio = (props) => {
         </View>
         <View>
           <Text
-            style={{ textAlign: "center", fontSize: 24, fontWeight: "600", paddingHorizontal: 53 }}
+            style={{ fontFamily: 'WorkSans', textAlign: "center", 
+            fontSize: 24, fontWeight: "600", paddingHorizontal: 53 }}
           >
             {item.title}
           </Text>
@@ -36,27 +41,10 @@ export const Singleaudio = (props) => {
           >
             Pastor Tibi Peters
           </Text>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingb.png")} />
-            <Image source={require("../../assets/icons/ratingw.png")} />
-          </View>
           <Text style={styles.infocon}>
             <View style={styles.info}>
-              <Text style={styles.infotext}>Duration</Text>
-              <Text style={styles.infosubtext}>1 hr 20 mins</Text>
-            </View>
-            <View style={styles.info}>
               <Text style={styles.infotext}>Type</Text>
-              <Text style={styles.infosubtext}>Audio</Text>
+              <Text style={styles.infosubtext}>{item.contentType}</Text>
             </View>
             <View style={{ paddingHorizontal: 10 }}>
               <Text style={styles.infotext}>Release</Text>
@@ -85,6 +73,7 @@ export const Singleaudio = (props) => {
                 fontSize: 14,
                 fontWeight: "bold",
                 textAlign: "center",
+                fontFamily: 'WorkSans'
               }}
             />
           </View>
@@ -140,5 +129,8 @@ const styles = StyleSheet.create({
   description: {
     paddingHorizontal: 17,
     marginBottom: 83,
+    fontFamily: 'WorkSans',
+    fontWeight: 600,
+    fontSize: 14
   },
 });

@@ -1,45 +1,68 @@
 import React, { useRef, useState } from "react";
-import {
-  ScrollView,
-  View,
-  StyleSheet,
-  Text,
-} from "react-native";
-import { Video, ResizeMode } from "expo-av";
+import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
+import { Video } from "expo-av";
 import VideoPlayer from "expo-video-player";
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import {useFonts} from 'expo-font';
+
+let compPressed = false
 
 export const Singlevideoplay = (props) => {
-
   const [item, setItem] = useState(props.route.params.item);
-
   const video = useRef(null);
-  const [status, setStatus] = useState({});
-  const [isMute, setIsMute] = useState(false)
+  const [isRepeat, setIsRepeat] = useState(false);
+  const [font] = useFonts({
+    WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf")
+  })
+
+  if (!font){
+    return null
+  }
+
+  const handleOnPlaybackStatusUpdate = (status) => {
+    if(status.didJustFinish){
+        if(isRepeat){
+          video.current.replayAsync()
+        }else{
+          video.current.stopAsync();
+        }
+    }
+  }
+  
   return (
-    <ScrollView style={styles.container}>
-      <VideoPlayer 
-      style={styles.main}
-        videoProps={{
-          shouldPlay: true,
-          resizeMode: ResizeMode.CONTAIN,
-          // ❗ source is required https://docs.expo.io/versions/latest/sdk/video/#props
-          source: {
-            uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-          }
-        }}
-        onPlaybackStatusUpdate={status => setStatus(() => status)}
-        // fullscreen={}
-         />
+    <View style={styles.container}>
+        <Video
+          onPress={() => compPressed = !compPressed}
+          ref={video}
+          source={{ uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }} // Replace with your video source
+          resizeMode="cover"
+          useNativeControls
+          style={styles.video}
+          onPlaybackStatusUpdate={handleOnPlaybackStatusUpdate}
+        />
+      <View style={styles.controlsContainer}>
+        <TouchableOpacity
+          onPress={() => setIsRepeat(!isRepeat)}
+        >
+          {isRepeat ? (
+            <MaterialIcons name="repeat-one" size={30} color="white" />
+          ) : (
+            <MaterialIcons name="repeat" size={30} color="white" />
+          )}
+          </TouchableOpacity>
+      </View>
       <View style={styles.videoTitle}>
-        <Text style={{ fontSize: 24, fontWeight: 600, marginTop: 26 }}>
-          The Process of Believing
+        <Text style={{ fontSize: 20, fontWeight: 700, marginTop: 20, fontFamily: 'WorkSans', padding: 20}}>
+          {item.title}
         </Text>
-        <Text style={{ fontSize: 14, marginTop: 5 }}>Pastor Tibi Peters</Text>
+        <Text style={{ fontSize: 14, fontWeight: 600, marginTop: 5, fontFamily: 'WorkSans' }}>
+          Pastor Tibi Peters
+        </Text>
       </View>
       <View style={styles.comments}>
-        <Text>Comments</Text>
+        <Text>{item.description}</Text>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -52,17 +75,26 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   main: {
-    height: 200,
+    height: 300,
     backgroundColor: "#D9D9D9",
   },
   videoTitle: {
     marginTop: 10,
     marginLeft: 16,
+
   },
   comments: {
     paddingHorizontal: 16,
     marginTop: 37,
   },
+  controlsContainer: {
+    paddingLeft: 30,
+    position: 'absolute',
+    top: 275,
+  },
+  video: {
+    height: 350
+  }
 });
 
 {
