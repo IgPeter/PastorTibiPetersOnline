@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, ScrollView, Image } from 'react-native'
+import { StyleSheet, Text, TextInput, View, ScrollView } from 'react-native'
 import React, {useState} from 'react'
 import { A } from '@expo/html-elements';
 import { Button } from '../../components/Button';
@@ -9,8 +9,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import { Dimensions } from 'react-native';
 import Toast from 'react-native-toast-message';
 
-var {width} = Dimensions.get('window')
-
+var {width} = Dimensions.get('window');
 
 export const Signup = (props) => {
   const [firstName, setFirstName] = useState('');
@@ -29,19 +28,29 @@ export const Signup = (props) => {
     || password === ''){
       setError('Fill in the form completely');
     }
-      
-    let user = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-        isAdmin: false,
-        phone: phone,
-        country: country,
-        avatar: file.name
+
+    let user =  new FormData()
+    user.append("firstName", firstName)
+    user.append("lastName", lastName)
+    user.append("email", email)
+    user.append("password", password)
+    user.append("isAdmin", false)
+    user.append("phone", phone)
+    user.append("country", country)
+    user.append("avatar", {
+      name: file.name,
+      type: file.mimeType,
+      uri: file.uri
+    }
+      )
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
     }
 
-    axios.post(`${baseUrl}user/register`, user).then((res)=> {
+    axios.post(`${baseUrl}user/register`, user, config).then((res)=> {
       if (res.status == 200){
         Toast.show({
           topeOffset: 60,
@@ -50,7 +59,7 @@ export const Signup = (props) => {
           text2: 'Please login to your account'
 
         })
-            setTimeout(()=> {
+        setTimeout(() => {
                 props.navigation.navigate('Login');
             }, 300)
       }
@@ -60,7 +69,6 @@ export const Signup = (props) => {
         type: 'error',
         text1: 'Something went wrong',
         text2: 'Please try again'
-
       })
     })
   }

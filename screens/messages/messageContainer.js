@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from 'react';
-import {View, Text, StyleSheet, ScrollView, Dimensions, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Dimensions, ActivityIndicator, SafeAreaView} from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import MessageList from './messageList';
 import MessageCategory from '../../shared/messageCategory';
@@ -135,7 +135,7 @@ const MessageContainer = (props) => {
     return (
         <>
         {loading == false ? (
-             <View style = {styles.container}>                
+             <SafeAreaView style = {styles.container}>                
              <View>          
                  <Header message={messages} navigation = {props.navigation}/>
                  <View style = {{height: 80, width: width - 40}}>
@@ -160,12 +160,12 @@ const MessageContainer = (props) => {
                      )}
                      </ScrollView>
              </View>
-             </View>
+             </SafeAreaView>
         ): (
             //loading
-            <View style = {[styles.center, {backgroundColor: '#f2f2f2', height: height}]}>
+            <SafeAreaView style = {[styles.center, {backgroundColor: '#f2f2f2', height: height}]}>
                 <ActivityIndicator size='large' color='gold'/>
-            </View>
+            </SafeAreaView>
         )}        
         </>
         ) 

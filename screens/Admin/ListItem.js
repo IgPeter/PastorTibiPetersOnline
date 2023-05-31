@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image, Dimensions,Modal} from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
 import EasyButton from '../../shared/styledComponents/EasyButton';
@@ -9,10 +9,9 @@ const ListItem = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     
     return (
-        <View>
-            {console.log(props)}
+        <View style={{padding: 5}}>
             <Modal
-                animationType={fade}
+                animationType={'fade'}
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
@@ -42,7 +41,7 @@ const ListItem = (props) => {
                             medium
                             secondary
                             onPress={() => {
-                                props.navigation.navigate('Message Form');
+                                props.navigation.navigate('Edit Message Form', {item: props});
                                 setModalVisible(false)
                             }}
                         >
@@ -74,18 +73,20 @@ const ListItem = (props) => {
             style={[styles.container, {backgroundColor: props.index % 2 == 0 ? 
                 'white' : 'gainsboro' }]}
             >
-                <Image 
-                    source= {{
-                        uri: props.image ? 
-                        props.image : 'https://pixabay.com/photos/dog-beach-sea-domestic-animal-7956828/'
-                    }}
-                    resizeMode = 'contain'
-                    style={styles.image}
-                />
-            <Text style={styles.item}>{props.title}</Text>
-            <Text style={styles.item} numberOfLines={1} ellipsizeMode='tail'>{props.contentType}</Text>
-            <Text style={styles.item} numberOfLines={1} ellipsizeMode='tail'>{props.category.name}</Text>
-            <Text style={styles.item} numberOfLines={1} ellipsizeMode='tail'>{props.isFeatured}</Text>
+                <View style={[styles.item, {flex: 1}]}>
+                    <Image 
+                        source= {{
+                            uri: props.image ? 
+                            props.image : 'https://pixabay.com/photos/dog-beach-sea-domestic-animal-7956828/'
+                        }}
+                        resizeMode = 'contain'
+                        style={[styles.image]}
+                    />
+                </View>
+            <Text style={[styles.item, {flex:1}]}>{props.title.length > 20 ? 
+            props.title.substring(0, 15-3) + "...": props.title}</Text>
+            <Text style={[styles.item, {flex:2}]} numberOfLines={1} ellipsizeMode='tail'>{props.contentType}</Text>
+            <Text style={[styles.item, {flex:1}]} numberOfLines={1} ellipsizeMode='tail'>{props.category.name}</Text>
             </TouchableOpacity>
         </View>
     )
@@ -94,19 +95,17 @@ const ListItem = (props) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        padding: 5,
-        width: width
+        justifyContent: 'space-between'
     },
     image: {
         borderRadius: 50,
-        width: width/6,
-        height: 20,
-        margin: 2
+        width: 60,
+        height: 20
     },
     item: {
         flexWrap: 'wrap',
         margin: 3,
-        width: width/6
+        width: width/8
     },
     centeredView: {
         flex: 1,

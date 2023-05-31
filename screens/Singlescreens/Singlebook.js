@@ -6,14 +6,17 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/Backbutton";
 import {useFonts} from "expo-font";
+import {Buffer} from 'buffer';
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from "expo-sharing";
 
 export const Singlebook = (props) => {
+  const [item] = useState(props.route.params.item);
 
-  const [item, setItem] = useState(props.route.params.item);
   const [font] = useFonts({
     WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf")
   });
@@ -22,6 +25,7 @@ export const Singlebook = (props) => {
     return null
   }
 
+  //Helper functions
   const handleClick = () => {
     props.navigation.navigate("Bookreader", {item: item});
   };
@@ -34,7 +38,7 @@ export const Singlebook = (props) => {
       <View style={styles.bookInfo}>
         <TouchableOpacity onPress={() => console.log("Button pressed")}>
           <View style={styles.thumbnail}>
-            <Image />
+            <Image source = {{uri: item.image}} style={{width: 195, height: 280}}/>
           </View>
         </TouchableOpacity>
         <View>
@@ -111,6 +115,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     padding: 20,
+    marginVertical: 30
   },
   bookInfo: {
     justifyContent: "center",

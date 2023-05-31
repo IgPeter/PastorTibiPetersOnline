@@ -5,8 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MessageForm from '../screens/Admin/createMessageForm';
 import Messages from '../screens/Admin/messages';
 import Categories from '../screens/Admin/categories';
-import Signup from '../screens/Admin/SignUp';
-import  Login  from '../screens/Admin/Login';
+import EditMessageForm from '../screens/Admin/editMessage';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +29,14 @@ const MyStack = () => {
             <Stack.Screen
                 name='Message Form' 
                 component={MessageForm}
+                options={{
+                    headerShown: false
+                }}
+            />
+
+            <Stack.Screen
+                name='Edit Message Form' 
+                component={EditMessageForm}
                 options={{
                     headerShown: false
                 }}

@@ -11,6 +11,7 @@ import baseUrl from '../../assets/common/baseUrl';
 import AuthGlobal from '../../context/store/AuthGlobal';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { logoutUser } from '../../context/actions/AuthActions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var {width, height} = Dimensions.get('window');
 
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingRight: 20,
         paddingTop: 20,
-        paddingBottom: 90,
+        paddingBottom: 120,
         flexDirection: 'row',
         justifyContent: 'space-around'
     },

@@ -47,7 +47,7 @@ export const Login = (props) => {
         <TextInput style={styles.inputField} 
         placeholder="Email" keyboardType='email-address' onChangeText={(text)=> setEmail(text.trim())} />
         <TextInput style={styles.inputField} keyboardType='default'
-          placeholder="Password" onChangeText={(text)=> setPassword(text.trim())}/>
+          placeholder="Password" secureTextEntry={true} onChangeText={(text)=> setPassword(text.trim())}/>
         {error ? <Error message={error} /> : null}
       </View>
       <View>

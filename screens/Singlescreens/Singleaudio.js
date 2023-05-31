@@ -22,7 +22,7 @@ export const Singleaudio = (props) => {
       </View>
       <View style={styles.audioInfo}>
         <View style={styles.thumbnail}>
-          <AudioCard />
+          <AudioCard imageSource={item.image} />
         </View>
         <View>
           <Text
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     padding: 20,
+    marginVertical: 30
   },
   audioInfo: {
     justifyContent: "center",

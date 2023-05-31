@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    top: -135,
+    top: -117,
     backgroundColor: 'gainsboro',
     opacity: 0.7
   }

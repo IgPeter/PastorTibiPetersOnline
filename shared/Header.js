@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, TextInput, 
-    StyleSheet, Image, 
-    View, Dimensions, 
+import {SafeAreaView, TextInput, StyleSheet, Image, View, Dimensions, 
     TouchableOpacity} from 'react-native';
 import SearchInterface from "../screens/messages/searchMessages";
 import {useFonts} from 'expo-font';
@@ -34,12 +32,16 @@ const Header = (props) => {
         setFocus(false);
     }
 
+    const handleBlur = () => {
+        setFocus(false);
+    }
+
      return (
             <SafeAreaView>
             {focus == true ? (
                 <View style = {styles.dropdownInput}>
-                    {console.log('bad in header')}
-                    <TextInput style={styles.input} onChangeText={(text) => searchMessage(text)}/>
+                    <TextInput style={styles.input} onBlur = {handleBlur} 
+                    onChangeText={(text) => searchMessage(text)}/>
                     <TouchableOpacity style = {styles.closeIcon} onPress = {close}>
                         <Image source={require('../assets/icons/icon-close.png')} />
                     </TouchableOpacity> 

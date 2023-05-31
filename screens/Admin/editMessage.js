@@ -12,7 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var {width} = Dimensions.get('window')
 
-const MessageForm = (props) => {
+const EditMessageForm = (props) => {
   const [pickerValue, setPickerValue] = useState();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -24,7 +24,7 @@ const MessageForm = (props) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState();
-  const [editer] = useState(props.route.params.editer);
+  const [item] = useState(props.route.params.item._id);
 
   useEffect(()=>{
 
@@ -91,37 +91,30 @@ const MessageForm = (props) => {
     },[])
 
   const createMessage = () => {
-    if(title === '' || description === '' || contentType === '' || category === ''
-    || image === '' || messageFile === ''){
-      setError('Fill in the form completely');
-    }
-      
     let message = new FormData()
         message.append("title", title);
         message.append("description", description)
         message.append("contentType", contentType)
         message.append("category", selectedCategory)
+       if(image !== null){
         message.append("image", {
           name: image.name,
           type: image.mimeType,
           uri: image.uri
         })
-          message.append("message",  
+       } 
+
+       if(messageFile !== null){
+        message.append("message",  
         {
           name: messageFile.name,
           type: messageFile.mimeType,
           uri: messageFile.uri
         }
       )
-
-        const config = {
-            headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-          }
-        }
-
-    axios.post(`${baseUrl}message`, message, {
+       }
+         
+    axios.patch(`${baseUrl}message/${item}`, message, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`
@@ -132,7 +125,7 @@ const MessageForm = (props) => {
         Toast.show({
           topeOffset: 60,
           type: 'success',
-          text1: 'Message created successfully',
+          text1: 'Message updated successfully',
           text2: ''
         })
             setTimeout(()=> {
@@ -227,9 +220,6 @@ const MessageForm = (props) => {
         justifyContent: "center", padding: 10, marginBottom: 15, }} 
         txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} 
         onPress={()=> createMessage()}/>
-        {error ? (
-          <Error message={error} />
-        ): null}
       </View>
         {loading == true ? (
           <View style={{justifyContent: 'center', alignItems: 'center', paddingVertical: 20}}>
@@ -283,4 +273,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default MessageForm;
+export default EditMessageForm;

@@ -13,7 +13,7 @@ const MessageList = (props) => {
             props.navigation.navigate('Single Audio', {item: item})
             : item.contentType.toLowerCase() === 'video' ? 
             props.navigation.navigate('Single Video', {item: item})
-            : props.navigation.navigate('Single Book', {item: item}) 
+            : props.navigation.navigate('Single Book', {item: item})
         }}>
             <View style = {{backgroundColor: '#ffffff'}}>
                 <MessageInterfaceCard {...item} />

@@ -2,7 +2,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  SafeAreaView
 } from "react-native";
 import React, {useState, useContext, useEffect} from "react";
 import { Button } from "../../components/Button";
@@ -12,6 +13,8 @@ import axios from "axios";
 import baseUrl from "../../assets/common/baseUrl";
 import AuthGlobal from "../../context/store/AuthGlobal";
 import { logoutUser } from "../../context/actions/AuthActions";
+import {useFonts} from 'expo-font';
+import EasyButton from "../../shared/styledComponents/EasyButton";
 
 export const Userprofile = (props) => {
   const context = useContext(AuthGlobal);
@@ -34,32 +37,36 @@ export const Userprofile = (props) => {
       }).catch((error) => console.log(error))
   }, [context.stateUser.isAuthenticated])
 
+
+  const [font] = useFonts({
+    WorkSans: require('../../assets/fonts/WorkSans-VariableFont_wght.ttf')
+  });
+
+  if(!font){
+    return null
+  }
+
   return (
-    <View style={styles.container}>
-          <View style={styles.header}>
+    <SafeAreaView style={styles.container}>
+        <View style={styles.header}>
         <BackButton onPress={() => props.navigation.goBack()} />
-        <Text style={{ fontSize: 26, fontWeight: "bold", left: -36, alignSelf: "center" }}>
-          Profile
+        <Text style={{ fontSize: 20, fontWeight: "700", left: -30, 
+        alignSelf: "center", fontFamily: 'WorkSans' }}>
+          {userProfile ? userProfile.name : ''}
         </Text>
       </View>
       <View style={styles.profile}>
-        <View style={styles.avatar}>
-          <Text style={{ fontSize: 26 }}>
-            {userProfile ? userProfile.name : ''}
-          </Text>
-          <View>
+          <View style={styles.avatar}>
             {userProfile ? (
               <Image source={{uri: userProfile.avatar}}/>
             ): null}
           </View>
-        </View>
-        <View>
-          <Text style={{ textAlign: "center", fontSize: 12 }}>
+        <View style={styles.emailSection}>
+          <Text style={{ textAlign: "center", fontSize: 15, fontFamily: 'WorkSans', fontWeight: 600 }}>
             {userProfile ? userProfile.email : ''}
           </Text>
         </View>
-      </View>
-      <View>
+        <View style={styles.subscriptionSection}>
         {userProfile && userProfile.subscription.plan === "Basic" && (
         <View style={{ marginBottom: 30, flexDirection: "row", justifyContent: "center", alignItems: 'center'}}>
           <Image
@@ -67,8 +74,8 @@ export const Userprofile = (props) => {
           source={require("../../assets/icons/Vectorstarbroze.png")}
           />
           <Text
-          style={{ textAlign: "center", fontSize: 12, alignSelf: "center", 
-          justifyContent: "center", color: "#235EF5"}}
+          style={{ textAlign: "center", fontWeight: 600, fontSize: 15, alignSelf: "center", 
+          justifyContent: "center", color: "#235EF5", fontFamily: 'WorkSans'}}
         >
           90 days remaining before renewal
         </Text>
@@ -81,8 +88,8 @@ export const Userprofile = (props) => {
           source={require("../../assets/icons/VectorStarSilver.png")}
           />
           <Text
-          style={{ textAlign: "center", fontSize: 12, alignSelf: "center", 
-          justifyContent: "center", color: "#235EF5"}}
+          style={{ textAlign: "center", fontWeight: 600, fontSize: 15, alignSelf: "center", 
+          justifyContent: "center", color: "#235EF5", fontFamily: 'WorkSans'}}
         >
          180 days before renewal
         </Text>
@@ -95,8 +102,8 @@ export const Userprofile = (props) => {
           source={require("../../assets/icons/Vectorstargold.png")}
           />
           <Text
-          style={{ textAlign: "center", fontSize: 12, alignSelf: "center", 
-          justifyContent: "center", color: "#235EF5"}}
+          style={{ textAlign: "center", fontWeight: 600, fontSize: 15, alignSelf: "center", 
+          justifyContent: "center", color: "#235EF5", fontFamily: 'WorkSans'}}
         >
          365 days before renewal
         </Text>
@@ -104,51 +111,25 @@ export const Userprofile = (props) => {
         )} 
         {userProfile && userProfile.subscription.plan === "Free Trial" && (
          <View>
+            <Text style={{textAlign: "center", fontWeight: 600, fontSize: 15, alignSelf: "center", 
+          justifyContent: "center", color: "#235EF5", fontFamily: 'WorkSans'}}>
             You have only 7 days left on your free trial
+          </Text>
          </View>
         )}
       </View>
-      {/*<View style={styles.footer}>
-        <View>
-          <TouchableHighlight>
-            <View style={styles.btn}>
-              <Image source={require("../assets/home.png")} height="19px" />
-            </View>
-          </TouchableHighlight>l,
+      <View style={styles.btnSection}>
+          <EasyButton
+          meduim
+          dark 
+          onPress={()=> {
+            AsyncStorage.removeItem('jwt'), logoutUser(context.dispatch)
+        }}>
+          <Text style={{fontFamily: 'WorkSans', color: '#f2f2f2', fontWeigt: 600,  fontSize: 15}}>Log Out</Text>
+        </EasyButton>
         </View>
-        
-        <View>
-          <TouchableHighlight>
-            <View style={styles.btn}>
-              <Image source={require("../assets/openlink.png")} />
-            </View>
-          </TouchableHighlight>
-        </View>
-        <View>
-          <TouchableHighlight>
-            <View style={styles.btn}>
-              <Image source={require("../assets/bookmark.png")} />
-            </View>
-          </TouchableHighlight>
-        </View>
-        <View>
-          <TouchableHighlight>
-            <View style={styles.btn}>
-              <Image source={require("../assets/profile.png")} />
-            </View>
-          </TouchableHighlight>
-        </View>
-      </View>
-        */}
-        <View>
-          <Button title ='Log Out' btnstyle={{ backgroundColor: "#141414", 
-        borderRadius: 8, height: 54, justifyContent: "center", padding: 10, marginBottom: 15, }} 
-        txtstyle={{ color: "#FFFFFF", fontSize: 14, fontWeight: "600", textAlign: "center" }} 
-        onPress={()=> {
-          AsyncStorage.removeItem('jwt'), logoutUser(context.dispatch)
-        }}/>
-        </View>
-      </View>
+    </View>
+      </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
@@ -163,7 +144,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     display: "flex",
     flexDirection: "row",
-    padding: 20,
+    paddingTop: 50,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20
   },
   profile: {
     alignSelf: "center",
@@ -173,21 +157,25 @@ const styles = StyleSheet.create({
   avatar: {
     marginHorizontal: "100%",
     backgroundColor: "#D9D9D9",
-    height: 120,
-    width: 120,
-    //borderRadius: "100%",
+    height: 180,
+    width: 180,
+    borderRadius: 70,
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 8,
   },
-  footer: {
-    height: 115,
-    width: "100%",
-    backgroundColor: "black",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 40,
-    alignItems: "center",
+  subscriptionSection: {
+    marginTop: 5
   },
+  emailSection: {
+    marginTop: 10,
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight:10
+  },
+  btnSection: {
+    marginVertical: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  }
 });

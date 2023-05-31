@@ -32,7 +32,7 @@ const Main = () => {
       <Tab.Screen name="HomeScreen" component={HomeNavigator}/>
       <Tab.Screen name="Explore" component={MessageNavigator}/>
       <Tab.Screen name="Setting" component={SettingNavigator} />
-      {context.stateUser.isAdmin == true ? (
+      {context.stateUser.user.isAdmin == true ? (
         <Tab.Screen name="User" component={AdminNavigator}/>
       ):(
         <Tab.Screen name="User" component={AuthNavigator}/>

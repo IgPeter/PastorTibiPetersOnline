@@ -13,7 +13,7 @@ import {useFonts} from "expo-font";
 
 export const Singlevideo = (props) => {
   
-  const [item, setItem] = useState(props.route.params.item);
+  const [item] = useState(props.route.params.item);
   const [font] = useFonts({
     WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf")
   })
@@ -25,7 +25,7 @@ export const Singlevideo = (props) => {
       </View>
       <View style={styles.audioInfo}>
         <View style={styles.thumbnail}>
-          <VideoCard />
+          <VideoCard imageSource={item.image}/>
         </View>
         <View>
           <Text style={{ textAlign: "center", fontSize: 24, fontWeight: "600", paddingHorizontal: 53 }}>
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     padding: 20,
+    marginVertical: 30
   },
   audioInfo: {
     justifyContent: "center",

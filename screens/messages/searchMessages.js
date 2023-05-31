@@ -24,11 +24,16 @@ const SearchedMessage = (props) => {
     return(
         <View>
         {context.stateUser.user.isAdmin == true ? (
-           <View>
-            {console.log('Bad in search interface')}
+           <View style={{width: width - 40}}>
                 {   filteredMessage.length > 0 ? (
-                    <TouchableOpacity>
-                        <View style = {{width: width-20, padding: 5, marginTop: 10}}>
+                    <TouchableOpacity style = {{width: width - 40}} onPress={() =>
+                        filteredMessage[0].contentType.toLowerCase() === 'audio' ?  
+                        props.navigation.navigate('Single Audio', {item: filteredMessage})
+                        : filteredMessage[0].contentType.toLowerCase() === 'video' ? 
+                        props.navigation.navigate('Single Video', {item: filteredMessage})
+                        : props.navigation.navigate('Single Book', {item: filteredMessage})}
+                        >
+                        <View style = {{width: width-40, padding: 5}}>
                             <Text style = {{fontFamily: 'WorkSans', fontSize: 17, fontWeight: '700' }}>
                                 {filteredMessage[0].title} </Text>
                             <Text style = {{fontFamily: 'WorkSans', fontSize: 12, 

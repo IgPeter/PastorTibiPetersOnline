@@ -1,135 +1,4 @@
 {
-    "id": "5CE68274EJ5400129",
-    "intent": "CAPTURE",
-    "status": "COMPLETED",
-    "purchase_units": [
-        {
-            "reference_id": "default",
-            "amount": {
-                "currency_code": "USD",
-                "value": "20.00"
-            },
-            "payee": {
-                "email_address": "sb-2dkmp25975528@business.example.com",
-                "merchant_id": "T33VK9PNDREFQ"
-            },
-            "shipping": {
-                "name": {
-                    "full_name": "John Doe"
-                },
-                "address": {
-                    "address_line_1": "1 Main St",
-                    "admin_area_2": "San Jose",
-                    "admin_area_1": "CA",
-                    "postal_code": "95131",
-                    "country_code": "US"
-                }
-            },
-            "payments": {
-                "captures": [
-                    {
-                        "id": "73R242026E9099635",
-                        "status": "COMPLETED",
-                        "amount": {
-                            "currency_code": "USD",
-                            "value": "20.00"
-                        },
-                        "final_capture": true,
-                        "seller_protection": {
-                            "status": "ELIGIBLE",
-                            "dispute_categories": [
-                                "ITEM_NOT_RECEIVED",
-                                "UNAUTHORIZED_TRANSACTION"
-                            ]
-                        },
-                        "create_time": "2023-05-12T15:03:06Z",
-                        "update_time": "2023-05-12T15:03:06Z"
-                    }
-                ]
-            }
-        }
-    ],
-    "payer": {
-        "name": {
-            "given_name": "John",
-            "surname": "Doe"
-        },
-        "email_address": "sb-hfnfh25975685@personal.example.com",
-        "payer_id": "V2B3T9NPX495Y",
-        "address": {
-            "country_code": "US"
-        }
-    },
-    "create_time": "2023-05-12T15:02:46Z",
-    "update_time": "2023-05-12T15:03:06Z",
-    "links": [
-        {
-            "href": "https://api.sandbox.paypal.com/v2/checkout/orders/5CE68274EJ5400129",
-            "rel": "self",
-            "method": "GET"
-        }
-    ]
-}
-
-<VideoPlayer
-style={styles.main
-}
-videoProps={
-    {
-  shouldPlay: false,
-  resizeMode: ResizeMode.CONTAIN,
-        // ❗ source is required https://docs.expo.io/versions/latest/sdk/video/#props
-  source: {
-    uri: 'https: //d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'
-        },
-    }
-}
-inFullscreen={isFullScreen
-}
-switchToPortrait={() => setIsFullScreen(false)
-}
-height={
-    300
-}
-videoRef={video
-}
-isLooping = {isRepeat
-}
-/>
-
-
-const playVideo = async () => {
-    if(video.current){
-      await video.current.playAsync()
-      setIsPlaying(true);
-    }
-}
-
-  const pauseVideo = async () => {
-    if(video.current){
-      await video.current.pauseAsync()
-      setIsPlaying(false);
-    }
-}
-
-  const handleSkipBackward = async () => {
-    if (video.current) {
-      const status = await video.current.getStatusAsync();
-      const newPosition = status.positionMillis - 10000; // Skip 10 seconds backward
-      video.current.setPositionAsync(newPosition < 0 ? 0 : newPosition);
-    }
-};
-
-  const handleSkipForward = async () => {
-    if (video.current) {
-      const status = await video.current.getStatusAsync();
-      const duration = status.durationMillis;
-      const newPosition = status.positionMillis + 10000; // Skip 10 seconds forward
-      video.current.setPositionAsync(newPosition > duration ? duration : newPosition);
-    }
-}
-//Begining of user profile data
-{
     "config": {
         "adapter": [
             "xhr",
@@ -161,37 +30,32 @@ const playVideo = async () => {
             "forcedJSONParsing": true,
             "silentJSONParsing": true
         },
-        "url": "http://192.168.43.66:3000/api/v1/user/646007e6789bbb1e851f8174",
+        "url": "http://192.168.50.213:3000/api/v1/message",
         "validateStatus": [Function validateStatus
         ],
         "xsrfCookieName": "XSRF-TOKEN",
         "xsrfHeaderName": "X-XSRF-TOKEN"
     },
     "data": {
-        "avatar": "http://localhost:3000/public/upload/user/imagesundefined",
-        "country": "Nigeria",
-        "email": "igagapeter477@gmail.com",
-        "id": "646007e6789bbb1e851f8174",
-        "isSubscriber": true,
-        "name": "Peter Igaga",
-        "phone": 8163538789,
-        "request": {
-            "type": "GET",
-            "url": "localhost:3000/api/v1/646007e6789bbb1e851f8174"
-        },
-        "subscription": {
-            "desc": "A 90 days subscription plan",
-            "plan": "Basic",
-            "price": 1000
-        }
+        "count": 4,
+        "message": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ]
     },
     "headers": {
         "access-control-allow-origin": "*",
         "connection": "keep-alive",
-        "content-length": "377",
+        "content-length": "2155",
         "content-type": "application/json; charset=utf-8",
-        "date": "Sun, 21 May 2023 16:25:58 GMT",
-        "etag": "W/\"179-P+d6Qd06Qq/wq7DOGnxKzdMJUjw\"",
+        "date": "Fri, 26 May 2023 11:04:09 GMT",
+        "etag": "W/\"86b-iwsHKKTfvXwOXMiGQgxM++hmHkc\"",
         "keep-alive": "timeout=5",
         "x-powered-by": "Express"
     },
@@ -205,22 +69,21 @@ const playVideo = async () => {
         "_cachedResponse": undefined,
         "_hasError": false,
         "_headers": {
-            "accept": "application/json, text/plain, */*",
-            "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDYwMDdlNjc4OWJiYjFlODUxZjgxNzQiLCJpc0FkbWluIjpmYWxzZSwiaXNTdWJzY3JpYmVyIjp0cnVlLCJpYXQiOjE2ODQ2ODYzMzYsImV4cCI6MTY4NDc3MjczNn0.ZvZCtl6A-YKBLqHjntSUEYjejwLHcFTYHCZuWhiq9pw"
+            "accept": "application/json, text/plain, */*"
         },
         "_incrementalEvents": false,
         "_lowerCaseResponseHeaders": {
             "access-control-allow-origin": "*",
             "connection": "keep-alive",
-            "content-length": "377",
+            "content-length": "2155",
             "content-type": "application/json; charset=utf-8",
-            "date": "Sun, 21 May 2023 16:25:58 GMT",
-            "etag": "W/\"179-P+d6Qd06Qq/wq7DOGnxKzdMJUjw\"",
+            "date": "Fri, 26 May 2023 11:04:09 GMT",
+            "etag": "W/\"86b-iwsHKKTfvXwOXMiGQgxM++hmHkc\"",
             "keep-alive": "timeout=5",
             "x-powered-by": "Express"
         },
         "_method": "GET",
-        "_perfKey": "network_XMLHttpRequest_http://192.168.43.66:3000/api/v1/user/646007e6789bbb1e851f8174",
+        "_perfKey": "network_XMLHttpRequest_http://192.168.50.213:3000/api/v1/message",
         "_performanceLogger": {
             "_closed": false,
             "_extras": [Object
@@ -233,25 +96,25 @@ const playVideo = async () => {
             ]
         },
         "_requestId": null,
-        "_response": "{\"name\":\"Peter Igaga\",\"phone\":8163538789,\"email\":\"igagapeter477@gmail.com\",\"avatar\":\"http://localhost:3000/public/upload/user/imagesundefined\",\"id\":\"646007e6789bbb1e851f8174\",\"isSubscriber\":true,\"subscription\":{\"plan\":\"Basic\",\"desc\":\"A 90 days subscription plan\",\"price\":1000},\"country\":\"Nigeria\",\"request\":{\"type\":\"GET\",\"url\":\"localhost:3000/api/v1/646007e6789bbb1e851f8174\"}}",
+        "_response": "{\"count\":4,\"message\":[{\"_id\":\"641193893feea5757e735c96\",\"title\":\"Zoe\",\"image\":\"http://192.168.50.213:3000/public/upload/message/images/IMG_20230114_103248_831.jpg-1678873481540.jpeg\",\"description\":\"The life of God\",\"category\":{\"_id\":\"644fe0a9d9a63a943336b999\",\"name\":\"Audio\",\"color\":\"yellow\",\"__v\":0},\"message\":\"http://192.168.50.213:3000/public/upload/message/audioMessages/Zoe_The_Life_Of_God.mp3-1678873481581.mp3\",\"dateCreated\":\"2023-03-15T09:44:41.691Z\",\"contentType\":\"Audio\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"641194c294d9efdd22445445\",\"title\":\"Activating the blessing\",\"image\":\"http://192.168.50.213:3000/public/upload/message/images/2.png-1678873793950.png\",\"description\":\"Making the blessing yours\",\"category\":{\"_id\":\"644fe0a9d9a63a943336b999\",\"name\":\"Audio\",\"color\":\"yellow\",\"__v\":0},\"message\":\"http://192.168.50.213:3000/public/upload/message/audioMessages/Activating-The Blessing - Pastor Tibi Peters.mp3-1678873793963.mp3\",\"dateCreated\":\"2023-03-15T09:49:54.302Z\",\"contentType\":\"Audio\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"64357b1acc3b168e63b1b9ac\",\"title\":\"In his presence\",\"image\":\"http://192.168.50.213:3000/public/upload/message/images/FaithToFaith.png-1681226522117.png\",\"description\":\"This will teach you to dwell\",\"category\":{\"_id\":\"6455fd14e491a650ea762280\",\"name\":\"Book\",\"color\":\"green\",\"__v\":0},\"message\":\"http://192.168.50.213:3000/public/upload/message/audioMessages/GUC-The-Bill.mp3-1681226522118.mp3\",\"dateCreated\":\"2023-04-11T15:22:02.228Z\",\"contentType\":\"book\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}},{\"_id\":\"6455f5d995a6c2308f4abb3d\",\"title\":\"Valerie\",\"image\":\"http://192.168.50.213:3000/public/upload/message/images/IMG_20230114_103248_831.jpg-1678873481540.jpeg\",\"description\":\"The voice of God\",\"category\":{\"_id\":\"644fe0a9d9a63a943336b999\",\"name\":\"Audio\",\"color\":\"yellow\",\"__v\":0},\"message\":\"http://192.168.50.213:3000/public/upload/message/audioMessages/Zoe_The_Life_Of_God.mp3-1678873481581.mp3\",\"dateCreated\":\"2023-03-15T09:44:41.691Z\",\"contentType\":\"Audio\",\"request\":{\"type\":\"GET\",\"Url\":\"localhost:3000/api/v1/message\"}}]}",
         "_responseType": "",
         "_sent": true,
         "_subscriptions": [],
         "_timedOut": false,
         "_trackingName": "unknown",
-        "_url": "http://192.168.43.66:3000/api/v1/user/646007e6789bbb1e851f8174",
+        "_url": "http://192.168.50.213:3000/api/v1/message",
         "readyState": 4,
         "responseHeaders": {
             "Access-Control-Allow-Origin": "*",
             "Connection": "keep-alive",
-            "Content-Length": "377",
+            "Content-Length": "2155",
             "Content-Type": "application/json; charset=utf-8",
-            "Date": "Sun, 21 May 2023 16:25:58 GMT",
-            "ETag": "W/\"179-P+d6Qd06Qq/wq7DOGnxKzdMJUjw\"",
+            "Date": "Fri, 26 May 2023 11:04:09 GMT",
+            "ETag": "W/\"86b-iwsHKKTfvXwOXMiGQgxM++hmHkc\"",
             "Keep-Alive": "timeout=5",
             "X-Powered-By": "Express"
         },
-        "responseURL": "http://192.168.43.66:3000/api/v1/user/646007e6789bbb1e851f8174",
+        "responseURL": "http://192.168.50.213:3000/api/v1/message",
         "status": 200,
         "timeout": 0,
         "upload": {},

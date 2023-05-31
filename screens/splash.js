@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { StatusBar, SafeAreaView, Text, StyleSheet, ActivityIndicator, Dimensions, View, Image} from 'react-native'
 import {useFonts} from 'expo-font';
 
@@ -7,8 +7,8 @@ import {useFonts} from 'expo-font';
         const [loading, setLoading] = useState(true);
 
             setTimeout(function() {
-                setTimePassed(true);
                 setLoading(false);
+                setTimePassed(true);
             }, 10000)
 
         const [font] = useFonts({
@@ -18,7 +18,7 @@ import {useFonts} from 'expo-font';
           if (!font) {
             return null;
           }
-
+          
           if(!timePassed){
                 return (
                     <SafeAreaView style = {styles.container}>
@@ -38,7 +38,7 @@ import {useFonts} from 'expo-font';
                                 <Text style={[styles.txtStyle, {fontSize: 13, fontWeight: 600}]}>Online Digital Library</Text>
                             </View>
                             {loading == true ? (
-                                <View>
+                                <View style={{marginTop: 10}}>
                                     <ActivityIndicator 
                                     style={{alignItems: 'center', justifyContent: 'center'}} color="gold"/>
                                 </View>
@@ -46,11 +46,11 @@ import {useFonts} from 'expo-font';
                     </View>
                 </SafeAreaView>
                 )
+            }else{
+                navigation.navigate('Onboarding')
+                return null
             }
-            navigation.navigate('Onboarding')
-            return null;
-    }
-
+    }       
     const styles = StyleSheet.create({
         container: {
             flex: 1,

@@ -93,12 +93,12 @@ export const Subscription = (props) => {
 
   //Define the subscription here and  hanlde checkboxes toggle
   const handleCheckBoxPress = (checkBoxName) => {
-    console.log(user)
     if(checkBoxName === 'checkBox1'){
          setSubscription({
           plan: 'Basic',
           desc: 'A 90 days subscription plan',
-          price: user.country === 'Nigeria' ? 1000 : 20
+          price: user.country === 'Nigeria' ? 1000 : 20,
+          dateSubscribed: new Date(Date.now()).toISOString()
       })
       
       setCheckBoxes((prevCheckBoxes)=> ({
@@ -113,7 +113,8 @@ export const Subscription = (props) => {
       setSubscription({
         plan: 'Standard',
         desc: 'A 180 days subscription plan',
-        price: user.country === 'Nigeria' ? 2000 : 25
+        price: user.country === 'Nigeria' ? 2000 : 25,
+        dateSubscribed: new Date(Date.now()).toISOString()
       })
       setCheckBoxes((prevCheckBoxes)=> ({
         ...prevCheckBoxes,
@@ -127,7 +128,8 @@ export const Subscription = (props) => {
       setSubscription({
         plan: 'Premuim',
         desc: 'A 365 days subscription plan',
-        price: user.country === 'Nigeria' ? 3000 : 50
+        price: user.country === 'Nigeria' ? 3000 : 50,
+        dateSubscribed: new Date(Date.now()).toISOString()
       })
       setCheckBoxes((prevCheckBoxes)=> ({
         ...prevCheckBoxes,
@@ -145,7 +147,7 @@ export const Subscription = (props) => {
           [checkBoxName]: !prevCheckBoxes[checkBoxName],
           checkBox2: false
       }))
-      }
+    }
 
       if(checkBoxName === 'checkBox2'){
         setPaymentCheckBoxes((prevCheckBoxes)=>({
