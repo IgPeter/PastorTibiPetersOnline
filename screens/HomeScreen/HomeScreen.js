@@ -64,7 +64,7 @@ const HomeScreen = (props) => {
                             </EasyButton>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.closeIcon} onPress={() => setModalVisible(false)}>
-                            <Icon name="close" size={20}/>
+                            <Icon name="close" size={17}/>
                         </TouchableOpacity>
                     </View>
                     </Modal>
@@ -75,8 +75,8 @@ const HomeScreen = (props) => {
                     <Text style={styles.textHeader}>Hello {singleUser.name.split(' ')[0]}</Text>)}
                 </View>
                 <TouchableOpacity style={styles.userExpIcons} onPress={() => setModalVisible(true)}>
-                    <Image source={require('../../assets/icons/VectorNotification.png')} 
-                    style={{resizeMode: 'contain', width: 20, height: 20, marginRight: 10}}/>
+                    {/*<Image source={require('../../assets/icons/VectorNotification.png')} 
+                    style={{resizeMode: 'contain', width: 20, height: 20, marginRight: 10}}/>*/}
                     <Image source={require('../../assets/icons/name-circle.png')} 
                     style={{resizeMode: 'contain', width: 50, height: 45}} />
                 </TouchableOpacity>
@@ -223,7 +223,8 @@ const styles = StyleSheet.create({
     },
     HomeModal: {
         width: '40%',
-        padding: 10,
+        paddingHorizontal: 30,
+        paddingVertical: 20,
         position: 'absolute',
         top: 70,
         alignItems: 'center',
@@ -233,8 +234,8 @@ const styles = StyleSheet.create({
         },
     closeIcon: {
         position: 'absolute',
-        top: 5,
-        right: 10
+        top: 3,
+        right: 5
     }
 })
 
