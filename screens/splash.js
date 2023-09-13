@@ -6,11 +6,19 @@ import {useFonts} from 'expo-font';
         const [timePassed, setTimePassed] = useState(false);
         const [loading, setLoading] = useState(true);
 
+        useEffect(()=>{
             setTimeout(function() {
                 setLoading(false);
                 setTimePassed(true);
             }, 10000)
+        }, []);
 
+        useEffect(()=>{
+            if(timePassed){
+                navigation.navigate('Onboarding');
+            }
+        },[navigation, timePassed])
+            
         const [font] = useFonts({
             WorkSans: require("../assets/fonts/WorkSans-VariableFont_wght.ttf"),
           });
@@ -46,9 +54,6 @@ import {useFonts} from 'expo-font';
                     </View>
                 </SafeAreaView>
                 )
-            }else{
-                navigation.navigate('Onboarding')
-                return null
             }
     }       
     const styles = StyleSheet.create({

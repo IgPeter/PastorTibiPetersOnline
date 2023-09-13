@@ -7,7 +7,7 @@ import Slider from '@react-native-community/slider';
 var height = Dimensions.get('window').height;
 var width = Dimensions.get('window').width;
 
-const SingleAudioPlay = () => {
+const SingleAudioPlay = (props) => {
     const [item] = useState(props.route.params.item)
     const [audio, setAudio] = useState();
     const [isPlaying, setIsPlaying] = useState(false);

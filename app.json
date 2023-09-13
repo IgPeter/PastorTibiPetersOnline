@@ -5,6 +5,10 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "plugins": [
+      "@config-plugins/react-native-blob-util",
+      "@config-plugins/react-native-pdf"
+    ],
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -21,7 +25,14 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.DOWNLOAD_WITHOUT_NOTIFICATION",
+        "android.permission.ACCESS_NETWORK_STATE"
+      ],
+      "package": "com.igagapeter477.PastorTibiPetersOnline"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,6 +49,11 @@
           "NSLocationWhenInUseUsageDescription": "This app needs access to your location to function properly.",
           "NSLocationAlwaysAndWhenInUseUsageDescription": "This app needs access to your location to function properly."
         }
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "69146423-bddd-4ee8-ac02-d1cb0b192513"
       }
     }
   }
