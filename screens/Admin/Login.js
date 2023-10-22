@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableHighlight, Text, TextInput, View, ScrollView, Image } from 'react-native'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState, useContext, useEffect } from 'react'
 import { A } from '@expo/html-elements'
 import { Button } from '../../components/Button'

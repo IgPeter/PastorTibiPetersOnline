@@ -1,9 +1,5 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  Image,
+import {View,Text,ScrollView,
+  StyleSheet
 } from "react-native";
 import React, {useState} from "react";
 import { Button } from "../../components/Button";
@@ -25,7 +21,7 @@ export const Singlevideo = (props) => {
       </View>
       <View style={styles.audioInfo}>
         <View style={styles.thumbnail}>
-          <VideoCard imageSource={item.image}/>
+          <VideoCard imageSource={{uri: item.image}}/>
         </View>
         <View>
           <Text style={{ textAlign: "center", fontSize: 24, fontWeight: "600", paddingHorizontal: 53 }}>
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     backgroundColor: "#D9D9D9",
-    width: 195,
+    width: 280,
     height: 280,
     alignSelf: "center",
     marginBottom: 20

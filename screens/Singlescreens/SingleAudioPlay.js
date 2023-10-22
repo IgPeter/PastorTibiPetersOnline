@@ -8,7 +8,7 @@ var height = Dimensions.get('window').height;
 var width = Dimensions.get('window').width;
 
 const SingleAudioPlay = (props) => {
-    const [item] = useState(props.route.params.item)
+    const [item] = useState(props.route.params.item);
     const [audio, setAudio] = useState();
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
@@ -16,33 +16,23 @@ const SingleAudioPlay = (props) => {
     const [isRepeat, setIsRepeat] = useState(false);
 
     const pause = async () => {
-        await audio.pauseAsync();
-        setIsPlaying(false);
+        try{
+            setIsPlaying(false);
+            await audio.pauseAsync();
+            audio.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+        }catch(error){
+            console.log(error);
+        }
     }
 
     const playAudio = async () => {
-        setIsPlaying(true)
-        await audio.playAsync()
-        audio.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-    }
-
-    const loadAudio = async() => {
-        await Audio.setAudioModeAsync({
-            playsInSilentModeIOS: true,
-            staysActiveInBackground: true
-        });
-
-        const playbackAudio = new Audio.Sound();
-
-        await playbackAudio.loadAsync(require('../../assets/GUC-Yours.mp3'));
-
-        if(playbackAudio._loaded){
-            setAudio(playbackAudio)       
-            //getting the duration and setting the duration
-            const {duration} = playbackAudio.getStatusAsync()
-            setDuration(duration)
+        try{
+                setIsPlaying(true);
+                await audio.playAsync();
+                audio.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+        }catch(error){
+            console.log(error);
         }
-
     }
 
     const skipForward = async () => {
@@ -70,18 +60,72 @@ const SingleAudioPlay = (props) => {
     if (status.didJustFinish) {
         if (isRepeat) {
           // If repeat is enabled, play the audio again
-          audioPlayer.replayAsync();
+          audio.replayAsync();
         } else {
           // If repeat is not enabled, stop the audio playback
-          audioPlayer.stopAsync();
+          audio.stopAsync();
         }
       }
   };
 
-  useEffect(() => {
+  useEffect(()=> {
+    //Load  the audio when the component mounts
+    const loadAudio = async () => {
+    try{        
+        if (isPlaying){
+                await audio.unloadAsync();
+            }
+
+        const playbackAudio = new Audio.Sound();
+
+        await playbackAudio.loadAsync({uri: `${item.message}`});
+
+        if(playbackAudio._loaded){
+            setAudio(playbackAudio)       
+            //getting the duration and setting the duration
+            const {duration} = playbackAudio.getStatusAsync()
+            setDuration(duration)
+            }
+
+        }catch(error){
+            console.log(error);
+        }
+}
+
     loadAudio();
-    return audio ? audio.loadAsync : undefined
-  }, [])
+
+    //Clean up current audio when the component unmounts
+    return async () => {
+        if(audio){
+            await audio.unloadAsync();
+        }
+    }
+},[])
+
+    // Function to stop audio
+  /*const stopAudio = async () => {
+    if (audio) {
+        try{
+            await audio.stopAsync();
+            audio.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+            setIsPlaying(false);
+        }catch(error){
+            console.log(error);
+        }
+    }
+  };*/  
+
+  /*useEffect(() => {
+    try{
+        loadAudio();
+    }catch(error){
+        console.log(error);
+    }
+    
+    return ()=>{
+        audio ? audio.unloadAsync : undefined
+    }
+  }, [])*/
 
     return (
         <View style = {StyleSheet.container}>

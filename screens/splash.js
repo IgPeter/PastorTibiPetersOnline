@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import { StatusBar, SafeAreaView, Text, StyleSheet, ActivityIndicator, Dimensions, View, Image} from 'react-native'
+import {useState, useEffect} from 'react'
+import { SafeAreaView, Text, StyleSheet, ActivityIndicator, View, Image} from 'react-native'
 import {useFonts} from 'expo-font';
 
-    function SplashScreen ({navigation}){
+function SplashScreen ({navigation}){
         const [timePassed, setTimePassed] = useState(false);
         const [loading, setLoading] = useState(true);
 
@@ -31,10 +31,6 @@ import {useFonts} from 'expo-font';
                 return (
                     <SafeAreaView style = {styles.container}>
                         <View>
-                            <StatusBar 
-                                backgroundColor = "#FFFFFF"
-                                barStyle = "dark-content"
-                            />
                             <View style={styles.center}>
                             <Image source={require('../assets/images/splashImage.jpeg')}
                                 ResizeMode = 'contain'
@@ -43,7 +39,7 @@ import {useFonts} from 'expo-font';
                             </View>
                             <View style={[styles.center , {marginTop: -30 }]}>
                                 <Text style={[styles.txtStyle, {fontSize: 18, fontWeight: 'bold'}]}>Pastor Tibi Peters</Text>
-                                <Text style={[styles.txtStyle, {fontSize: 13, fontWeight: 600}]}>Online Digital Library</Text>
+                                <Text style={[styles.txtStyle, {fontSize: 13, fontWeight: 'normal'}]}>Online Digital Library</Text>
                             </View>
                             {loading == true ? (
                                 <View style={{marginTop: 10}}>
@@ -71,6 +67,6 @@ import {useFonts} from 'expo-font';
             alignItems: 'center',
             justifyContent: 'center'
         }
-    })
+    });
 
-    export default SplashScreen;
+export default SplashScreen;

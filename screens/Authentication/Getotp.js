@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableHighlight, Text, TextInput, View, ScrollView, Image } from 'react-native'
+import { StyleSheet, Text, TextInput, View, ScrollView, } from 'react-native'
 import React from 'react'
 import { Button } from '../../components/Button'
 

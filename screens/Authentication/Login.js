@@ -5,7 +5,8 @@ import { Button } from '../../components/Button'
 // import CheckBox from '@react-native-community/checkbox'
 import Error from '../../shared/Error'
 import AuthGlobal from '../../context/store/AuthGlobal'
-import { loginUser } from '../../context/actions/AuthActions'
+import { loginUser, setCurrentUser } from '../../context/actions/AuthActions'
+import { setLoading } from '../../context/actions/AuthActions'
 
 export const Login = (props) => {
   // const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -13,15 +14,19 @@ export const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
-    if(context.stateUser.isAuthenticated == true && context.stateUser.user.isSubscriber == false){
+    if(context.stateUser.isAuthenticated == true && context.stateUser.user.isSubscriber == false && 
+      context.stateUser.userProfile.user.subscription.subscriberStatus === 'New User' ){
       props.navigation.navigate('Subscription', {item: context.stateUser});
     }else if (context.stateUser.isAuthenticated == true && context.stateUser.user.isSubscriber == true){
       props.navigation.navigate('main', {item: context.stateUser})
+    }else if (context.stateUser.isAuthenticated == true && 
+      context.stateUser.userProfile.user.subscription.subscriberStatus === 'unsubscribed'){
+      props.navigation.navigate('Subscription Expired')
     }
-  }, [context.stateUser.isAuthenticated])
+  }, [context.stateUser.isAuthenticated == true])
 
     const handleSubmit = () => {
       const user = {
@@ -32,8 +37,8 @@ export const Login = (props) => {
         if(email === '' || password === ''){
           setError("Please fill in your credentials")
       }else {
-          setLoading(true);
-          loginUser(user, context.dispatch)
+          context.dispatch(setLoading(true));
+          loginUser(user, context.dispatch);
       }
     }
     
@@ -61,7 +66,7 @@ export const Login = (props) => {
           onPress={()=> props.navigation.navigate('Register')}>Sign Up</A>
         </Text>
       </View>
-        {loading == true ? (
+        {context.stateUser.loading == true ? (
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <ActivityIndicator color="gold"/>
           </View>

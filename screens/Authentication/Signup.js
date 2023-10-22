@@ -19,7 +19,7 @@ export const Signup = (props) => {
   const [country, setCountry] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [file, setFile] = useState();
+  const [file, setFile] = useState({});
 
 
   const register = () => {
@@ -76,7 +76,7 @@ export const Signup = (props) => {
   const pickDocument = async () => {
    try {
       let result = await DocumentPicker.getDocumentAsync({})
-      setFile(result);
+      setFile(result.assets[0]);
    } catch(e){
       console.log(e);
    }

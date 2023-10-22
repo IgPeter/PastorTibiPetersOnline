@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {TouchableOpacity, Dimensions, StyleSheet, SafeAreaView, View} from "react-native";
+import {TouchableOpacity, Text, Dimensions, StyleSheet, SafeAreaView, View} from "react-native";
 import { BackButton } from "../../components/Backbutton";
 import Pdf from 'react-native-pdf';
 
@@ -14,22 +14,22 @@ export const Bookreader = (props) => {
     setPdfResource({uri: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" , cache: true})
   }, [])*/
 
-  const pdfResource = {uri: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', cache: true}
+  const pdfResource = {uri: `${item.message}`, cache: false}
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={{marginTop: 20, padding: 10}} onPress={props.navigation.goBack()}>
-          <BackButton />
+      <TouchableOpacity style={{marginTop: 20, padding: 10}} onPress={() => props.navigation.goBack()}>
+          <BackButton onPress={() => props.navigation.goBack()} />
       </TouchableOpacity>
       <View>
-        {console.log(pdfResource)}
-            <Pdf
-            trustAllcerts={false}
-            source = {pdfResource}
+      <Pdf 
+            trustAllCerts={false}
+            source={pdfResource}
             style = {styles.pdf}
-            onLoadComplete={(numOfPages, filePath)=> {
-              console.log(`number of pages : ${numOfPages}`);
+            onLoadComplete={(numOfPages, filePath) => {
+                 console.log(`number of pages ${numOfPages}`);
             }}
+            onError = {(error)=> {console.error("Error ", error)}}
           />
       </View>
     </SafeAreaView>
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
   },
 
   pdf: {
-    flex: 1,
     height: PAGE_HEIGHT,
     width: PAGE_WIDTH,
   }

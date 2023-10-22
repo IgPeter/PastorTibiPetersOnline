@@ -1,23 +1,28 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {View, StyleSheet, StatusBar, Modal, TouchableOpacity, ScrollView, 
+import {View, StyleSheet, Modal, TouchableOpacity, ScrollView, 
     Dimensions, Text, SafeAreaView, Image } from 'react-native';
 import { getCachedUsers, cacheUsers } from '../../shared/UserAsyncStorage';
 import Banner from './banner.js';
-import RecommendedMessages from './recommended';
-import EasyButton from '../../shared/styledComponents/EasyButton';
+import { Button } from '../../components/Button';
 import {useFonts} from 'expo-font';
 import axios from 'axios';
 import baseUrl from '../../assets/common/baseUrl';
 import AuthGlobal from '../../context/store/AuthGlobal';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { logoutUser } from '../../context/actions/AuthActions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwt_decode from 'jwt-decode';
+import { setCurrentUser } from '../../context/actions/AuthActions';
+import MessageList from '../messages/messageList';
 
 var {width, height} = Dimensions.get('window');
 
 const HomeScreen = (props) => {
-    const [singleUser, setSingleUser] = useState({})
+    const [singleUser, setSingleUser] = useState({});
     const [modalVisible, setModalVisible] = useState(false);
+    const [recMessages, setRecMessages] = useState({});
+    const [unsubscribedUser, setUnsubscribedUser] = useState({});
+    const [numOfDaysLeft, setNumOfDaysLeft] = useState(7);
     const context = useContext(AuthGlobal);
     
     useEffect(() => {
@@ -32,10 +37,99 @@ const HomeScreen = (props) => {
             return error;
         })
 
-        return () => {
-            setSingleUser({})
+        const setCachedMessages = async (messages) => {
+            try{
+                await AsyncStorage.setItem('messages', JSON.stringify(messages));
+            }catch(error){
+                console.log(error);
+            }
         }
-    },[])
+
+        const getCachedMessages = async () => {
+            try{
+                const messages = await AsyncStorage.getItem('messages');
+                if(messages != null){
+                const parsedMessages = JSON.parse(messages);
+
+                return {messages: parsedMessages}
+                }
+
+            }catch(error){
+                console.log(error);
+            }
+        }
+
+        const fetchRecommendedData = async () => {
+            try{
+               await axios.get(`${baseUrl}message`).then(res => {
+                    if (res.status == 304){
+                        const messages = getCachedMessages();
+                        setRecMessages(messages);
+                    }else {
+                        const sortedMessages = res.data.message.sort((a,b)=> new Date(b.dateCreated) - new Date(a.dateCreated));
+                        const latestMessages = sortedMessages.slice(0,3);
+                        setRecMessages(latestMessages);
+                        setCachedMessages(latestMessages);
+                    }
+            }).catch(error => {return error});
+            }catch(error){
+                console.log(error);
+            }
+        }
+
+        fetchRecommendedData();
+
+        return () => {
+            setSingleUser({});
+        }
+    },[]) 
+
+     useEffect(() => {
+        const checkForSubscriptionExpiration = () => {
+            const userID = singleUser.id;
+            const currentDate = new Date();
+            if(singleUser &&  singleUser.subscription && singleUser.subscription.dateSubscribed){
+                const dateSubscribed = new Date(singleUser.subscription.dateSubscribed);
+                let dateSubscriptionExpired;
+                if (singleUser.subscription.plan == "Free Trial"){
+                    const milliSecInADay = 1000 * 60 * 60 * 24;
+                    const timeDifference = currentDate - dateSubscribed;
+                    const daysLeft = numOfDaysLeft - Math.floor(timeDifference/milliSecInADay)
+                    if(daysLeft > 0){
+                        setNumOfDaysLeft(daysLeft);
+                    }else {
+                        axios.patch(`${baseUrl}user/unsubscribe/${userID}`).then(res => {
+                            setUnsubscribedUser(res.data.unsubscribedUser);
+                            const decoded = jwt_decode(res.data.token);
+                            context.dispatch(setCurrentUser(decoded, res.data.unsubscribedUser));
+                            props.navigation.navigate('Subscription Expired')
+                        }).catch(error=> console.log(error)) 
+                }           
+            }else if (singleUser.subscription.plan == "Basic"){
+                dateSubscriptionExpired = dateSubscribed.setDate(dateSubscribed.getDate() + 90);
+            }else if (singleUser.subscription.plan == "Standard"){
+                dateSubscriptionExpired = dateSubscribed.setDate(dateSubscribed.getDate() + 180);
+            }else{
+                dateSubscriptionExpired = dateSubscribed.setDate(dateSubscribed.getDate() + 365);
+            }
+    
+            if (currentDate > dateSubscriptionExpired){
+                axios.patch(`${baseUrl}user/unsubscribe/${userID}`).then(res => {
+                    setUnsubscribedUser(res.data.unsubscribedUser);
+                    const decoded = jwt_decode(res.data.token);
+                    context.dispatch(setCurrentUser(decoded, unsubscribedUser));
+                    props.navigation.navigate('Subscription Expired')
+                }).catch(error=> console.log(error))
+            }
+
+        }
+    }
+
+     const interval = setInterval(checkForSubscriptionExpiration, 1000 * 60 * 60 * 24);
+
+     return () => clearInterval(interval);
+
+     }, [singleUser && singleUser.isSubscriber == true && singleUser.subscription.dateSubscribed])
 
     const [font] = useFonts({
         WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf"),
@@ -52,21 +146,21 @@ const HomeScreen = (props) => {
                     <Modal animationType='fade' transparent={true} visible={modalVisible} 
                     onRequestClose={()=>setModalVisible(false)}>
                     <View style={styles.HomeModal}>
-                    <TouchableOpacity onPress={() => setModalVisible(false)}>
-                            <EasyButton dark meduim onPress={() => {
+                        <TouchableOpacity onPress={() => setModalVisible(false)}>
+                            <Button title="Log Out"
+                            btnstyle={{borderRadius: 5, height: 40, justifyContent: 'center', padding: 10,  backgroundColor: "#141414"}}
+                            txtstyle={{fontFamily: 'WorkSans', fontWeight: 'normal', color: '#f2f2f2', fontSize: 13}}
+                            onPress={() => {
                                  setModalVisible(false);
                                  AsyncStorage.removeItem('jwt');
                                 logoutUser(context.dispatch);
                                 props.navigation.navigate('Login');
-                            }}>
-                                <Text style={{fontFamily: 'WorkSans', fontWeight: 500, 
-                                color: '#f2f2f2', fontSize: 13}}>Log Out</Text>
-                            </EasyButton>
+                            }}/>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.closeIcon} onPress={() => setModalVisible(false)}>
                             <Icon name="close" size={17}/>
                         </TouchableOpacity>
-                    </View>
+                        </View>
                     </Modal>
                 ): null}
             <View style={styles.nameView}>
@@ -87,49 +181,74 @@ const HomeScreen = (props) => {
                 </Text>)}
                 </View>
             </View>
-            {singleUser.isSubscriber == false || context.stateUser.user.isSubscriber == false ? (
+            {singleUser &&  singleUser.isSubscriber == true && singleUser.subscription.plan === "Free Trial" && (
                 <View style={styles.subscriberStatus}>
                 <Text style={styles.textBody}>
-                    You have six days left on your free trial, for more messages 
+                    You have {numOfDaysLeft} days left on your free trial, for more messages 
                     kindly
                 </Text>
-                <EasyButton
-                    large
-                 subscribe
-                 style={styles.btn}
+                <Button title = "Subscribe"
+                btnstyle={styles.btn}
+                txtstyle={styles.subscribeNow}
                  onPress={() => {
                     props.navigation.navigate('Subscription')
-                 }}
-                >
-                    <Text style={styles.subscribeNow}>Subscribe</Text>
-                </EasyButton>
+                 }}/>
             </View>
-            ): (
-                <View style={{width: '100%', padding: 20, height: height/4, justifyContent: 'center'}}>
+            )}
+            { singleUser && singleUser.isSubscriber === true && singleUser.subscription.plan !== "Free Trial" && (
+            <View style={{width: '100%', padding: 20, height: height/4, justifyContent: 'center'}}>
                     <Text style={{fontFamily: 'WorkSans', fontSize:  25, fontWeight: 'bold', marginLeft: 20}} >Welcome!</Text>
                     <Text style={{fontFamily: 'WorkSans', fontSize:  16, 
-                    fontWeight: 500, marginTop: 0, marginLeft: 20}}>This is Pastor Tibi Peters Online Library</Text>
-                </View>
-            )} 
+                    fontWeight: 'normal', marginTop: 0, marginLeft: 20}}>This is Pastor Tibi Peters Online Library</Text>
+            </View>)}
+            {
+                singleUser && singleUser.isSubscriber === false && (
+                    <View style = {styles.subscriberStatus}>
+                        <Text style={styles.textBody}>You don't have any subscription, Kindly </Text>
+                        <Button title = "Subscribe"
+                            btnstyle={styles.btn}
+                            txtstyle={styles.subscribeNow}
+                            onPress={() => {
+                                props.navigation.navigate('Subscription Expired')
+                        }}/>
+                    </View>
+                )
+            }
             <ScrollView style={{width: width-20}}>
             <View style={styles.theSlider}>
                 <Banner />
             </View>
             <View style={styles.specialMessageList}>
-                <RecommendedMessages navigation = {props.navigation} />
+                <View style={[styles.center, {width: '100%', padding: 20, margin: 10}]}>
+                    <Text style={{fontFamily: 'WorkSans', fontSize: 20, fontWeight: 'bold'}}>Latest Messages</Text>
+                    <Text style={{fontFamily: 'WorkSans', fontSize: 12, fontWeight: 'normal'}}>Explore the latest messages on PastorTibiPetersOnline</Text>
+                </View>
+                <ScrollView>
+                    {recMessages.length > 0 ? (
+                        <View style = {styles.messageListContainer}>
+                            { recMessages.map((item) => {
+                                    return (
+                                        <MessageList key={item._id} item={item} 
+                                        navigation = {props.navigation}/>
+                                    )
+                            })}
+                        </View>
+                    ): (
+                        <View style = {[styles.center, {height: '40%', flex: 1, padding: 30}]}>
+                             <Text>No Recommended messages for you yet, you will get some options soon</Text>
+                         </View>
+                    )
+                  }
+                </ScrollView>
             </View>
-            { singleUser && (<View style={{paddingBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
-                <EasyButton
-                 loadMore
-                 meduim
-                 onPress={() => context.stateUser.user.isSubscriber == true ? 
+            { singleUser && (<View style={{marginTop: 10, paddingBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
+                <Button title="Load more" btnstyle={{borderRadius: 5, height: 40, justifyContent: 'center', 
+                paddingTop: 10, paddingRight: 20, paddingLeft: 20, paddingBottom: 10, backgroundColor: '#141414'}} txtstyle={{fontFamily: 'WorkSans', fontSize: 16, 
+                fontWeight: 800, color: '#ffffff'}}
+                 onPress={() => singleUser.isSubscriber == true ? 
                     props.navigation.navigate('Explore', {item: singleUser}):
-                    props.navigation.navigate('Subscription')
-                }
-                >
-                    <Text style={{fontFamily: 'WorkSans', fontSize: 16, 
-                    fontWeight: 800, color: '#E5B80B'}}>Load more</Text>                    
-                </EasyButton>    
+                    props.navigation.navigate('Subscription Expired')
+                }/>  
             </View>)} 
             <View style={styles.abtSone}>
                 <View style={{width: '30%', marginRight: 5}}>
@@ -161,6 +280,10 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10
     },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     nameView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -180,8 +303,8 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
   specialMessageList: {
-    paddingRight: 20,
-    width: '100%'
+    width: '100%',
+    marginBottom: 20
     },
     
     abtSone: {
@@ -195,22 +318,22 @@ const styles = StyleSheet.create({
     textBody: {
         fontFamily: 'WorkSans',
         fontSize: 13,
-        fontWeight: 600,
+        fontWeight: '600',
         color: '#141414'
     },
     textHeader: {
         fontFamily: 'WorkSans',
         fontSize: 20,
-        fontWeight: 700,
+        fontWeight: 'bold',
         color: '#141414'
     },
     btn: {
         marginTop: 20,
-        marginLeft: -125
+        marginLeft: -90
     },
     subscribeNow: {
         fontFamily: 'WorkSans',
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: 'bold',
         fontStyle: 'italic',
         color: '#E5B80B'
@@ -236,7 +359,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 3,
         right: 5
+    },
+    messageListContainer: {
+        flex: 1,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        flexWrap: 'wrap',
     }
-})
+});
 
 export default HomeScreen;

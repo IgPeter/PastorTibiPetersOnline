@@ -1,18 +1,9 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-import React, {useEffect, useState} from "react";
+import {View, Text, ScrollView, StyleSheet, Image, TouchableOpacity} from "react-native";
+import React, {useState} from "react";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/Backbutton";
 import {useFonts} from "expo-font";
-import {Buffer} from 'buffer';
-import * as FileSystem from 'expo-file-system';
-import * as Sharing from "expo-sharing";
+
 
 export const Singlebook = (props) => {
   const [item] = useState(props.route.params.item);
@@ -38,7 +29,7 @@ export const Singlebook = (props) => {
       <View style={styles.bookInfo}>
         <TouchableOpacity onPress={() => console.log("Button pressed")}>
           <View style={styles.thumbnail}>
-            <Image source = {{uri: item.image}} style={{width: 195, height: 280}}/>
+            <Image source = {{uri: item.image}} style={{width: 280, height: 280}}/>
           </View>
         </TouchableOpacity>
         <View>
@@ -123,7 +114,7 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     backgroundColor: "#D9D9D9",
-    width: 195,
+    width: 280,
     height: 280,
     alignSelf: "center",
     marginBottom: 20,

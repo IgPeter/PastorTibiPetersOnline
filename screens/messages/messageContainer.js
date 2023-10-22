@@ -154,8 +154,8 @@ const MessageContainer = (props) => {
                              })}
                          </View>
                      ) : (
-                         <View style = {[styles.center, {height: '40%'}]}>
-                             <Text>No messages for this category</Text>
+                         <View style = {[styles.center, {height: '40%', flex: 1}]}>
+                             <ActivityIndicator color ="gold" />
                          </View>
                      )}
                      </ScrollView>
@@ -191,6 +191,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     }
-})
+});
 
 export default MessageContainer;

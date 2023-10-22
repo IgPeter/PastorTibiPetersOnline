@@ -18,10 +18,7 @@ const MessageInterfaceCard = (props) => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{uri: image}}
-        style={styles.image}
-      />    
+      <Image source={{uri: image}} style={styles.image} />    
         <View>  
           <Text style={styles.text}>{contentType}</Text>
         {contentType === "video" ? (
@@ -36,7 +33,7 @@ const MessageInterfaceCard = (props) => {
             </View>
           </View>
         ) : (
-          <Image />
+          null
         )}
         {contentType === "audio" ? (
           <Image
@@ -44,7 +41,7 @@ const MessageInterfaceCard = (props) => {
             style={styles.messageFeaturesImage}
           />
         ) : (
-          <Image />
+          null
         )}
         {contentType === "book" ? (
           <Image
@@ -52,7 +49,7 @@ const MessageInterfaceCard = (props) => {
             style={styles.messageFeaturesImage}
           />
         ) : (
-          <Image />
+          null
         )}
     </View>
       <Text style={styles.title}>
@@ -76,7 +73,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 8,
     fontFamily: "WorkSans",
-    fontWeight: 600,
+    fontWeight: '600',
     marginTop: 5,
     marginLeft: 5,
   },

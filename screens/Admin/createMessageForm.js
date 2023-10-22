@@ -24,7 +24,6 @@ const MessageForm = (props) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState();
-  const [editer] = useState(props.route.params.editer);
 
   useEffect(()=>{
 
@@ -114,13 +113,6 @@ const MessageForm = (props) => {
         }
       )
 
-        const config = {
-            headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-          }
-        }
-
     axios.post(`${baseUrl}message`, message, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -141,6 +133,7 @@ const MessageForm = (props) => {
             }, 300)
       }
     }).catch((error)=> {
+      console.log(error);
       Toast.show({
         topeOffset: 60,
         type: 'error',

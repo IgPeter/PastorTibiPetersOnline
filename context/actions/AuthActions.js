@@ -4,10 +4,12 @@ import Toast from "react-native-toast-message";
 import baseUrl from "../../assets/common/baseUrl";
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const SET_LOADING = "SET_LOADING";
 
 //function to log in the user
 
 export const loginUser = (user, dispatch) => {
+
   fetch(`${baseUrl}user/login`, {
     method: "POST",
     body: JSON.stringify(user),
@@ -26,7 +28,7 @@ export const loginUser = (user, dispatch) => {
         const token = data.token;
         AsyncStorage.setItem("jwt", token);
         const decoded = jwt_decode(token);
-        dispatch(setCurrentUser(decoded, user));
+        dispatch(setCurrentUser(decoded, data));
       } else {
         logoutUser(dispatch)
       }
@@ -39,8 +41,9 @@ export const loginUser = (user, dispatch) => {
         text1: "Please provide correct credentials",
         text2: "",
       });
+      dispatch(setLoading(false))
       logoutUser(dispatch)
-    });
+    })
 };
 
 //Getting the user's profile
@@ -70,4 +73,11 @@ export const setCurrentUser = (decoded, user) => {
         payload: decoded,
         userProfile: user
     }
+}
+
+export  const setLoading = (isLoading) => {
+  return {
+    type: SET_LOADING,
+    payload: isLoading
+  }
 }

@@ -1,28 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
-import { Audio } from 'expo-av';
 
-export const AudioCard = ({ title, imageSource, audioSource }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const soundObject = new Audio.Sound();
-
-  const playAudio = async () => {
-    try {
-      if (isPlaying) {
-        await soundObject.pauseAsync();
-        setIsPlaying(false);
-      } else {
-        await soundObject.loadAsync(audioSource);
-        await soundObject.playAsync();
-        setIsPlaying(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+export const AudioCard = ({ imageSource }) => {
   return (
-    <TouchableOpacity onPress={playAudio} style={styles.card}>
+    <TouchableOpacity>
       <Image source={imageSource} style={styles.image} />
       {/* <Text style={styles.title}>{title}</Text> */}
     </TouchableOpacity>
@@ -31,7 +12,7 @@ export const AudioCard = ({ title, imageSource, audioSource }) => {
 
 const styles = StyleSheet.create({
   image: {
-    width: 195,
+    width: 280,
     height: 280,
     resizeMode: 'cover',
     borderRadius: 5,

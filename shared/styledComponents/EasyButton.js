@@ -16,7 +16,7 @@ const EasyButton = styled.TouchableOpacity`
 
     ${
         (props) => 
-            props.secondary && css
+            props.secondary && css 
                 `background: #62b1f6`       
     }
     ${

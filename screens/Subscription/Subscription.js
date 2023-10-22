@@ -4,20 +4,21 @@ import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Modal,
 import { CheckBox } from "react-native-elements";
 import {useFonts}  from 'expo-font';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import EasyButton from "../../shared/styledComponents/EasyButton";
+import {Button} from '../../components/Button';
 import { WebView } from 'react-native-webview';
 import Feather from 'react-native-vector-icons/Feather';
 import baseUrl from '../../assets/common/baseUrl';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import AuthGlobal from '../../context/store/AuthGlobal';
 import { cacheUsers } from "../../shared/UserAsyncStorage";
 import { getCachedUsers } from "../../shared/UserAsyncStorage";
+import { setCurrentUser } from "../../context/actions/AuthActions";
+import jwt_decode from 'jwt-decode';
 
 var {width , height} = Dimensions.get('window');
 
 export const Subscription = (props) => {
-  const [checkBoxes, setCheckBoxes] = useState({checkBox1: false, checkBox2: false, checkBox3: false})
+  const [checkBoxes, setCheckBoxes] = useState({checkBox1: false, checkBox2: false, checkBox3: false});
   const [modalVisible, setModalVisible] = useState(false);
   const [paymentCheckBoxes, setPaymentCheckBoxes] = useState({checkBox1: false, checkBox2: false})
   const [showGateway, setShowGateway] = useState(false);
@@ -29,8 +30,6 @@ export const Subscription = (props) => {
   const context = useContext(AuthGlobal);
   
   useEffect(() => {
-    console.log(context.stateUser);
-
   const fetchData = async () => {
 
     try{
@@ -68,8 +67,10 @@ export const Subscription = (props) => {
     if (payment.status === 'COMPLETED') {
       axios.patch(`${baseUrl}user/subscribe/${user.id}`, {subscription}).then(res=> {
         setUpdatedUser(res.data.updatedUser);
+        const decoded = jwt_decode(res.data.token);
+        context.dispatch(setCurrentUser(decoded, updatedUser));
         alert('You have subscribed successfully');
-        props.navigation.navigate('main', {subscribedUser: updatedUser});
+        props.navigation.navigate('main');
       }).catch(error => console.log(error))
     } else {
       alert('Payment Failed');
@@ -77,17 +78,20 @@ export const Subscription = (props) => {
   }
 
   //Handling Free Trial
-  const handleFreeTrial = () => {
+  const handleFreeTrial = async () => {
     let freeTrial = {
       plan: "Free Trial",
       desc: "7 days plan",
-      price: 0
+      price: 0,
+      dateSubscribed: new Date(Date.now()).toISOString()
     }
 
     //updating user data with subscription information
-    axios.patch(`${baseUrl}user/freeTrial/${user.id}`, {freeTrial}).then(res=> {
+    await axios.patch(`${baseUrl}user/freeTrial/${user.id}`, {freeTrial}).then(res=> {
       setUpdatedUser(res.data.updatedUser);
-      props.navigation.navigate('Non Subscriber', {subscribedUser: updatedUser});
+      const decoded = jwt_decode(res.data.token);
+      context.dispatch(setCurrentUser(decoded, res.data.updatedUser));
+      props.navigation.navigate('main');
     }).catch(error => console.log(error))
   }
 
@@ -126,7 +130,7 @@ export const Subscription = (props) => {
 
     if(checkBoxName === 'checkBox3'){
       setSubscription({
-        plan: 'Premuim',
+        plan: 'Premium',
         desc: 'A 365 days subscription plan',
         price: user.country === 'Nigeria' ? 3000 : 50,
         dateSubscribed: new Date(Date.now()).toISOString()
@@ -208,21 +212,21 @@ export const Subscription = (props) => {
             </TouchableOpacity>
             {paymentCheckBoxes.checkBox1 == true || paymentCheckBoxes.checkBox2 == true ? 
             (
-              <EasyButton meduim dark 
-              onPress={() => paymentCheckBoxes.checkBox1 == true ? 
+              <Button title="Pay" btnstyle={{borderRadius: 5, margin: 5, height: 50, width: '50%', alignItems: 'center', justifyContent: 'center', padding: 10, backgroundColor:'#141414'}}
+              txtstyle={{color: '#f2f2f2', fontFamily: 'WorkSans', fontSize: 14, fontWeight: '600', textAlign: 'center' }}
+                onPress={() => paymentCheckBoxes.checkBox1 == true ? 
                 props.navigation.navigate('Paystack Payment', {item: subscription, user: user}) : 
                 paymentCheckBoxes.checkBox2 == true ? setShowGateway(true) : null
-              }>
-                <Text style={{fontFamily: 'WorkSans', color: '#f2f2f2', fontSize: 13}}>Pay</Text></EasyButton>
+              }/>
             ): null }
           </View>
         </View>
       </Modal>
-        <View style={styles.textGroup}>
+        <View>
             <Text style={{fontFamily: 'WorkSans', 
-            fontWeight: 700, fontSize: 16, color: '#141414'}}>Choose a Subscription Plan</Text>
+            fontWeight: 'bold', fontSize: 16, color: '#141414'}}>Choose a Subscription Plan</Text>
             <Text style={{fontFamily: 'WorkSans', 
-            fontWeight: 500, fontSize: 13, color: '#141414'}}>
+            fontWeight: '500', fontSize: 13, color: '#141414'}}>
                 The subscription plan gives you 100% access to resources, 
                 publications, and messages for a designated period of time.
             </Text>
@@ -288,21 +292,14 @@ export const Subscription = (props) => {
                 source={require('../../assets/icons/Vectorstargold.png')}/>
             </View>
         </TouchableOpacity>
-        <View style={{marginTop: 20}}>
+        <View style={{marginTop: 20, width: '100%', justifyContent: 'center', alignItems: 'center'}}>
           {checkBoxes.checkBox1 != true && checkBoxes.checkBox2 != true && checkBoxes.checkBox3 != true ? 
-                <EasyButton
-                 large
-                 dark
-                 onPress={()=>handleFreeTrial()}
-                ><Text style={styles.btnText}>Free Trial</Text></EasyButton> : 
-                <EasyButton
-                large
-                dark
-                onPress={()=>setModalVisible(true)}
-                >
-                  <Text style= {styles.btnText}>Subscribe</Text>
-                </EasyButton>
-                }
+                <Button title = "Free Trial" btnstyle={{borderRadius: 5, margin: 5, height: 50, width: '50%', justifyContent: 'center', alignItems: 'center', padding: 10, backgroundColor:'#141414'}}
+                txtstyle={{color: '#f2f2f2', fontFamily: 'WorkSans', fontWeight: '600', textAlign: 'center' }}
+                 onPress={()=>handleFreeTrial()}/>: 
+                <Button title = "Subscribe" btnstyle={{borderRadius: 5, margin: 5, height: 50, width: '50%', justifyContent: 'center', padding: 10, backgroundColor:'#141414'}}
+                txtstyle={{color: '#f2f2f2', fontFamily: 'WorkSans', fontWeight: '600', textAlign: 'center' }}
+                 onPress={()=>setModalVisible(true)}/>}
         </View> 
         {showGateway == true ? (
           <Modal
@@ -396,13 +393,13 @@ const styles = StyleSheet.create({
     fontFamily: 'WorkSans',
     fontSize: 14,
     color: '#141414',
-    fontWeight: '600'  
+    fontWeight: '600'
   },
   desc: {
     fontFamily: 'WorkSans',
     fontSize: 12,
     color: '#141414',
-    fontWeight: '500'
+    fontWeight: '600'
   },
   star: {
     marginLeft: 50
@@ -410,13 +407,7 @@ const styles = StyleSheet.create({
   finalTxt: {
     fontFamily: 'WorkSans',
     fontSize: 16,
-    fontWeight: 600
-  },
-  btnText:{
-    color: '#f2f2f2',
-    fontFamily: 'WorkSans',
-    fontSize: 14,
-    fontWeight: 600
+    fontWeight: '600'
   },
   centeredView: {
     justifyContent: 'center',

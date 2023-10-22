@@ -3,6 +3,8 @@ import { View, StyleSheet } from "react-native";
 import { Paystack } from "react-native-paystack-webview";
 import baseUrl from "../../assets/common/baseUrl";
 import axios from "axios";
+import jwt_decode from 'jwt-decode';
+import { setCurrentUser } from "../../context/actions/AuthActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function PaymentScreen(props) {
@@ -63,8 +65,9 @@ function PaymentScreen(props) {
   const handleOnSuccess = async () => {
     axios.patch(`${baseUrl}user/subscribe/${user.id}`, {subscription}).then(res=> {
       setUpdatedUser(res.data.updatedUser);
-      props.navigation.navigate('main', {subscribedUser: updatedUser});
-      console.log("payment was successful");
+      const decoded = jwt_decode(res.data.token);
+      context.dispatch(setCurrentUser(decoded, updatedUser));
+      props.navigation.navigate('main');
     }).catch(error => console.log(error))
   };
 

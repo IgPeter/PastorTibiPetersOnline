@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image, Dimensions,Modal} from 'react-native';
-import { Ionicons } from '@expo/vector-icons'
-import EasyButton from '../../shared/styledComponents/EasyButton';
+import { Ionicons } from '@expo/vector-icons';
+import { Button } from '../../components/Button';
 
 var {width} = Dimensions.get('window');
 
@@ -37,26 +37,24 @@ const ListItem = (props) => {
                         >
                             <Ionicons name="close" size={20} />
                         </TouchableOpacity>
-                        <EasyButton 
-                            medium
-                            secondary
+                        <Button 
+                            title="Edit"
+                            btnstyle={{borderRadius: 5, height: 40, justifyContent: 'center', padding: 10, backgroundColor: "#141414"}}
+                            txtstyle={{ color: 'white', fontWeight: 'bold'}}
                             onPress={() => {
                                 props.navigation.navigate('Edit Message Form', {item: props});
                                 setModalVisible(false)
                             }}
-                        >
-                            <Text style={styles.txtStyle}>Edit</Text>
-                        </EasyButton>
-                        <EasyButton 
-                            medium
-                            danger
-                            onPress={() => {
-                                props.delete(props._id)
+                        />
+                        <Button 
+                            title="Delete"
+                            btnstyle={{borderRadius: 5, height: 40, justifyContent: 'center', padding: 10, 
+                            backgroundColor: '#141414'}}
+                            txtstyle={{ color: 'white', fontWeight: 'bold'}}
+                            onPress={() => { props.delete(props._id)
                                 setModalVisible(false)
                             }}
-                        >
-                            <Text style={styles.txtStyle}>Delete</Text>
-                            </EasyButton>
+                        />
                     </View>
                 </View>
             </Modal>
@@ -67,7 +65,7 @@ const ListItem = (props) => {
                 props.contentType.toLowerCase().trim() === 'audio' ? 
                 props.navigation.navigate('Single Audio', {item: props}) :
                 props.contentType.toLowerCase().trim() === 'book'?
-                props.navigation.navigate('Single Video', {item: props}): null 
+                props.navigation.navigate('Single Book', {item: props}): null 
             }}
             onLongPress={()=> setModalVisible(true)}
             style={[styles.container, {backgroundColor: props.index % 2 == 0 ? 

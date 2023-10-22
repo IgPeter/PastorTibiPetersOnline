@@ -1,19 +1,60 @@
-import React, { useRef, useState } from "react";
-import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
+import React, { useRef, useState, useEffect } from "react";
+import { TouchableOpacity, View, StyleSheet, Text, Dimensions } from "react-native";
 import { Video } from "expo-av";
-import VideoPlayer from "expo-video-player";
-import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import {MaterialIcons } from "@expo/vector-icons";
 import {useFonts} from 'expo-font';
 
-let compPressed = false
+const width = Dimensions.get('window').width;
 
 export const Singlevideoplay = (props) => {
-  const [item, setItem] = useState(props.route.params.item);
+  const [item] = useState(props.route.params.item);
   const video = useRef(null);
   const [isRepeat, setIsRepeat] = useState(false);
+  const [onPressed, setOnPressed] = useState(false);
   const [font] = useFonts({
     WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf")
   })
+
+  useEffect(() => {
+    (async () => {
+      setOnPressed(true);
+      setTimeout(() => {
+        setOnPressed(false);
+      }, 700)
+    })();
+
+    return () => {
+      setOnPressed(false);
+    }
+  }, [])
+
+  /*const removeFirstInstanceRepeatButton = (async () => {
+    if(onPressed == true){
+      setTimeout(() => {
+        setOnPressed(false);
+      },500)
+    }
+  })()
+
+  const removeSecondInstanceRepeatButton = () => {
+    if(onPressed == true){
+      setTimeout(() => {
+        setOnPressed(false);
+      },5000)
+    }
+  }*/
+
+  
+  /*useEffect(() => {
+  (async ()=> {s
+      if(video.current){
+        await video.current.loadAsync({uri: `${item.message}`}, {shouldPlay: true});
+
+        //video.current.setWidth('100%'); // Set the desired width
+        //video.current.setHeight(350);
+      }
+    })();
+  },[video.current])*/
 
   if (!font){
     return null
@@ -30,49 +71,53 @@ export const Singlevideoplay = (props) => {
   }
   
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress = {() => {setOnPressed(true); 
+      setTimeout(() => {
+        setOnPressed(false);
+      }, 2950)
+    }}>
         <Video
-          onPress={() => compPressed = !compPressed}
           ref={video}
-          source={{ uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }} // Replace with your video source
+          source={{uri: `${item.message}`}}
           resizeMode="cover"
           useNativeControls
           style={styles.video}
           onPlaybackStatusUpdate={handleOnPlaybackStatusUpdate}
         />
-      <View style={styles.controlsContainer}>
-        <TouchableOpacity
-          onPress={() => setIsRepeat(!isRepeat)}
-        >
+    <View style={styles.controlsContainer}>
+        {
+          onPressed ? (
+            <TouchableOpacity onPress={() => setIsRepeat(!isRepeat)}>
           {isRepeat ? (
             <MaterialIcons name="repeat-one" size={30} color="white" />
           ) : (
             <MaterialIcons name="repeat" size={30} color="white" />
           )}
           </TouchableOpacity>
+          ): null
+        }
       </View>
       <View style={styles.videoTitle}>
-        <Text style={{ fontSize: 20, fontWeight: 700, marginTop: 20, fontFamily: 'WorkSans', padding: 20}}>
+        <Text style={{ fontSize: 20, fontWeight: '700', marginTop: 20, fontFamily: 'WorkSans', padding: 20}}>
           {item.title}
         </Text>
-        <Text style={{ fontSize: 14, fontWeight: 600, marginTop: 5, fontFamily: 'WorkSans' }}>
+        <Text style={{ fontSize: 14, fontWeight: '600', marginTop: 5, fontFamily: 'WorkSans' }}>
           Pastor Tibi Peters
         </Text>
       </View>
       <View style={styles.comments}>
         <Text>{item.description}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 //  style={styles.buttons}
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: "100%",
     // backgroundColor: "indigo",
-    marginTop: 20,
+    marginTop: 20
   },
   main: {
     height: 300,
@@ -80,20 +125,21 @@ const styles = StyleSheet.create({
   },
   videoTitle: {
     marginTop: 10,
-    marginLeft: 16,
-
+    marginLeft: 16
   },
   comments: {
     paddingHorizontal: 16,
     marginTop: 37,
   },
   controlsContainer: {
-    paddingLeft: 30,
     position: 'absolute',
-    top: 275,
+    top: 276,
+    paddingLeft: 30
   },
   video: {
-    height: 350
+    width: '100%',
+    height: 350,
+    marginBottom: 10
   }
 });
 

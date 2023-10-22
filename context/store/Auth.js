@@ -1,7 +1,6 @@
 import React, {useReducer, useState, useEffect} from 'react';
 import jwt_decode from 'jwt-decode';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import authReducer from '../reducers/AuthReducers';
 import { setCurrentUser } from '../actions/AuthActions';
 import AuthGlobal from './AuthGlobal';
@@ -9,7 +8,8 @@ import AuthGlobal from './AuthGlobal';
 const Auth = props => {
     const [stateUser, dispatch] = useReducer(authReducer, {
         isAuthenticated: null,
-        user: {}
+        user: {},
+        loading: false
     })
 
     const [showChild, setShowChild] = useState(false);

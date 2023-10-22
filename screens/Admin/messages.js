@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import baseUrl from '../../assets/common/baseUrl';
 import Header from '../../shared/Header';
 import ListItem from './ListItem';
-import EasyButton from '../../shared/styledComponents/EasyButton';
+import {Button} from '../../components/Button';
 import {useFonts} from 'expo-font';
 
 var {width, height} = Dimensions.get('window');
@@ -126,20 +126,16 @@ const Messages = (props) => {
     return (
         <View style = {styles.container}>
             <View style = {styles.buttonContainer}>
-                <EasyButton
-                    meduim
-                    dark
+                <Button title="Categories"
+                btnstyle={{borderRadius: 5, margin: 5, height: 40, justifyContent: 'center', padding: 10, backgroundColor:'#141414'}}
+                txtstyle={{color: '#f2f2f2', fontFamily: 'WorkSans', fontWeight: '600', textAlign: 'center' }}
                     onPress={()=>props.navigation.navigate('Categories')}
-                >
-                    <Text style={styles.buttonText}>Categories</Text>
-                </EasyButton>
-                <EasyButton
-                    large
-                    dark
+                />
+                <Button title="Create Message"
+                btnstyle={{borderRadius: 5, margin: 5, height: 40, justifyContent: 'center', padding: 10, backgroundColor:'#141414'}}
+                txtstyle={{color: '#f2f2f2', fontFamily: 'WorkSans', fontWeight: '600', textAlign: 'center' }}
                     onPress={()=>props.navigation.navigate('Message Form')}
-                >
-                    <Text style={styles.buttonText}>Create Message</Text>
-                </EasyButton>
+                />
             </View>
                 <Header message={messageList} navigation = {props.navigation}/>
             <View style={{ width: '100%'}}>
@@ -162,7 +158,7 @@ const Messages = (props) => {
                                 delete={deleteMessage}
                             />
                         )}
-                        keyExtractor={(item) => item.id}
+                        keyExtractor={(item) => item._id}
                     />
                 )}
             </View>
@@ -202,7 +198,7 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#f2f2f2',
         fontFamily: 'WorkSans',
-        fontWeight: 600,
+        fontWeight: '600',
         textAlign: 'center' 
     }
 })

@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
         borderRadius: 5
     }
 
-})
+});

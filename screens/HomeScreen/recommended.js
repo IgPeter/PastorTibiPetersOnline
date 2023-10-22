@@ -30,7 +30,7 @@ const RecommendedMessages = (props) => {
     return (
         <View style={styles.container}>
             <Text style = {styles.recHeader}>JUST A TIP OF THE ICEBERG!</Text>
-            <Text style ={{fontFamily: 'WorkSans', fontWeight: 600, fontSize: 14, color: '#E5B80B', 
+            <Text style ={{fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 14, color: '#E5B80B', 
         marginTop: 0, marginBottom: 0, marginLeft: 20}}>Explore these highlights for you</Text>
             {recommended.length > 0 ? (
                 <View style = {styles.recommendedContainer}>
@@ -73,6 +73,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginLeft: 20
     }
-})
+});
 
-export default RecommendedMessages
+export default RecommendedMessages;

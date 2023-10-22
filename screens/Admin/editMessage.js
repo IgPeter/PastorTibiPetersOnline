@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TextInput, View, ScrollView, ActivityIndicator} from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { Button } from '../../components/Button';
-import Error from '../../shared/Error';
 import axios from 'axios';
 import baseUrl from '../../assets/common/baseUrl';
 import * as DocumentPicker from 'expo-document-picker';
@@ -21,7 +20,6 @@ const EditMessageForm = (props) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [image, setImage] = useState();
   const [messageFile, setMessageFile] = useState();
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState();
   const [item] = useState(props.route.params.item._id);

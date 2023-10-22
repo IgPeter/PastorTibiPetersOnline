@@ -18,6 +18,7 @@ import { Subscription } from "../screens/Subscription/Subscription";
 import OnBoardingScreen from "../screens/onboarding";
 import SplashScreen from "../screens/splash";
 import PaymentScreen from "../screens/Subscription/PaystackPayment";
+import SubscriptionExpires from "../screens/Subscription/subscriptionExpires";
 
 const Stack = createStackNavigator()
 
@@ -29,7 +30,7 @@ const MyStack = () => {
             <Stack.Screen name='Single Video' component={Singlevideo} options={{headerShown: false}}/>
             <Stack.Screen name='Single Book' component={Singlebook} options={{ headerShown: false}}/>
             <Stack.Screen name="Video Play" component={Singlevideoplay} options ={{ headerShown: false}} />
-            {<Stack.Screen name="Audio Play" component={SingleAudioPlay} options ={{ headerShown: false}} />}
+            <Stack.Screen name="Audio Play" component={SingleAudioPlay} options ={{ headerShown: false}} />
             <Stack.Screen name="Bookreader" component={Bookreader} options={{ headerShown: false}}/>
           {/*Admin screens*/}
           <Stack.Screen name="Admin Login" component={AdminLogin}  options ={{ headerShown: false}}/>
@@ -42,6 +43,7 @@ const MyStack = () => {
         <Stack.Screen name='Register' component={Signup} options={{ headerShown: false}}/>
         <Stack.Screen name='Subscription' component={Subscription} options={{ headerShown: false}}/>
         <Stack.Screen name='Paystack Payment'  component={PaymentScreen} options={{headerShown: false}}/>
+        <Stack.Screen name='Subscription Expired'  component={SubscriptionExpires} options={{headerShown: false}}/>
         {/*First Screens*/}
         <Stack.Screen name='Onboarding' component={OnBoardingScreen} options={{ headerShown: false}}/>
         <Stack.Screen name='Splash Screen' component={SplashScreen} options={{ headerShown: false}}/>

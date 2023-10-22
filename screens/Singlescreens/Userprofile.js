@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  SafeAreaView
-} from "react-native";
+import {StyleSheet, Text, View, Image, SafeAreaView} from "react-native";
 import React, {useState, useContext, useEffect} from "react";
 import { Button } from "../../components/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -14,7 +8,6 @@ import baseUrl from "../../assets/common/baseUrl";
 import AuthGlobal from "../../context/store/AuthGlobal";
 import { logoutUser } from "../../context/actions/AuthActions";
 import {useFonts} from 'expo-font';
-import EasyButton from "../../shared/styledComponents/EasyButton";
 
 export const Userprofile = (props) => {
   const context = useContext(AuthGlobal);
@@ -50,19 +43,19 @@ export const Userprofile = (props) => {
     <SafeAreaView style={styles.container}>
         <View style={styles.header}>
         <BackButton onPress={() => props.navigation.goBack()} />
-        <Text style={{ fontSize: 20, fontWeight: "700", left: -30, 
+        <Text style={{ fontSize: 20, fontWeight: 'bold', left: -30, 
         alignSelf: "center", fontFamily: 'WorkSans' }}>
           {userProfile ? userProfile.name : ''}
         </Text>
       </View>
       <View style={styles.profile}>
           <View style={styles.avatar}>
-            {userProfile ? (
-              <Image source={{uri: userProfile.avatar}}/>
-            ): null}
+            {userProfile && (
+              <Image source={{uri: userProfile.avatar}} style={{resizeMode: 'cover', borderRadius: 70, width: 180, height: 180}}/>
+            )}
           </View>
         <View style={styles.emailSection}>
-          <Text style={{ textAlign: "center", fontSize: 15, fontFamily: 'WorkSans', fontWeight: 600 }}>
+          <Text style={{ textAlign: "center", fontSize: 15, fontFamily: 'WorkSans', fontWeight: '600' }}>
             {userProfile ? userProfile.email : ''}
           </Text>
         </View>
@@ -74,7 +67,7 @@ export const Userprofile = (props) => {
           source={require("../../assets/icons/Vectorstarbroze.png")}
           />
           <Text
-          style={{ textAlign: "center", fontWeight: 600, fontSize: 15, alignSelf: "center", 
+          style={{ textAlign: "center", fontWeight: '600', fontSize: 15, alignSelf: "center", 
           justifyContent: "center", color: "#235EF5", fontFamily: 'WorkSans'}}
         >
           90 days remaining before renewal
@@ -88,7 +81,7 @@ export const Userprofile = (props) => {
           source={require("../../assets/icons/VectorStarSilver.png")}
           />
           <Text
-          style={{ textAlign: "center", fontWeight: 600, fontSize: 15, alignSelf: "center", 
+          style={{ textAlign: "center", fontWeight: '600', fontSize: 15, alignSelf: "center", 
           justifyContent: "center", color: "#235EF5", fontFamily: 'WorkSans'}}
         >
          180 days before renewal
@@ -99,10 +92,10 @@ export const Userprofile = (props) => {
           <View>
           <Image
           style={{ marginRight: 12 }}
-          source={require("../../assets/icons/Vectorstargold.png")}
+            source={require("../../assets/icons/Vectorstargold.png")}
           />
           <Text
-          style={{ textAlign: "center", fontWeight: 600, fontSize: 15, alignSelf: "center", 
+          style={{ textAlign: "center", fontWeight: '600', fontSize: 15, alignSelf: "center", 
           justifyContent: "center", color: "#235EF5", fontFamily: 'WorkSans'}}
         >
          365 days before renewal
@@ -111,7 +104,7 @@ export const Userprofile = (props) => {
         )} 
         {userProfile && userProfile.subscription.plan === "Free Trial" && (
          <View>
-            <Text style={{textAlign: "center", fontWeight: 600, fontSize: 15, alignSelf: "center", 
+            <Text style={{textAlign: "center", fontWeight: '600', fontSize: 15, alignSelf: "center", 
           justifyContent: "center", color: "#235EF5", fontFamily: 'WorkSans'}}>
             You have only 7 days left on your free trial
           </Text>
@@ -119,14 +112,11 @@ export const Userprofile = (props) => {
         )}
       </View>
       <View style={styles.btnSection}>
-          <EasyButton
-          meduim
-          dark 
+          <Button title = "Log Out" btnstyle={{borderRadius: 5, margin: 5, height: 40, width: '50%', justifyContent: 'center', alignItems: 'center',padding: 10, backgroundColor:'#141414'}}
+                txtstyle={{color: '#f2f2f2', fontFamily: 'WorkSans', fontWeight: '600', textAlign: 'center' }} 
           onPress={()=> {
             AsyncStorage.removeItem('jwt'), logoutUser(context.dispatch)
-        }}>
-          <Text style={{fontFamily: 'WorkSans', color: '#f2f2f2', fontWeigt: 600,  fontSize: 15}}>Log Out</Text>
-        </EasyButton>
+        }}/>
         </View>
     </View>
       </SafeAreaView>
@@ -134,8 +124,6 @@ export const Userprofile = (props) => {
 };
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "brown",
-    flex: 1,
     width: "100%",
     height: "100%",
     marginTop: 20,
@@ -150,12 +138,14 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
   profile: {
+    width: '100%',
+    alignItems: 'center',
     alignSelf: "center",
     marginTop: 43,
     marginBottom: 8,
   },
   avatar: {
-    marginHorizontal: "100%",
+    //marginHorizontal: "100%",
     backgroundColor: "#D9D9D9",
     height: 180,
     width: 180,
@@ -175,6 +165,7 @@ const styles = StyleSheet.create({
   },
   btnSection: {
     marginVertical: 50,
+    width: '80%',
     alignItems: "center",
     justifyContent: "center",
   }

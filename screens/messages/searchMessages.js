@@ -37,13 +37,13 @@ const SearchedMessage = (props) => {
                             <Text style = {{fontFamily: 'WorkSans', fontSize: 17, fontWeight: '700' }}>
                                 {filteredMessage[0].title} </Text>
                             <Text style = {{fontFamily: 'WorkSans', fontSize: 12, 
-                            fontWeight: 'regular', paddingTop: 2}}>{filteredMessage[0].description} 
+                            fontWeight: '600', paddingTop: 2}}>{filteredMessage[0].description} 
                             </Text>
                         </View>
                     </TouchableOpacity>
             ) : (
                 <View style = {styles.center}>
-                    <Text style = {{alignSelf: 'center', fontFamily: 'WorkSans', fontWeight: 'bold', color: '#CCCCCC'}}>
+                    <Text style = {{alignSelf: 'center', fontFamily: 'WorkSans', fontWeight: '600', color: '#CCCCCC'}}>
                         No message found
                     </Text>
                 </View>
@@ -61,20 +61,20 @@ const SearchedMessage = (props) => {
                         : props.navigation.navigate('Single Book', {item: filteredMessage})
                     }}>
                         <View style = {styles.thumbnail}>
-                            <Image source = {require("../../assets/messageImages/RoleOfScriptures.jpg")} 
+                            <Image source = {{uri: `${filteredMessage.image}`}} 
                             style = {styles.searchImage}/>
                         </View>
                         <View style = {styles.thumbnailView}>
                             <Text style = {{fontFamily: 'WorkSans', fontSize: 17, fontWeight: '700' }}>
                                 {filteredMessage[0].title} </Text>
                             <Text style = {{fontFamily: 'WorkSans', fontSize: 12, 
-                            fontWeight: 'regular', paddingTop: 2}}>{filteredMessage[0].description} 
+                            fontWeight: 'normal', paddingTop: 2}}>{filteredMessage[0].description} 
                             </Text>
                         </View>
                     </TouchableOpacity>
             ) : (
                 <View style = {styles.center}>
-                    <Text style = {{alignSelf: 'center', fontFamily: 'WorkSans', fontWeight: 'bold', color: '#CCCCCC'}}>
+                    <Text style = {{alignSelf: 'center', fontFamily: 'WorkSans', fontWeight: '600', color: '#CCCCCC'}}>
                         No message found
                     </Text>
                 </View>

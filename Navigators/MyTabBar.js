@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
       alignItems: 'center', 
       marginVertical: 10,
       borderRadius: 1, 
-      borderColor: "#333B42"
+      borderColor: "#333B42",
+      width: '100%'
     },
 
     pressable: {  

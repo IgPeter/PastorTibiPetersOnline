@@ -1,12 +1,12 @@
-import React, {useState} from "react";
-import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
+import React, {useEffect, useState} from "react";
+import { View, Text, ScrollView, StyleSheet} from "react-native";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/Backbutton";
 import { AudioCard } from "../../components/Audiocard";
 import {useFonts} from "expo-font";
 
 export const Singleaudio = (props) => {
-  const [item, setItem] = useState(props.route.params.item);
+  const [item] = useState(props.route.params.item);
   const [font] = useFonts({
     WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf")
   })
@@ -14,6 +14,7 @@ export const Singleaudio = (props) => {
   if(!font){
     return null
   }
+  
 
   return (
     <ScrollView style={styles.container}>
@@ -22,7 +23,7 @@ export const Singleaudio = (props) => {
       </View>
       <View style={styles.audioInfo}>
         <View style={styles.thumbnail}>
-          <AudioCard imageSource={item.image} />
+          <AudioCard imageSource={{uri: item.image}}/>
         </View>
         <View>
           <Text
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     backgroundColor: "#D9D9D9",
-    width: 195,
+    width: 280,
     height: 280,
     alignSelf: "center",
     marginBottom: 20,
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 17,
     marginBottom: 83,
     fontFamily: 'WorkSans',
-    fontWeight: 600,
+    fontWeight: '600',
     fontSize: 14
   },
 });
