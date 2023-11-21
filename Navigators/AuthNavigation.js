@@ -1,11 +1,11 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import {Login} from '../screens/Authentication/Login';
 import {Signup} from '../screens/Authentication/Signup';
 import {Userprofile} from '../screens/Singlescreens/Userprofile';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const MyStack = () => {
     return (

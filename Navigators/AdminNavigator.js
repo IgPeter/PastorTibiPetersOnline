@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //importing Admin screens
 import MessageForm from '../screens/Admin/createMessageForm';
@@ -7,7 +7,7 @@ import Messages from '../screens/Admin/messages';
 import Categories from '../screens/Admin/categories';
 import EditMessageForm from '../screens/Admin/editMessage';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const MyStack = () => {
     return (

@@ -9,7 +9,6 @@ const Auth = props => {
     const [stateUser, dispatch] = useReducer(authReducer, {
         isAuthenticated: null,
         user: {},
-        loading: false
     })
 
     const [showChild, setShowChild] = useState(false);
@@ -27,6 +26,25 @@ const Auth = props => {
             setShowChild(false);
         }
     }, [])
+
+    /*useEffect(() => {
+        const fetchToken = async () => {
+            setShowChild(true);
+            try {
+                const token = await AsyncStorage.getItem('jwt');
+                if (token) {
+                    const decoded = jwt_decode(token);
+                    dispatch(setCurrentUser(decoded));
+                }
+            } catch (error) {
+                console.error('Error fetching JWT token:', error);
+            } finally {
+                setShowChild(false);
+            }
+        };
+    
+        fetchToken();
+    }, []);*/
 
     if(!showChild) {
         return null;

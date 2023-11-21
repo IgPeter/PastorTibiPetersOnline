@@ -69,35 +69,23 @@ const SingleAudioPlay = (props) => {
   };
 
   useEffect(()=> {
-    //Load  the audio when the component mounts
+
     const loadAudio = async () => {
-    try{        
-        if (isPlaying){
-                await audio.unloadAsync();
-            }
-
-        const playbackAudio = new Audio.Sound();
-
-        await playbackAudio.loadAsync({uri: `${item.message}`});
-
-        if(playbackAudio._loaded){
-            setAudio(playbackAudio)       
-            //getting the duration and setting the duration
-            const {duration} = playbackAudio.getStatusAsync()
-            setDuration(duration)
-            }
-
-        }catch(error){
-            console.log(error);
-        }
-}
+        setIsPlaying(true);
+        const {sound} = await Audio.Sound.createAsync({uri: `${item.message}`});
+        const {duration} = await sound.getStatusAsync()
+        setDuration(duration)
+        setAudio(sound);
+        await sound.playAsync();
+        sound.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);    
+    }
 
     loadAudio();
 
     //Clean up current audio when the component unmounts
-    return async () => {
+    return () => {
         if(audio){
-            await audio.unloadAsync();
+         audio.unloadAsync();
         }
     }
 },[])

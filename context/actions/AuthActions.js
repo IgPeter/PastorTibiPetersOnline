@@ -3,6 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
 import baseUrl from "../../assets/common/baseUrl";
 
+
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_LOADING = "SET_LOADING";
 
@@ -25,6 +26,7 @@ export const loginUser = (user, dispatch) => {
     }
   } ).then((data) => {
       if (data) {
+        dispatch(setLoading(false));
         const token = data.token;
         AsyncStorage.setItem("jwt", token);
         const decoded = jwt_decode(token);
@@ -41,9 +43,38 @@ export const loginUser = (user, dispatch) => {
         text1: "Please provide correct credentials",
         text2: "",
       });
-      dispatch(setLoading(false))
-      logoutUser(dispatch)
+      dispatch(setLoading(false));
+      //logoutUser(dispatch)
     })
+/*axios.post(`${baseUrl}user/login`, user,
+{
+  headers : {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+}
+}).then((res) => {
+  if (res.data) {
+    console.log('error occurred in axios data');
+    const token = res.data.token;
+    AsyncStorage.setItem("jwt", token);
+    const decoded = jwt_decode(token);
+    dispatch(setCurrentUser(decoded, res.data));
+  } else {
+    console.log('error occured in axio then else');
+    logoutUser(dispatch)
+  }
+}).catch((err) => {
+  console.log(err);
+  console.log('error occurred in axios catch')
+  Toast.show({
+    topOffset: 60,
+    type: "error",
+    text1: "Please provide correct credentials",
+    text2: "",
+  });
+  console.log('error occurred after axios Toast in catch');
+  //logoutUser(dispatch)
+})*/
 };
 
 //Getting the user's profile
@@ -75,7 +106,7 @@ export const setCurrentUser = (decoded, user) => {
     }
 }
 
-export  const setLoading = (isLoading) => {
+export const setLoading = (isLoading) => {
   return {
     type: SET_LOADING,
     payload: isLoading

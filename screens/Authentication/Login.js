@@ -14,19 +14,19 @@ export const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  //const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if(context.stateUser.isAuthenticated == true && context.stateUser.user.isSubscriber == false && 
-      context.stateUser.userProfile.user.subscription.subscriberStatus === 'New User' ){
-      props.navigation.navigate('Subscription', {item: context.stateUser});
-    }else if (context.stateUser.isAuthenticated == true && context.stateUser.user.isSubscriber == true){
-      props.navigation.navigate('main', {item: context.stateUser})
-    }else if (context.stateUser.isAuthenticated == true && 
-      context.stateUser.userProfile.user.subscription.subscriberStatus === 'unsubscribed'){
-      props.navigation.navigate('Subscription Expired')
-    }
-  }, [context.stateUser.isAuthenticated == true])
+      if(context.stateUser.isAuthenticated == true && context.stateUser.user.isSubscriber == true ){
+        props.navigation.navigate('main', {item: context.stateUser});
+      }else if (context.stateUser.isAuthenticated == true && context.stateUser.user.isSubscriber == false && 
+        context.stateUser.userProfile.user.subscription.subscriberStatus === 'New User'){
+        props.navigation.navigate('Subscription', {item: context.stateUser})
+      }else if (context.stateUser.isAuthenticated == true && 
+        context.stateUser.userProfile.user.subscription.subscriberStatus === 'unsubscribed'){
+        props.navigation.navigate('Subscription Expired')
+      }
+  }, [context.stateUser.isAuthenticated])
 
     const handleSubmit = () => {
       const user = {
