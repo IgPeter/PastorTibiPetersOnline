@@ -10,7 +10,7 @@ function SplashScreen ({navigation}){
             setTimeout(function() {
                 setLoading(false);
                 setTimePassed(true);
-            }, 10000)
+            }, 6000)
         }, []);
 
         useEffect(()=>{

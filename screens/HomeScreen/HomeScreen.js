@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {View, StyleSheet, Modal, TouchableOpacity, ScrollView, 
-    Dimensions, Text, SafeAreaView, Image } from 'react-native';
+    Dimensions, Text, SafeAreaView, Image, Touchable } from 'react-native';
 import { getCachedUsers, cacheUsers } from '../../shared/UserAsyncStorage';
 import Banner from './banner.js';
 import { Button } from '../../components/Button';
@@ -172,14 +172,14 @@ const HomeScreen = (props) => {
                     {/*<Image source={require('../../assets/icons/VectorNotification.png')} 
                     style={{resizeMode: 'contain', width: 20, height: 20, marginRight: 10}}/>*/}
                     <Image source={require('../../assets/icons/name-circle.png')} 
-                    style={{resizeMode: 'contain', width: 50, height: 45}} />
-                </TouchableOpacity>
-                <View style={{position: 'absolute', top: 10, right: 35}}>
-                {singleUser && singleUser.name && (
-                <Text style={styles.textHeader}>
-                    {singleUser.name.split(' ').map((initials)=> initials.charAt(0)).join('')}
-                </Text>)}
+                    style={{resizeMode: 'contain', width: 60, height: 70}} />
+                    <View style={{marginTop: -50}}>
+                    {singleUser && singleUser.name && (
+                        <Text style={styles.textHeader}>
+                        {singleUser.name.split(' ').map((initials)=> initials.charAt(0)).join('')}
+                    </Text>)}
                 </View>
+                </TouchableOpacity>
             </View>
             {singleUser &&  singleUser.isSubscriber == true && singleUser.subscription.plan === "Free Trial" && (
                 <View style={styles.subscriberStatus}>
@@ -292,10 +292,11 @@ const styles = StyleSheet.create({
     },
 
     userExpIcons: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
+        marginRight: 10,
+        //flexDirection: 'row',
+        justifyContent: 'center',
         alignItems: 'center',
-        paddingRight: 20
+        paddingRight: 10
     },
     theSlider:{
         width: '100%',
@@ -323,7 +324,7 @@ const styles = StyleSheet.create({
     },
     textHeader: {
         fontFamily: 'WorkSans',
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: 'bold',
         color: '#141414'
     },
