@@ -2,19 +2,16 @@ import { StyleSheet, Text, TextInput, View, ScrollView, Image, ActivityIndicator
 import React, { useState, useContext, useEffect } from 'react'
 import { A } from '@expo/html-elements'
 import { Button } from '../../components/Button'
-// import CheckBox from '@react-native-community/checkbox'
 import Error from '../../shared/Error'
 import AuthGlobal from '../../context/store/AuthGlobal'
-import { loginUser, setCurrentUser } from '../../context/actions/AuthActions'
+import { loginUser } from '../../context/actions/AuthActions'
 import { setLoading } from '../../context/actions/AuthActions'
 
 export const Login = (props) => {
-  // const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const context = useContext(AuthGlobal);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  //const [loading, setLoading] = useState(false);
 
   useEffect(() => {
       if(context.stateUser.isAuthenticated == true && context.stateUser.user.isSubscriber == true ){

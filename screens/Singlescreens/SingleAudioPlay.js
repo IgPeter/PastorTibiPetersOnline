@@ -90,31 +90,6 @@ const SingleAudioPlay = (props) => {
     }
 },[])
 
-    // Function to stop audio
-  /*const stopAudio = async () => {
-    if (audio) {
-        try{
-            await audio.stopAsync();
-            audio.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-            setIsPlaying(false);
-        }catch(error){
-            console.log(error);
-        }
-    }
-  };*/  
-
-  /*useEffect(() => {
-    try{
-        loadAudio();
-    }catch(error){
-        console.log(error);
-    }
-    
-    return ()=>{
-        audio ? audio.unloadAsync : undefined
-    }
-  }, [])*/
-
     return (
         <View style = {StyleSheet.container}>
             <ImageBackground style={styles.bImage} source = {require('../../assets/images/audiobackground.jpg')}>
