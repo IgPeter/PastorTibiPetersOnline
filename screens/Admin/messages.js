@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from 'react';
-import {View, Text, StyleSheet, FlatList, ActivityIndicator, Dimensions} from 'react-native';
+import {View, SafeAreaView, Text, StyleSheet, Image, ActivityIndicator, ScrollView, Dimensions} from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -114,7 +114,7 @@ const Messages = (props) => {
             return null;
         }
 
-        const deleteMessage  = (id) => {
+        const deleteMessage = (id) => {
             axios.delete(`${baseUrl}message/${id}`, {
                 headers: {Authorization: `Bearer ${token}`}
             }).then(res=> {
@@ -124,7 +124,7 @@ const Messages = (props) => {
         }
 
     return (
-        <View style = {styles.container}>
+        <SafeAreaView style = {styles.container}>
             <View style = {styles.buttonContainer}>
                 <Button title="Categories"
                 btnstyle={{borderRadius: 5, margin: 5, height: 40, justifyContent: 'center', padding: 10, backgroundColor:'#141414'}}
@@ -137,32 +137,46 @@ const Messages = (props) => {
                     onPress={()=>props.navigation.navigate('Message Form')}
                 />
             </View>
+            <View>
                 <Header message={messageList} navigation = {props.navigation}/>
-            <View style={{ width: '100%'}}>
+                <View style={{marginTop: 20, paddingBottom: 10}}>
+                            <ListHeader />
+                 </View>
+            </View>
+            <ScrollView style={{ width: '100%'}}>
                 {loading == true ? (
                 <View style={styles.spinner}>
                     <ActivityIndicator size="large" color="gold" />
                 </View>
                 ):(
-                    <FlatList 
-                        style={{marginTop: 40}}
-                        data={messageFiltered}
-                        ListHeaderComponent={ListHeader}
-                        renderItem={({item, index}) => (
-                            <ListItem
-                                key = {item.id}
-                                {...item}
-                                token={token}
-                                navigation = {props.navigation}
-                                index={index}
-                                delete={deleteMessage}
-                            />
-                        )}
-                        keyExtractor={(item) => item._id}
-                    />
+                    <View>
+                        <View style={{marginTop: 20, width: width, height: height}}>
+                            {messageFiltered.length > 0 ? (
+                                <View style={{flex: 1, width: width, height: height}}>
+                                    {messageFiltered.map((item) => {
+                                        return(
+                                        <ListItem 
+                                            key={item._id}
+                                            {...item}
+                                            navigation = {props.navigation}
+                                            token = {token}
+                                            delete={deleteMessage}
+                                        />
+                                        )
+                                    })}
+                                </View>
+                            ) : (
+                                <View>
+                                    <Text>
+                                        No message is available
+                                    </Text>
+                                </View>
+                            )}
+                        </View>
+                    </View>
                 )}
-            </View>
-        </View>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 
@@ -183,7 +197,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     container: {
-        marginBottom: 160,
+        paddingBottom: 60,
         alignItems: 'center',
         height: height,
         backgroundColor: 'white'

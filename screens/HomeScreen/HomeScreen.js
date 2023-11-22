@@ -82,7 +82,7 @@ const HomeScreen = (props) => {
         return () => {
             setSingleUser({});
         }
-    },[]) 
+    }, []) 
 
      useEffect(() => {
         const checkForSubscriptionExpiration = () => {

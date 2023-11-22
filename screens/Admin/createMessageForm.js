@@ -19,8 +19,8 @@ const MessageForm = (props) => {
   const [contentType, setContentType] = useState('');
   const [category, setCategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [image, setImage] = useState();
-  const [messageFile, setMessageFile] = useState();
+  const [image, setImage] = useState({});
+  const [messageFile, setMessageFile] = useState({});
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState();
@@ -146,7 +146,7 @@ const MessageForm = (props) => {
   const pickDocumentDisplayImage = async () => {
    try {
       let result = await DocumentPicker.getDocumentAsync({});
-      setImage(result);
+      setImage(result.assets[0]);
    } catch(e){
       console.log(e);
    }
@@ -155,7 +155,7 @@ const MessageForm = (props) => {
   const pickDocumentMessageFile = async () => {
     try {
        let result = await DocumentPicker.getDocumentAsync({});
-       setMessageFile(result);
+       setMessageFile(result.assets[0]);
     } catch(e){
        console.log(e);
     }

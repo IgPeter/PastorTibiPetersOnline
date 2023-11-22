@@ -5,14 +5,14 @@
     "version": "1.0.3",
     "sdkVersion": "49.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/pastortibipetersLOGO.png",
     "plugins": [
       "@config-plugins/react-native-blob-util",
       "@config-plugins/react-native-pdf"
     ],
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/pastortibipetersLOGO.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,10 +24,11 @@
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app needs access to your location to function properly.",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "This app needs access to your location to function properly."
-      }
+      },
+      "bundleIdentifier": "com.igagapeter477.PastorTibiPetersOnline"
     },
     "android": {
-      "versionCode": 3,
+      "versionCode": 4,
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
@@ -37,13 +38,13 @@
         "ACCESS_COARSE_LOCATION"
       ],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/pastortibipetersLOGO.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.igagapeter477.PastorTibiPetersOnline"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/images/pastortibipetersLOGO.png"
     },
     "extra": {
       "eas": {

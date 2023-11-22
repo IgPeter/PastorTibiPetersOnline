@@ -4,7 +4,7 @@ import {useFonts} from 'expo-font';
 
 
 
-const Categories = () => {
+const ComingSoon = () => {
 
     const [font] = useFonts({
         WorkSans: require("../../assets/fonts/WorkSans-VariableFont_wght.ttf"),
@@ -18,8 +18,8 @@ const Categories = () => {
     return (
         <SafeAreaView style = {styles.container}>
             <View style={styles.center}>
-                <Image source = {require('../../assets/images/splashImage.jpeg')} 
-                ResizeMode='contain' style={{width: 250, height: 250}}/>
+                <Image source = {require('../../assets/images/pastortibipetersLOGO.png')} 
+                resizeMode="contain" style={{width: 250, height: 250}}/>
                 <Text style = {{fontFamily: 'WorkSans', fontSize: 20, fontWeight: 'bold'}}>This Page Is Coming Soon...</Text>
             </View>
         </SafeAreaView>
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Categories;
+export default ComingSoon;

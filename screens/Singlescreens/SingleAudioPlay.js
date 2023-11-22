@@ -64,6 +64,7 @@ const SingleAudioPlay = (props) => {
         } else {
           // If repeat is not enabled, stop the audio playback
           audio.stopAsync();
+          setIsPlaying(false);
         }
       }
   };

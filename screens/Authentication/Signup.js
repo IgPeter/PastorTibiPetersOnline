@@ -85,6 +85,8 @@ export const Signup = (props) => {
   const comparePassword = (newPassword) => {
     if(newPassword !== password){
       setError('Password does not match');
+    }else {
+      setError('');
     }
   }
 

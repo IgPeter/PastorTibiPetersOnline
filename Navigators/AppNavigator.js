@@ -19,6 +19,7 @@ import OnBoardingScreen from "../screens/onboarding";
 import SplashScreen from "../screens/splash";
 import PaymentScreen from "../screens/Subscription/PaystackPayment";
 import SubscriptionExpires from "../screens/Subscription/subscriptionExpires";
+import ComingSoon from "../screens/Singlescreens/ComingSoon";
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,7 @@ const MyStack = () => {
         <Stack.Screen name='Paystack Payment'  component={PaymentScreen} options={{headerShown: false}}/>
         <Stack.Screen name='Subscription Expired'  component={SubscriptionExpires} options={{headerShown: false}}/>
         {/*First Screens*/}
+        <Stack.Screen name ='Coming Soon' component={ComingSoon} options={{headerShown: false}}/>
         <Stack.Screen name='Onboarding' component={OnBoardingScreen} options={{ headerShown: false}}/>
         <Stack.Screen name='Splash Screen' component={SplashScreen} options={{ headerShown: false}}/>
         </Stack.Navigator>

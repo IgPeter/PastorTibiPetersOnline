@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react'
-import { SafeAreaView, Text, StyleSheet, ActivityIndicator, View, Image} from 'react-native'
+import { SafeAreaView, Text, StyleSheet, ActivityIndicator, View, Image, Dimensions} from 'react-native'
 import {useFonts} from 'expo-font';
+
+const {width, height} = Dimensions.get('window');
 
 function SplashScreen ({navigation}){
         const [timePassed, setTimePassed] = useState(false);
@@ -10,7 +12,7 @@ function SplashScreen ({navigation}){
             setTimeout(function() {
                 setLoading(false);
                 setTimePassed(true);
-            }, 6000)
+            }, 10000)
         }, []);
 
         useEffect(()=>{
@@ -30,24 +32,19 @@ function SplashScreen ({navigation}){
           if(!timePassed){
                 return (
                     <SafeAreaView style = {styles.container}>
-                        <View>
-                            <View style={styles.center}>
-                            <Image source={require('../assets/images/splashImage.jpeg')}
-                                ResizeMode = 'contain'
-                                style={{width: 200, height:200}}
+                            <View style={[styles.center, {}]} >
+                            <Image source={require('../assets/images/pastortibipetersLOGO.png')}
+                                resizeMode="contain" style={{width: 200, height:200}}
                             />
                             </View>
-                            <View style={[styles.center , {marginTop: -30 }]}>
-                                <Text style={[styles.txtStyle, {fontSize: 18, fontWeight: 'bold'}]}>Pastor Tibi Peters</Text>
-                                <Text style={[styles.txtStyle, {fontSize: 13, fontWeight: 'normal'}]}>Online Digital Library</Text>
-                            </View>
-                            {loading == true ? (
+                            <View style={[styles.center , { flexDirection: 'flex-end'}]}>
+                                {loading == true ? (
                                 <View style={{marginTop: 10}}>
                                     <ActivityIndicator 
                                     style={{alignItems: 'center', justifyContent: 'center'}} color="gold"/>
                                 </View>
                             ): null}
-                    </View>
+                            </View>
                 </SafeAreaView>
                 )
             }
@@ -57,7 +54,8 @@ function SplashScreen ({navigation}){
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#ffffff'
+            backgroundColor: '#ffffff',
+            paddingBottom:  20 
         },
         txtStyle:{
             fontFamily: 'WorkSans'
